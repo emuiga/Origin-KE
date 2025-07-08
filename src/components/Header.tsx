@@ -18,7 +18,7 @@ export default function Header({ isScrolled = false }: HeaderProps) {
       className={`z-50 transition-all duration-500 ${
         isScrolled 
           ? 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-xl border border-white/30 shadow-2xl py-2 px-4 rounded-full' 
-          : 'relative pl-24 pr-8 py-6 w-full'
+          : 'relative max-w-xs w-full mx-auto px-2 py-2 text-sm sm:pl-24 sm:pr-8 sm:py-6 sm:max-w-3xl'
       }`}
       initial={{ y: -100 }}
       animate={{ 
@@ -30,9 +30,9 @@ export default function Header({ isScrolled = false }: HeaderProps) {
         opacity: { duration: 0.3 }
       }}
     >
-      <div className={`flex items-center ${isScrolled ? 'justify-between space-x-4 sm:space-x-6' : 'justify-center space-x-6 sm:space-x-8 max-w-7xl mx-auto'}`}>
+      <div className={`flex items-center ${isScrolled ? 'justify-between space-x-2 sm:space-x-6' : 'justify-center space-x-2 sm:space-x-8 max-w-7xl mx-auto'}`}>
         <motion.div 
-          className={`flex items-center font-semibold text-slate-900 ${isScrolled ? 'text-base sm:text-lg' : 'text-lg sm:text-xl'} mr-6`}
+          className={`flex items-center font-semibold text-slate-900 ${isScrolled ? 'text-base sm:text-lg' : 'text-base sm:text-xl'} mr-2 sm:mr-6`}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
@@ -44,7 +44,7 @@ export default function Header({ isScrolled = false }: HeaderProps) {
         </motion.div>
         
         <motion.div 
-          className={`items-center ${isScrolled ? 'flex space-x-2 sm:space-x-3' : 'hidden lg:flex space-x-2 sm:space-x-3'}`}
+          className={`items-center hidden lg:flex ${isScrolled ? 'space-x-1 sm:space-x-3' : 'space-x-1 sm:space-x-3'}`}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -71,7 +71,7 @@ export default function Header({ isScrolled = false }: HeaderProps) {
         </motion.div>
 
         <button
-          className={`text-slate-700 ${isScrolled ? 'hidden' : 'lg:hidden'}`}
+          className={`text-slate-700 ml-auto lg:hidden ${isScrolled ? 'hidden' : ''}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,6 +90,7 @@ export default function Header({ isScrolled = false }: HeaderProps) {
           transition={{ duration: 0.3 }}
         >
           <div className="flex flex-col space-y-3">
+            <Link href="/" className={`transition-colors text-base font-medium ${pathname === "/" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`} data-cursor="hover" >Home</Link>
             <Link href="/process" className={`transition-colors text-base font-medium ${pathname === "/process" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`} data-cursor="hover" >The Process</Link>
             <Link href="/portfolio" className={`transition-colors text-base font-medium ${pathname === "/portfolio" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`} data-cursor="hover">Portfolio</Link>
             <Link href="/letter" className={`transition-colors text-base font-medium ${pathname === "/letter" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`} data-cursor="hover">Letter</Link>

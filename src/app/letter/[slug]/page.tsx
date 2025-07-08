@@ -6,8 +6,9 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Document } from '@contentful/rich-text-types';
 import NewsletterSection from '@/components/NewsletterSection';
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await getBlogPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getBlogPostBySlug(slug);
   
   if (!post) return notFound();
 
@@ -84,10 +85,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     <div className="min-h-screen bg-[#84a98c] text-white flex flex-col">
       <Header />
       <section className="w-full h-[40vh] md:h-[60vh] relative flex items-center justify-center overflow-hidden">
-        {post.image && (
-          <img src={post.image} alt={post.title} className="absolute inset-0 w-full h-full object-cover object-center opacity-80" />
+        {post.image && typeof post.image === 'string' && (
+          <img src={post.image} alt={typeof post.title === 'string' ? post.title : 'Blog post'} className="absolute inset-0 w-full h-full object-cover object-center opacity-80" />
         )}
-        <h1 className="relative z-10 text-4xl md:text-6xl font-bold text-white text-center drop-shadow-lg">{post.title}</h1>
+        <h1 className="relative z-10 text-4xl md:text-6xl font-bold text-white text-center drop-shadow-lg">{typeof post.title === 'string' ? post.title : 'Blog Post'}</h1>
         <div className="absolute inset-0 bg-black/30" />
       </section>
       <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-12">

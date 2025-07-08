@@ -338,9 +338,9 @@ export default function Portfolio() {
           </motion.div>
 
           {/* Project Carousel */}
-          <div className="relative h-[60vh] sm:h-[70vh] flex items-center">
-            {/* Project Image - Left Side */}
-            <div className="w-1/2 h-full relative overflow-hidden">
+          <div className="relative h-auto sm:h-[70vh] flex flex-col sm:flex-row items-center">
+            {/* Project Image - Top on mobile, Left on desktop */}
+            <div className="w-full sm:w-1/2 h-64 sm:h-full relative overflow-hidden mb-6 sm:mb-0">
               <motion.div
                 key={currentProjectIndex}
                 initial={{ opacity: 0, scale: 1.1 }}
@@ -352,15 +352,15 @@ export default function Portfolio() {
                 <img 
                   src={projects[currentProjectIndex].image} 
                   alt={projects[currentProjectIndex].title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-xl"
                 />
                 {/* Gradient fade to background */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-100/80"></div>
               </motion.div>
             </div>
 
-            {/* Project Text - Right Side */}
-            <div className="w-1/2 h-full flex items-center justify-center px-8 sm:px-12">
+            {/* Project Text - Below on mobile, Right on desktop */}
+            <div className="w-full sm:w-1/2 h-auto sm:h-full flex items-center justify-center px-2 sm:px-12">
               <motion.div
                 key={currentProjectIndex}
                 initial={{ opacity: 0, x: 50 }}
@@ -577,31 +577,29 @@ export default function Portfolio() {
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
             <div className="flex-1 text-center">
               <motion.div 
-                className="h-16 sm:h-20 mb-8 flex items-center justify-center"
+                className="h-auto mb-8 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="relative flex items-center justify-center">
-                  <span className="text-3xl sm:text-4xl font-semibold text-slate-900 mr-2">
-                    You're into
-                  </span>
-                  <div className="relative w-48 sm:w-56 h-12 sm:h-14 flex items-center justify-start overflow-hidden">
-                    <motion.span
-                      key={currentWordIndex}
-                      className="text-3xl sm:text-4xl font-semibold text-slate-900 absolute left-0"
-                      initial={{ y: 50, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -50, opacity: 0 }}
-                      transition={{ 
-                        duration: 0.5,
-                        ease: "easeInOut"
-                      }}
-                    >
-                      {words[currentWordIndex]}?
-                    </motion.span>
-                  </div>
+                <span className="text-3xl sm:text-4xl font-semibold text-slate-900">
+                  You're into
+                </span>
+                <div className="relative w-full sm:w-56 h-12 sm:h-14 flex items-center justify-center sm:justify-start overflow-hidden mt-2 sm:mt-0">
+                  <motion.span
+                    key={currentWordIndex}
+                    className="text-3xl sm:text-4xl font-semibold text-slate-900 static w-full text-center sm:absolute sm:left-0 sm:w-auto"
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -50, opacity: 0 }}
+                    transition={{ 
+                      duration: 0.5,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    {words[currentWordIndex]}?
+                  </motion.span>
                 </div>
               </motion.div>
               <motion.div
@@ -618,7 +616,9 @@ export default function Portfolio() {
               </motion.div>
             </div>
             <div className="flex-1 flex justify-center md:justify-end">
-              <CardStack />
+              <div className="w-full max-w-xs md:max-w-[380px]">
+                <CardStack />
+              </div>
             </div>
           </div>
         </div>

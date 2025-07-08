@@ -234,16 +234,18 @@ export default function Home() {
         />
       </div>
 
-      {/* Navigation */}
-      <Header isScrolled={isScrolled} />
+      {/* Navigation with extra top padding on mobile */}
+      <div className="pt-3 sm:pt-0">
+        <Header isScrolled={isScrolled} />
+      </div>
 
       {/* Hero Section */}
-      <section className="relative px-4 sm:px-8 pt-16 sm:pt-20 pb-20 sm:pb-28 min-h-[70vh] flex flex-col items-center justify-center">
+      <section className="relative px-4 sm:px-8 pt-8 sm:pt-20 pb-8 sm:pb-28 min-h-[70vh] flex flex-col items-center justify-center">
         {/* Soft blurred background shape */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] sm:w-[900px] sm:h-[520px] bg-blue-200/40 rounded-[40%] blur-3xl z-0" style={{filter: 'blur(80px)'}} />
         <div className="max-w-4xl mx-auto w-full text-center relative z-10">
           <motion.div 
-            className="space-y-6"
+            className="space-y-3 sm:space-y-6"
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
@@ -251,11 +253,11 @@ export default function Home() {
             {/* <motion.h1 className="font-extrabold text-slate-900 tracking-tight text-4xl sm:text-6xl lg:text-7xl xl:text-8xl leading-tight mx-auto max-w-5xl">
               Origin.
             </motion.h1> */}
-            <motion.h2 className="font-bold text-slate-900 tracking-tight text-2xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight mx-auto max-w-5xl mt-2">
+            <motion.h2 className="font-bold text-slate-900 tracking-tight text-2xl sm:text-4xl lg:text-5xl xl:text-6xl leading-tight mx-auto max-w-5xl mt-2 mb-2 sm:mb-4">
               Shaping The Future of Brands Through <span className="font-payout">Craft</span> and <span className="font-payout ">Curiosity</span>.
             </motion.h2>
             <motion.p 
-              className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto"
+              className="text-base sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto mt-2 sm:mt-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}

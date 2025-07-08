@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CardStack() {
   return (
-    <div className="relative w-[380px] h-[170px]">
+    <div className="relative w-full max-w-xs h-[170px] sm:w-[380px]">
       {/* Back card 2 */}
       <div
         className="absolute w-full h-[135px] rounded-2xl bg-zinc-800/30 shadow-md opacity-30 z-0 border border-zinc-700"

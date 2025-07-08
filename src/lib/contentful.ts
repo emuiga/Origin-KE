@@ -22,7 +22,7 @@ export async function getBlogPostBySlug(slug: string) {
     'fields.slug': slug,
     limit: 1,
   });
-  const item = entries.items[0];
+  const item = entries.items[0] as any;
   if (!item) return null;
   return {
     slug: item.fields.slug,
