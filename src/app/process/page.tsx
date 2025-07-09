@@ -172,7 +172,9 @@ export default function Process() {
       </div>
 
       {/* Navigation */}
-      <Header isScrolled={isScrolled} />
+      <div className="pt-3 sm:pt-0">
+        <Header isScrolled={isScrolled} />
+      </div>
 
       {/* Header Section */}
       <section className="relative px-4 sm:px-8 pt-16 sm:pt-24 pb-10 sm:pb-16">
@@ -322,8 +324,11 @@ The fingerprints of a team that builds from <span className="font-hey-august">Or
                   </div>
                   <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-900 mb-1 sm:mb-2">{step.title}</h3>
                   <div className="relative h-6 sm:h-8 mb-2 sm:mb-3">
-                    <h4 className="text-base sm:text-lg text-blue-600 italic absolute top-0 left-0 transition-all duration-300 transform group-hover:opacity-0 group-hover:-translate-y-4">{step.subtitle}</h4>
-                    <span className="text-base sm:text-lg text-blue-600 absolute top-0 left-0 transition-all duration-300 transform opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                    {/* Latin text - hidden on mobile, visible on desktop with hover */}
+                    <h4 className="text-base sm:text-lg text-blue-600 italic absolute top-0 left-0 transition-all duration-300 transform group-hover:opacity-0 group-hover:-translate-y-4 hidden lg:block">{step.subtitle}</h4>
+                    
+                    {/* English text - visible on mobile, hidden on desktop until hover */}
+                    <span className="text-base sm:text-lg text-blue-600 absolute top-0 left-0 transition-all duration-300 transform lg:opacity-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0">
                       {index === 0 ? "Context-consciousness" : 
                        index === 1 ? "Thought and Action" : 
                        index === 2 ? "Beauty is the Splendor of Truth" : 

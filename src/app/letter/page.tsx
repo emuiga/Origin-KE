@@ -8,7 +8,9 @@ export default async function LetterPage() {
 
   return (
     <div className="min-h-screen bg-[#84a98c] text-white flex flex-col">
-      <Header />
+     <div className="pt-3 sm:pt-0">
+        <Header />
+      </div>
       <section className="w-full bg-[#84a98c] flex flex-col items-center py-12 border-b border-white/10">
         <NewsletterSection />
       </section>

@@ -262,7 +262,9 @@ export default function Portfolio() {
       </div>
 
       {/* Navigation */}
-      <Header isScrolled={isScrolled} />
+      <div className="pt-3 sm:pt-0">
+        <Header isScrolled={isScrolled} />
+      </div>
 
       {/* Hero Section */}
       <section className="relative px-4 sm:px-8 pt-16 sm:pt-24 pb-10 sm:pb-16">

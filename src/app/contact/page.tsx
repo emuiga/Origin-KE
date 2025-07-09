@@ -41,7 +41,9 @@ export default function ContactPage() {
           style={{filter: 'blur(80px)'}}
         />
       </div>
-      <Header />
+      <div className="pt-3 sm:pt-0">
+        <Header />
+      </div>
       <main className="flex-1 flex flex-col items-center justify-center relative z-10 px-4 py-16">
         {/* Floating Origin logo */}
         <div className="mb-12 flex flex-col items-center animate-float">

@@ -83,7 +83,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <div className="min-h-screen bg-[#84a98c] text-white flex flex-col">
-      <Header />
+      <div className="pt-3 sm:pt-0">
+        <Header />
+      </div>
       <section className="w-full h-[40vh] md:h-[60vh] relative flex items-center justify-center overflow-hidden">
         {post.image && typeof post.image === 'string' && (
           <img src={post.image} alt={typeof post.title === 'string' ? post.title : 'Blog post'} className="absolute inset-0 w-full h-full object-cover object-center opacity-80" />
