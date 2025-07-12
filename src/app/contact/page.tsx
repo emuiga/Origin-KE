@@ -54,7 +54,7 @@ export default function ContactPage() {
         <h1 className="text-5xl md:text-6xl font-extrabold text-slate-900 text-center tracking-tight mb-4 drop-shadow-lg">Let's Make Something Incredible</h1>
         <p className="text-xl text-slate-600 text-center mb-16 max-w-2xl">Reach out and let's create together.</p>
         <div className="flex flex-col items-center space-y-10 w-full">
-          <a href="tel:+254768519115" className="group flex items-center justify-center space-x-4 text-slate-700 hover:text-slate-900 transition-all text-2xl font-semibold">
+          <a href="https://wa.me/254768519115" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center space-x-4 text-slate-700 hover:text-slate-900 transition-all text-2xl font-semibold">
             <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/60 backdrop-blur-sm group-hover:bg-blue-500/20 transition-all shadow-lg">
               <Phone size={28} strokeWidth={2} className="text-slate-700" />
             </span>
@@ -62,7 +62,7 @@ export default function ContactPage() {
               +254 768 519 115
             </span>
           </a>
-          <a href="mailto:info@origin.co.ke" className="group flex items-center justify-center space-x-4 text-slate-700 hover:text-slate-900 transition-all text-2xl font-semibold">
+          <a href="mailto:info@origin.co.ke?subject=Hello, Origin" className="group flex items-center justify-center space-x-4 text-slate-700 hover:text-slate-900 transition-all text-2xl font-semibold">
             <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/60 backdrop-blur-sm group-hover:bg-blue-500/20 transition-all shadow-lg">
               <Mail size={28} strokeWidth={2} className="text-slate-700" />
             </span>
@@ -70,7 +70,7 @@ export default function ContactPage() {
               info@origin.co.ke
             </span>
           </a>
-          <a href="https://goo.gl/maps/2Qw8Qw8Qw8Qw8Qw8A" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center space-x-4 text-slate-700 hover:text-slate-900 transition-all text-2xl font-semibold">
+          <a href="https://maps.google.com/?q=Westlands,Nairobi,Kenya" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center space-x-4 text-slate-700 hover:text-slate-900 transition-all text-2xl font-semibold">
             <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/60 backdrop-blur-sm group-hover:bg-blue-500/20 transition-all shadow-lg">
               <MapPin size={28} strokeWidth={2} className="text-slate-700" />
             </span>

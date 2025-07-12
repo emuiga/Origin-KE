@@ -6,125 +6,7 @@ import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-// Custom Cursor Component
-const CustomCursor = () => {
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  const [cursorState, setCursorState] = useState('default');
-  const [cursorText, setCursorText] = useState('');
-  
-  const springConfig = { damping: 25, stiffness: 700 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
-  
-  // Text offset for contextual labels
-  const textOffsetY = useMotionValue(-40);
-  const textOffsetYSpring = useSpring(textOffsetY, springConfig);
 
-  useEffect(() => {
-    const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 16);
-      cursorY.set(e.clientY - 16);
-    };
-
-    const handleMouseEnter = (e: Event) => {
-      const target = e.target as HTMLElement;
-      const cursorType = target.getAttribute('data-cursor');
-      const cursorTextData = target.getAttribute('data-cursor-text');
-      
-      if (cursorType) setCursorState(cursorType);
-      if (cursorTextData) setCursorText(cursorTextData);
-    };
-
-    const handleMouseLeave = () => {
-      setCursorState('default');
-      setCursorText('');
-    };
-
-    window.addEventListener('mousemove', moveCursor);
-    
-    // Add event listeners to elements with cursor data attributes
-    const cursorElements = document.querySelectorAll('[data-cursor]');
-    cursorElements.forEach(el => {
-      el.addEventListener('mouseenter', handleMouseEnter);
-      el.addEventListener('mouseleave', handleMouseLeave);
-    });
-
-    return () => {
-      window.removeEventListener('mousemove', moveCursor);
-      cursorElements.forEach(el => {
-        el.removeEventListener('mouseenter', handleMouseEnter);
-        el.removeEventListener('mouseleave', handleMouseLeave);
-      });
-    };
-  }, [cursorX, cursorY]);
-
-  const getCursorVariants = () => {
-    switch (cursorState) {
-      case 'hover':
-        return {
-          scale: 2,
-          backgroundColor: 'rgba(59, 130, 246, 0.6)',
-          border: '2px solid rgba(59, 130, 246, 0.8)',
-        };
-      case 'text':
-        return {
-          scale: 0.5,
-          backgroundColor: 'rgba(59, 130, 246, 0.3)',
-        };
-      case 'magic':
-        return {
-          scale: 2.5,
-          backgroundColor: 'rgba(147, 197, 253, 0.4)',
-          border: '2px solid rgba(147, 197, 253, 0.8)',
-        };
-      case 'paint':
-        return {
-          scale: 2,
-          backgroundColor: 'rgba(168, 85, 247, 0.4)',
-          border: '2px solid rgba(168, 85, 247, 0.8)',
-        };
-      default:
-        return {
-          scale: 1,
-          backgroundColor: 'rgba(59, 130, 246, 0.7)',
-          border: '2px solid rgba(59, 130, 246, 0.9)',
-        };
-    }
-  };
-
-  return (
-    <>
-      {/* Main Cursor */}
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-50 rounded-full"
-        style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-        }}
-        animate={getCursorVariants()}
-        transition={{ type: "spring", damping: 30, stiffness: 400 }}
-      />
-
-      {/* Contextual Text */}
-      {cursorText && (
-        <motion.div
-          className="fixed top-0 left-0 pointer-events-none z-50 text-sm font-medium bg-slate-900/90 backdrop-blur-sm text-white px-3 py-1 rounded-full"
-          style={{
-            x: cursorXSpring,
-            y: textOffsetYSpring,
-          }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.2 }}
-        >
-          {cursorText}
-        </motion.div>
-      )}
-    </>
-  );
-};
 
 // Magnetic Card Component
 const MagneticCard = ({ children, className = "", ...props }: { children: React.ReactNode; className?: string; [key: string]: any }) => {
@@ -191,18 +73,11 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Hide default cursor
-  useEffect(() => {
-    document.body.style.cursor = 'none';
-    return () => {
-      document.body.style.cursor = 'auto';
-    };
-  }, []);
+
 
   return (
     <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100 overflow-hidden">
-      {/* Custom Cursor */}
-      <CustomCursor />
+
       
       {/* Floating Background Elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">

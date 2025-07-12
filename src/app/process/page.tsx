@@ -6,113 +6,7 @@ import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
-// Custom Cursor Component (copied from main page)
-const CustomCursor = () => {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const [cursorText, setCursorText] = useState("");
-  const [cursorVariant, setCursorVariant] = useState("default");
-  
-  const variants = {
-    default: { 
-      height: 32, 
-      width: 32,
-      backgroundColor: "rgba(255, 255, 255, 0.2)",
-      border: "1px solid rgba(255, 255, 255, 0.5)",
-      x: -16, 
-      y: -16 
-    },
-    text: { 
-      height: 60, 
-      width: 60, 
-      backgroundColor: "rgba(25, 55, 255, 0.1)",
-      border: "1px solid rgba(25, 55, 255, 0.3)",
-      x: -30, 
-      y: -30 
-    },
-    hover: { 
-      height: 80, 
-      width: 80,
-      backgroundColor: "rgba(25, 55, 255, 0.2)",
-      border: "1px solid rgba(25, 55, 255, 0.5)",
-      x: -40, 
-      y: -40
-    },
-    magic: {
-      height: 70,
-      width: 70,
-      backgroundColor: "rgba(255, 215, 0, 0.15)",
-      border: "1px solid rgba(255, 215, 0, 0.4)",
-      x: -35,
-      y: -35
-    },
-    paint: {
-      height: 60,
-      width: 60,
-      backgroundColor: "rgba(138, 43, 226, 0.2)",
-      border: "1px solid rgba(138, 43, 226, 0.5)",
-      x: -30,
-      y: -30
-    }
-  };
 
-  const springConfig = { damping: 25, stiffness: 300 };
-  const cursorX = useSpring(0, springConfig);
-  const cursorY = useSpring(0, springConfig);
-
-  useEffect(() => {
-    const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-    };
-
-    const handleMouseEnter = (e: Event) => {
-      const target = e.target as HTMLElement;
-      const cursorType = target.dataset.cursor;
-      const cursorTextValue = target.dataset.cursorText || "";
-      
-      if (cursorType) {
-        setCursorVariant(cursorType);
-        setCursorText(cursorTextValue);
-      }
-    };
-
-    const handleMouseLeave = () => {
-      setCursorVariant("default");
-      setCursorText("");
-    };
-
-    window.addEventListener('mousemove', moveCursor);
-    
-    document.querySelectorAll('[data-cursor]').forEach(item => {
-      item.addEventListener('mouseenter', handleMouseEnter);
-      item.addEventListener('mouseleave', handleMouseLeave);
-    });
-
-    return () => {
-      window.removeEventListener('mousemove', moveCursor);
-      
-      document.querySelectorAll('[data-cursor]').forEach(item => {
-        item.removeEventListener('mouseenter', handleMouseEnter);
-        item.removeEventListener('mouseleave', handleMouseLeave);
-      });
-    };
-  }, [cursorX, cursorY]);
-
-  return (
-    <motion.div
-      ref={cursorRef}
-      className="fixed top-0 left-0 z-50 rounded-full pointer-events-none flex items-center justify-center backdrop-blur-sm"
-      animate={cursorVariant}
-      variants={variants}
-      style={{
-        x: cursorX,
-        y: cursorY,
-      }}
-    >
-      <span className="text-xs font-medium whitespace-nowrap">{cursorText}</span>
-    </motion.div>
-  );
-};
 
 export default function Process() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -128,18 +22,11 @@ export default function Process() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Hide default cursor
-  useEffect(() => {
-    document.body.style.cursor = 'none';
-    return () => {
-      document.body.style.cursor = 'auto';
-    };
-  }, []);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100 overflow-hidden">
-      {/* Custom Cursor */}
-      <CustomCursor />
+
       
       {/* Floating Background Elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">

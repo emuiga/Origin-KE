@@ -7,117 +7,25 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CardStack from "../../components/CardStack";
 
-const CustomCursor = () => {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const [cursorText, setCursorText] = useState("");
-  const [cursorVariant, setCursorVariant] = useState("default");
-  const [isInteractive, setIsInteractive] = useState(false);
-  
-  const variants = {
-    default: { 
-      height: 32, 
-      width: 32,
-      backgroundColor: "rgba(55, 255, 255, 0.2)",
-      border: "1px solid rgba(23, 255, 255, 0.5)",
-      x: -16, 
-      y: -16, 
-      opacity: 1
-    },
-    hidden: {
-      opacity: 0
-    },
-    text: { 
-      height: 60, 
-      width: 60, 
-      backgroundColor: "rgba(25, 55, 255, 0.1)",
-      border: "1px solid rgba(25, 55, 255, 0.3)",
-      x: -30, 
-      y: -30 
-    },
-    hover: { 
-      height: 80, 
-      width: 80,
-      backgroundColor: "rgba(25, 55, 255, 0.2)",
-      border: "1px solid rgba(25, 55, 255, 0.5)",
-      x: -40, 
-      y: -40
-    },
-    magic: {
-      height: 70,
-      width: 70,
-      backgroundColor: "rgba(255, 215, 0, 0.15)",
-      border: "1px solid rgba(255, 215, 0, 0.4)",
-      x: -35,
-      y: -35
-    },
-    paint: {
-      height: 60,
-      width: 60,
-      backgroundColor: "rgba(138, 43, 226, 0.2)",
-      border: "1px solid rgba(138, 43, 226, 0.5)",
-      x: -30,
-      y: -30
-    }
-  };
 
-  const springConfig = { damping: 25, stiffness: 300 };
-  const cursorX = useSpring(0, springConfig);
-  const cursorY = useSpring(0, springConfig);
-
-  useEffect(() => {
-    const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-    };
-
-    // Hide custom cursor on interactive elements
-    const handlePointerOver = (e: Event) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.closest('a, button, input, textarea, select, [role="button"], [tabindex]')
-      ) {
-        setIsInteractive(true);
-        document.body.style.cursor = '';
-      } else {
-        setIsInteractive(false);
-        document.body.style.cursor = 'none';
-      }
-    };
-
-    window.addEventListener('mousemove', moveCursor);
-    window.addEventListener('mouseover', handlePointerOver);
-
-    return () => {
-      window.removeEventListener('mousemove', moveCursor);
-      window.removeEventListener('mouseover', handlePointerOver);
-    };
-  }, [cursorX, cursorY]);
-
-  return (
-    <motion.div
-      ref={cursorRef}
-      className="fixed top-0 left-0 z-50 rounded-full pointer-events-none flex items-center justify-center backdrop-blur-sm"
-      animate={isInteractive ? "hidden" : cursorVariant}
-      variants={variants}
-      style={{
-        x: cursorX,
-        y: cursorY,
-      }}
-    >
-      <span className="text-xs font-medium whitespace-nowrap">{cursorText}</span>
-    </motion.div>
-  );
-};
 
 export default function Portfolio() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [shuffledServices, setShuffledServices] = useState<string[]>([]);
+  const [shuffledServicesRow1, setShuffledServicesRow1] = useState<string[]>([]);
+  const [shuffledServicesRow2, setShuffledServicesRow2] = useState<string[]>([]);
+  const [shuffledServicesRow3, setShuffledServicesRow3] = useState<string[]>([]);
+  const [shuffledServicesRow4, setShuffledServicesRow4] = useState<string[]>([]);
   const { scrollYProgress } = useScroll();
 
   // Services list - easy to add/remove items
   const services = [
+    
+    "POS Systems",
+    "Logo Design",
+    "HR Systems",
     "Web Development",
     "Mobile Apps",
     "UI/UX Design",
@@ -149,6 +57,10 @@ export default function Portfolio() {
     };
     
     setShuffledServices(shuffleArray(services));
+    setShuffledServicesRow1(shuffleArray(services));
+    setShuffledServicesRow2(shuffleArray(services));
+    setShuffledServicesRow3(shuffleArray(services));
+    setShuffledServicesRow4(shuffleArray(services));
   }, []);
 
   useEffect(() => {
@@ -161,12 +73,7 @@ export default function Portfolio() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    document.body.style.cursor = 'none';
-    return () => {
-      document.body.style.cursor = 'auto';
-    };
-  }, []);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -228,8 +135,7 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100 overflow-hidden">
-      {/* Custom Cursor */}
-      <CustomCursor />
+
       
       {/* Floating Background Elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
@@ -434,15 +340,15 @@ export default function Portfolio() {
               <motion.div 
                 className="flex gap-4 whitespace-nowrap"
                 animate={{ 
-                  x: [0, -100 * shuffledServices.length]
+                  x: [0, -100 * shuffledServicesRow1.length]
                 }}
                 transition={{ 
-                  duration: 25 * shuffledServices.length,
+                  duration: 1 * shuffledServicesRow1.length,
                   repeat: Infinity,
                   ease: "linear"
                 }}
               >
-                {shuffledServices.length > 0 && shuffledServices.map((service, index) => (
+                {shuffledServicesRow1.length > 0 && shuffledServicesRow1.map((service, index) => (
                   <motion.div
                     key={`row1-${index}`}
                     className="inline-block"
@@ -466,15 +372,15 @@ export default function Portfolio() {
               <motion.div 
                 className="flex gap-4 whitespace-nowrap"
                 animate={{ 
-                  x: [-100 * shuffledServices.length, 0]
+                  x: [-100 * shuffledServicesRow2.length, 0]
                 }}
                 transition={{ 
-                  duration: 30 * shuffledServices.length,
+                  duration: 3 * shuffledServicesRow2.length,
                   repeat: Infinity,
                   ease: "linear"
                 }}
               >
-                {shuffledServices.length > 0 && shuffledServices.map((service, index) => (
+                {shuffledServicesRow2.length > 0 && shuffledServicesRow2.map((service, index) => (
                   <motion.div
                     key={`row2-${index}`}
                     className="inline-block"
@@ -498,15 +404,15 @@ export default function Portfolio() {
               <motion.div 
                 className="flex gap-4 whitespace-nowrap"
                 animate={{ 
-                  x: [0, -100 * shuffledServices.length]
+                  x: [0, -100 * shuffledServicesRow3.length]
                 }}
                 transition={{ 
-                  duration: 35 * shuffledServices.length,
+                  duration: 4 * shuffledServicesRow3.length,
                   repeat: Infinity,
                   ease: "linear"
                 }}
               >
-                {shuffledServices.length > 0 && shuffledServices.map((service, index) => (
+                {shuffledServicesRow3.length > 0 && shuffledServicesRow3.map((service, index) => (
                   <motion.div
                     key={`row3-${index}`}
                     className="inline-block"
@@ -530,15 +436,15 @@ export default function Portfolio() {
               <motion.div 
                 className="flex gap-4 whitespace-nowrap"
                 animate={{ 
-                  x: [-100 * shuffledServices.length, 0]
+                  x: [-100 * shuffledServicesRow4.length, 0]
                 }}
                 transition={{ 
-                  duration: 40 * shuffledServices.length,
+                  duration: 2 * shuffledServicesRow4.length,
                   repeat: Infinity,
                   ease: "linear"
                 }}
               >
-                {shuffledServices.length > 0 && shuffledServices.map((service, index) => (
+                {shuffledServicesRow4.length > 0 && shuffledServicesRow4.map((service, index) => (
                   <motion.div
                     key={`row4-${index}`}
                     className="inline-block"
