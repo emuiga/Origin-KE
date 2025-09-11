@@ -11,13 +11,14 @@ import CardStack from "../../components/CardStack";
 
 export default function Portfolio() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [shuffledServices, setShuffledServices] = useState<string[]>([]);
   const [shuffledServicesRow1, setShuffledServicesRow1] = useState<string[]>([]);
   const [shuffledServicesRow2, setShuffledServicesRow2] = useState<string[]>([]);
   const [shuffledServicesRow3, setShuffledServicesRow3] = useState<string[]>([]);
   const [shuffledServicesRow4, setShuffledServicesRow4] = useState<string[]>([]);
+  const [activeFilter, setActiveFilter] = useState('All');
+  const [countedStats, setCountedStats] = useState({ customers: 0, agents: 0, hours: 0, projects: 0 });
   const { scrollYProgress } = useScroll();
 
   // Services list - easy to add/remove items
@@ -73,6 +74,34 @@ export default function Portfolio() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Counter animation effect
+  useEffect(() => {
+    const targetStats = { customers: 150, agents: 12, hours: 24, projects: 75 };
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const stepDuration = duration / steps;
+
+    let currentStep = 0;
+    const timer = setInterval(() => {
+      currentStep++;
+      const progress = currentStep / steps;
+      
+      setCountedStats({
+        customers: Math.floor(targetStats.customers * progress),
+        agents: Math.floor(targetStats.agents * progress),
+        hours: Math.floor(targetStats.hours * progress),
+        projects: Math.floor(targetStats.projects * progress)
+      });
+
+      if (currentStep >= steps) {
+        clearInterval(timer);
+        setCountedStats(targetStats);
+      }
+    }, stepDuration);
+
+    return () => clearInterval(timer);
+  }, []);
+
 
 
   useEffect(() => {
@@ -118,20 +147,66 @@ export default function Portfolio() {
   const projects = [
     {
       id: 1,
-      title: "Adorned",
+      title: "Adorned Family Home",
       description: "Personalized care for the elderly",
       image: "/adorned.png",
-      year: "2024"
+      year: "2024",
+      category: "Development",
+      tags: ["Web Development", "Healthcare", "UI/UX Design"]
+    },
+    {
+      id: 2,
+      title: "KIFWA Clearing & Forwarding System",
+      description: "Comprehensive logistics management system for Kenya International Freights and Warehousing Association",
+      image: "/Screenshot from 2025-07-02 14-38-44.png",
+      year: "2024",
+      category: "Development",
+      tags: ["Logistics", "Web Development", "Database Design", "Custom Software"]
+    },
+    {
+      id: 3,
+      title: "Bechfam.io Cloud Solutions",
+      description: "Enterprise cloud management platform for Bechfam.io cloud solutions company",
+      image: "/Screenshot from 2025-09-09 07-07-25.png",
+      year: "2024",
+      category: "Development",
+      tags: ["Cloud Solutions", "Enterprise Software", "API Development", "Scalable Architecture"]
+    },
+    {
+      id: 4,
+      title: "Brand Identity Package",
+      description: "Complete branding solution for startup",
+      image: "/web1.jpg",
+      year: "2024",
+      category: "Branding",
+      tags: ["Logo Design", "Brand Guidelines", "Marketing Materials"]
+    },
+    {
+      id: 5,
+      title: "Mobile Banking App",
+      description: "Secure mobile banking solution",
+      image: "/web2.jpg",
+      year: "2024",
+      category: "Development",
+      tags: ["Mobile App", "Fintech", "Security"]
+    },
+    {
+      id: 6,
+      title: "Digital Marketing Campaign",
+      description: "Multi-channel marketing strategy",
+      image: "/mock1.png",
+      year: "2024",
+      category: "Consulting",
+      tags: ["Digital Marketing", "SEO", "Social Media"]
     }
   ];
 
-  const nextProject = () => {
-    setCurrentProjectIndex((prev) => (prev + 1) % projects.length);
-  };
+  const categories = ['All', 'Development', 'Branding', 'Consulting'];
+  
+  const filteredProjects = activeFilter === 'All' 
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
 
-  const prevProject = () => {
-    setCurrentProjectIndex((prev) => (prev - 1 + projects.length) % projects.length);
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100 overflow-hidden">
@@ -174,144 +249,202 @@ export default function Portfolio() {
 
       {/* Hero Section */}
       <section className="relative px-4 sm:px-8 pt-16 sm:pt-24 pb-10 sm:pb-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h1 
-            className="text-4xl sm:text-5xl lg:text-7xl font-semibold text-slate-900 mb-4 sm:mb-6"
+        <div className="max-w-6xl mx-auto">
+          <motion.div 
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="font-payout">"</span>This doesn't look like a portfolio.<span className="font-payout">"</span>
-          </motion.h1>
-          
-          <motion.p 
-            className="text-lg sm:text-xl text-slate-600 leading-relaxed mt-6 sm:mt-8 max-w-3xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            That's because it isn't.
-          </motion.p>
-          
-          <motion.p 
-            className="text-lg sm:text-xl text-slate-600 leading-relaxed mt-4 max-w-3xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.7 }}
-          >
-            It's a space we carved for the curious.
-          </motion.p>
-          
-          <motion.p 
-            className="text-lg sm:text-xl text-slate-600 leading-relaxed mt-4 max-w-3xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.9 }}
-          >
-            These aren't just projects. They're our blueprints, risks, side quests, second drafts, and first principles.
-          </motion.p>
-          
-          <motion.div
-            className="mt-8 sm:mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
-          >
-            <button 
-              onClick={() => document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' })}
-              className="inline-flex items-center gap-2 py-3 px-6 bg-black text-white rounded-full font-bold hover:bg-slate-800 transition-colors duration-300 group"
-              data-cursor="hover"
-              data-cursor-text="Enter the Layer"
-            >
-              <span className="ml-2">Enter the Layer</span>
-              <span className="text-lg group-hover:translate-x-1 transition-transform duration-300">→</span>
-            </button>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
+              Our Portfolios
+            </h1>
+            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
+              Discover our successful projects across web development, mobile apps, branding, and digital solutions that drive real business results.
+            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects-section" className="relative px-4 sm:px-8 py-16 sm:py-24 bg-gradient-to-br from-slate-100 via-blue-100 to-indigo-100 min-h-screen">
+      {/* Portfolio Section */}
+      <section className="px-4 sm:px-8 py-16 sm:py-24 bg-white/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto">
+          {/* Filter Buttons */}
           <motion.div 
-            className="text-center mb-12 sm:mb-16"
+            className="flex flex-wrap justify-center gap-4 mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-4">
-              We have served up to 10 clients both individually and together
-            </h2>
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveFilter(category)}
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  activeFilter === category
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : 'bg-white/80 text-slate-700 hover:bg-blue-50 hover:text-blue-600 border border-slate-200'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
           </motion.div>
 
-          {/* Project Carousel */}
-          <div className="relative h-auto sm:h-[70vh] flex flex-col sm:flex-row items-center">
-            {/* Project Image - Top on mobile, Left on desktop */}
-            <div className="w-full sm:w-1/2 h-64 sm:h-full relative overflow-hidden mb-6 sm:mb-0">
-              <motion.div
-                key={currentProjectIndex}
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 2, ease: "easeInOut" }}
-                className="absolute inset-0"
+          {/* Projects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProjects.map((project, index) => (
+              <div
+                key={project.id}
+                className="group bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <img 
-                  src={projects[currentProjectIndex].image} 
-                  alt={projects[currentProjectIndex].title}
-                  className="w-full h-full object-cover rounded-xl"
-                />
-                {/* Gradient fade to background */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-100/80"></div>
-              </motion.div>
-            </div>
-
-            {/* Project Text - Below on mobile, Right on desktop */}
-            <div className="w-full sm:w-1/2 h-auto sm:h-full flex items-center justify-center px-2 sm:px-12">
-              <motion.div
-                key={currentProjectIndex}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 2, ease: "easeInOut" }}
-                className="text-center"
-              >
-                <h3 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-4">
-                  {projects[currentProjectIndex].title}
-                </h3>
-                <p className="text-lg sm:text-xl text-slate-600 mb-8 leading-relaxed">
-                  {projects[currentProjectIndex].description}
-                </p>
-                {projects.length > 1 && (
-                  <button
-                    onClick={nextProject}
-                    className="inline-flex items-center gap-2 text-slate-700 hover:text-blue-600 transition-colors duration-300 group"
-                  >
-                    <span className="text-lg group-hover:translate-x-1 transition-transform duration-300">→</span>
-                  </button>
-                )}
-              </motion.div>
-            </div>
+                <div className="relative overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+                
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                      {project.category}
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-xl font-semibold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-slate-600 mb-4 leading-relaxed">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.map((tag) => (
+                      <span 
+                        key={tag}
+                        className="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded-md"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    <button className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 px-4 rounded-lg font-medium transition-colors duration-300">
+                      Read More
+                    </button>
+                    <Link href="/contact" className="flex-1">
+                      <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-300 group-hover:shadow-lg">
+                        Get a Quote
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
-          {/* Project Indicators */}
-          <div className="flex justify-center mt-8 gap-4">
-            {projects.map((_, index) => (
-              <button
+          {/* Empty State */}
+          {filteredProjects.length === 0 && (
+            <motion.div 
+              className="text-center py-16"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="text-6xl mb-4">🔍</div>
+              <h3 className="text-xl font-semibold text-slate-900 mb-2">No projects found</h3>
+              <p className="text-slate-600">Try selecting a different category to see more projects.</p>
+            </motion.div>
+          )}
+        </div>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="px-4 sm:px-8 py-16 sm:py-24 bg-white/80 backdrop-blur-sm relative overflow-hidden">
+        {/* World Map Background */}
+        <div className="absolute inset-0 opacity-10">
+          <svg 
+            className="w-full h-full" 
+            viewBox="0 0 1000 500" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* Simplified World Map */}
+            <path d="M50 200 L150 180 L200 200 L250 180 L300 200 L350 180 L400 200 L450 180 L500 200 L550 180 L600 200 L650 180 L700 200 L750 180 L800 200 L850 180 L900 200 L950 180" stroke="#3b82f6" strokeWidth="2" fill="none"/>
+            <path d="M100 250 L200 230 L300 250 L400 230 L500 250 L600 230 L700 250 L800 230 L900 250" stroke="#3b82f6" strokeWidth="2" fill="none"/>
+            <path d="M150 300 L250 280 L350 300 L450 280 L550 300 L650 280 L750 300 L850 280" stroke="#3b82f6" strokeWidth="2" fill="none"/>
+            
+            {/* Continents */}
+            <circle cx="200" cy="200" r="30" fill="#3b82f6" opacity="0.3"/>
+            <circle cx="400" cy="180" r="25" fill="#3b82f6" opacity="0.3"/>
+            <circle cx="600" cy="220" r="35" fill="#3b82f6" opacity="0.3"/>
+            <circle cx="300" cy="300" r="20" fill="#3b82f6" opacity="0.3"/>
+            <circle cx="500" cy="280" r="28" fill="#3b82f6" opacity="0.3"/>
+            <circle cx="700" cy="250" r="22" fill="#3b82f6" opacity="0.3"/>
+            
+            {/* Kenya marker */}
+            <circle cx="500" cy="280" r="8" fill="#ef4444" opacity="0.8"/>
+            <text x="500" y="320" textAnchor="middle" className="text-xs fill-red-500 font-semibold">Kenya</text>
+          </svg>
+        </div>
+        
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-600 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-600 to-transparent"></div>
+          <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent"></div>
+        </div>
+        
+        <div className="max-w-6xl mx-auto relative z-10">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+              Our Impact in Numbers
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Real results from real projects that drive business growth
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { number: countedStats.customers, label: "Satisfied Customers", suffix: "+" },
+              { number: countedStats.agents, label: "Professional Agents", suffix: "" },
+              { number: countedStats.hours, label: "Hours Support", suffix: "/7" },
+              { number: countedStats.projects, label: "Project Finished", suffix: "+" }
+            ].map((stat, index) => (
+              <motion.div
                 key={index}
-                onClick={() => setCurrentProjectIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentProjectIndex 
-                    ? 'bg-blue-600 scale-125' 
-                    : 'bg-slate-300 hover:bg-slate-400'
-                }`}
-                data-cursor="hover"
-              />
+                className="text-center relative"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+              >
+                {/* Divider lines */}
+                {index < 3 && (
+                  <div className="hidden md:block absolute top-1/2 -right-4 w-px h-16 bg-gradient-to-b from-transparent via-blue-200 to-transparent transform -translate-y-1/2"></div>
+                )}
+                
+                <div className="text-4xl sm:text-5xl font-bold text-blue-600 mb-3">
+                  {stat.number}{stat.suffix}
+                </div>
+                <div className="text-slate-600 font-medium text-sm sm:text-base">{stat.label}</div>
+              </motion.div>
             ))}
           </div>
         </div>
-        
       </section>
 
       {/* Services Carousel Section */}

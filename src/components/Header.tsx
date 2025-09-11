@@ -66,7 +66,7 @@ export default function Header({ isScrolled = false }: HeaderProps) {
           <a href="/contact" className={`transition-all duration-300 font-medium ${
             isScrolled ? 'text-sm' : 'text-base'
           } ${pathname === "/contact" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`}
-            data-cursor="hover">Link Up</a>
+            data-cursor="hover">Get a Quote</a>
 
         </motion.div>
 
@@ -94,7 +94,7 @@ export default function Header({ isScrolled = false }: HeaderProps) {
             <Link href="/process" className={`transition-colors text-base font-medium ${pathname === "/process" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`} data-cursor="hover" >The Process</Link>
             <Link href="/portfolio" className={`transition-colors text-base font-medium ${pathname === "/portfolio" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`} data-cursor="hover">Portfolio</Link>
             <Link href="/letter" className={`transition-colors text-base font-medium ${pathname === "/letter" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`} data-cursor="hover">Letter</Link>
-            <Link href="/contact" className={`transition-colors text-base font-medium ${pathname === "/contact" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`} data-cursor="hover">Link Up</Link>
+            <Link href="/contact" className={`transition-colors text-base font-medium ${pathname === "/contact" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`} data-cursor="hover">Get a Quote</Link>
 
           </div>
         </motion.div>

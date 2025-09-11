@@ -89,61 +89,8 @@ export default function Process() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-            We don't hide our modus operandi.
-The raw sketches, the logic, the tradeoffs, the tension between{" "}
-            <span className="relative inline-block">
-              <motion.span
-                className="absolute inset-0"
-                animate={{ opacity: [1, 0, 0, 1] }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                possible
-              </motion.span>
-              <motion.span
-                className="absolute inset-0"
-                animate={{ opacity: [0, 1, 1, 0] }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                perfect
-              </motion.span>
-              <span className="invisible">possible</span>
-            </span>
-            {" "}and{" "}
-            <span className="relative inline-block">
-              <motion.span
-                className="absolute inset-0"
-                animate={{ opacity: [0, 1, 1, 0] }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                possible
-              </motion.span>
-              <motion.span
-                className="absolute inset-0"
-                animate={{ opacity: [1, 0, 0, 1] }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                perfect
-              </motion.span>
-              <span className="invisible">possible</span>
-            </span>
-            .
-The fingerprints of a team that builds from <span className="font-hey-august">Origin</span>.
+            From initial concept to final deployment, we follow a proven methodology that ensures your project succeeds. 
+            Every step is transparent, every decision is collaborative, and every outcome is designed to exceed your expectations.
           </motion.p>
         </div>
       </section>
@@ -160,38 +107,44 @@ The fingerprints of a team that builds from <span className="font-hey-august">Or
               {
                 number: "01",
                 title: "Listen & Learn",
-                subtitle: "Conscius Contextus",
-                description: "We actively listen- to you and to each other. Our first step is to absorb your vision, goals, and challenges. Think of it as brand therapy with a technical degree.",
+                subtitle: "Discovery & Requirements",
+                deliverables: ["Project brief", "Technical requirements", "User personas"],
+                description: "We actively listen to understand your vision, goals, and challenges. Through detailed discovery sessions, we map out your business needs and technical requirements.",
               },
               {
                 number: "02",
                 title: "Strategy & Synergy",
-                subtitle: "Logos et Praxis",
-                description: "Your thinking meets ours. Together, we craft a roadmap that balances ambition with achievability. We are not afraid to say no.",
+                subtitle: "Planning & Architecture",
+                deliverables: ["Project roadmap", "Technical architecture", "Timeline & milestones"],
+                description: "Your thinking meets ours. Together, we craft a comprehensive roadmap that balances ambition with achievability, including detailed technical architecture and project timeline.",
               },
               {
                 number: "03",
                 title: "Design & Define",
-                subtitle: "Pulchritudo Splendor Veritatis",
-                description: "Form follows function, and both need to impress. The team creates intuitive, engaging interfaces that you will fall in love with at first sight.",
+                subtitle: "UI/UX & Prototyping",
+                deliverables: ["Wireframes", "UI designs", "Interactive prototypes"],
+                description: "Form follows function, and both need to impress. We create intuitive, engaging interfaces with detailed wireframes, visual designs, and interactive prototypes for your approval.",
               },
               {
                 number: "04",
                 title: "Build & Breathe",
-                subtitle: "Ex nihilo nihil fit",
-                description: "We're not know-it-alls, we're learn-it-alls. Our developers don't just write code; they compose it. Clean, efficient, and future-proof. We build systems that scale with your success.",
+                subtitle: "Development & Integration",
+                deliverables: ["Core functionality", "Database setup", "API integration"],
+                description: "Our developers write clean, efficient, and future-proof code. We build systems that scale with your success, implementing core features and integrating all necessary components.",
               },
               {
                 number: "05",
                 title: "Test & Triumph",
-                subtitle: "Veritas Numquam Perit",
-                description: "We poke, prod, and push your product to its limits so users never have to experience anything but perfection.",
+                subtitle: "Quality Assurance",
+                deliverables: ["Bug reports", "Performance optimization", "Security audit"],
+                description: "We thoroughly test every feature, optimize performance, and ensure security. Our quality assurance process guarantees your product works flawlessly across all devices and scenarios.",
               },
               {
                 number: "06",
                 title: "Launch & Learn",
-                subtitle: "Egressus Cum Proposito",
-                description: "The big red button moment. We orchestrate smooth launches followed by data-driven iterations and develop customer expertise of their product. Your product's journey is just beginning.",
+                subtitle: "Deployment & Support",
+                deliverables: ["Live deployment", "Training materials", "Ongoing support"],
+                description: "We orchestrate smooth launches and provide comprehensive training. Post-launch, we offer ongoing support, monitoring, and iterative improvements to ensure continued success.",
               },
             ].map((step, index) => (
               <motion.div 
@@ -210,20 +163,22 @@ The fingerprints of a team that builds from <span className="font-hey-august">Or
                     <div className={`h-[1px] bg-slate-200 flex-grow ${index % 2 === 0 ? 'lg:mr-4' : 'ml-4'}`}></div>
                   </div>
                   <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-900 mb-1 sm:mb-2">{step.title}</h3>
-                  <div className="relative h-6 sm:h-8 mb-2 sm:mb-3">
-                    {/* Latin text - hidden on mobile, visible on desktop with hover */}
-                    <h4 className="text-base sm:text-lg text-blue-600 italic absolute top-0 left-0 transition-all duration-300 transform group-hover:opacity-0 group-hover:-translate-y-4 hidden lg:block">{step.subtitle}</h4>
-                    
-                    {/* English text - visible on mobile, hidden on desktop until hover */}
-                    <span className="text-base sm:text-lg text-blue-600 absolute top-0 left-0 transition-all duration-300 transform lg:opacity-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0">
-                      {index === 0 ? "Context-consciousness" : 
-                       index === 1 ? "Thought and Action" : 
-                       index === 2 ? "Beauty is the Splendor of Truth" : 
-                       index === 3 ? "Nothing Comes From Nothing" : 
-                       index === 4 ? "Truth Never Dies" : 
-                       "Setting Forth With Purpose"}
-                    </span>
+                  <h4 className="text-base sm:text-lg text-blue-600 font-medium mb-2">{step.subtitle}</h4>
+                  
+                  {/* Deliverables */}
+                  <div className="mb-3">
+                    <div className="mb-3">
+                      <p className="text-xs font-medium text-slate-500 mb-1">What You Get:</p>
+                      <div className="flex flex-wrap gap-1">
+                        {step.deliverables.map((deliverable, idx) => (
+                          <span key={idx} className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full">
+                            {deliverable}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
+                  
                   <p className="text-sm sm:text-base text-slate-600">{step.description}</p>
                 </div>
                 
@@ -231,6 +186,20 @@ The fingerprints of a team that builds from <span className="font-hey-august">Or
                 <div className={`absolute top-4 ${
                   index % 2 === 0 ? 'left-0 lg:left-1/2 lg:right-auto' : 'left-0 lg:left-1/2'
                 } lg:transform lg:-translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-blue-500 border-4 border-white shadow-lg z-20`}></div>
+                
+                {/* Connecting Arrow - only show if not the last step */}
+                {index < 5 && (
+                  <div className={`absolute ${
+                    index % 2 === 0 ? 'left-0 lg:left-1/2 lg:right-auto' : 'left-0 lg:left-1/2'
+                  } lg:transform lg:-translate-x-1/2 top-8 sm:top-10 lg:top-12 w-0 h-0 z-10`}>
+                    <div className="relative">
+                      {/* Arrow line */}
+                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[1px] h-16 sm:h-20 lg:h-24 bg-gradient-to-b from-blue-500 to-blue-300"></div>
+                      {/* Arrow head */}
+                      <div className="absolute top-16 sm:top-20 lg:top-24 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[4px] border-r-[4px] border-t-[8px] border-l-transparent border-r-transparent border-t-blue-500"></div>
+                    </div>
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
@@ -247,31 +216,46 @@ The fingerprints of a team that builds from <span className="font-hey-august">Or
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Ready to <span className="relative inline-block">
-              <span className="font-hey-august">Transform</span><span className="absolute -bottom-1 left-0 w-full h-[2px] bg-blue-500"></span>
-            </span> Your Big Idea?
+            Ready to Bring Your Vision to Life?
           </motion.h2>
           
           <motion.p 
-            className="text-base sm:text-lg text-slate-600 mb-6 sm:mb-8"
+            className="text-base sm:text-lg text-slate-600 mb-8 sm:mb-10 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
+            Every successful project starts with a conversation. Let's discuss your goals, explore possibilities, and create something extraordinary together.
           </motion.p>
           
           <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             <Link href="/contact">
-              <span className="inline-block py-2.5 sm:py-3 px-5 sm:px-6 bg-black text-white rounded-lg font-medium hover:bg-slate-800 transition-colors duration-300" data-cursor="hover" data-cursor-text="Let's Talk">
-                Start the Conversation
+              <span className="inline-block py-3 sm:py-4 px-6 sm:px-8 bg-blue-600 text-white rounded-lg font-semibold text-lg transition-colors duration-300">
+                Get Your Free Consultation
               </span>
             </Link>
+            <div className="text-sm text-slate-500">
+              <span className="font-medium">✓</span> No obligation • <span className="font-medium">✓</span> 30-minute call • <span className="font-medium">✓</span> Custom proposal
+            </div>
+          </motion.div>
+          
+          <motion.div
+            className="mt-8 pt-6 border-t border-slate-200"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+          >
+            <p className="text-sm text-slate-500">
+              Join <span className="font-semibold text-blue-600">150+</span> satisfied clients who chose Origin for their digital transformation
+            </p>
           </motion.div>
         </div>
       </section>
