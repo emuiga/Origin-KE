@@ -5,6 +5,11 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Globe from "../components/Globe";
+import TestimonialsCarousel from "../components/TestimonialsCarousel";
+import ClientsCarousel from "../components/ClientsCarousel";
+import FeaturedProjects from "../components/FeaturedProjects";
+import GlobalPresence from "../components/GlobalPresence";
 
 
 
@@ -76,38 +81,9 @@ export default function Home() {
 
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100 overflow-hidden">
+    <div ref={containerRef} className="min-h-screen bg-white overflow-hidden">
 
       
-      {/* Floating Background Elements */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <motion.div 
-          className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-blue-400/20 to-blue-300/20 rounded-full blur-3xl"
-          animate={{ 
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ 
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-40 right-20 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl"
-          animate={{ 
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            scale: [1.2, 1, 1.2]
-          }}
-          transition={{ 
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      </div>
 
       {/* Navigation with extra top padding on mobile */}
       <div className="pt-3 sm:pt-0">
@@ -115,83 +91,143 @@ export default function Home() {
       </div>
 
       {/* Hero Section - StoryBrand Approach */}
-      <section className="relative px-4 sm:px-8 pt-8 sm:pt-20 pb-8 sm:pb-28 min-h-[80vh] flex flex-col items-center justify-center">
-        {/* Soft blurred background shape */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] sm:w-[900px] sm:h-[520px] bg-blue-200/40 rounded-[40%] blur-3xl z-0" style={{filter: 'blur(80px)'}} />
-        <div className="max-w-5xl mx-auto w-full text-center relative z-10">
+      <section className="relative px-2 sm:px-3 md:px-4 pt-12 sm:pt-24 pb-12 sm:pb-32 min-h-[80vh] flex items-center bg-no-repeat bg-cover bg-center md:bg-[position:50%_40%]" style={{ backgroundImage: "url(/bg.webp)" }}>
+        {/* Overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/40" />
+        <div className="max-w-6xl mx-auto w-full relative z-10">
           <motion.div 
-            className="space-y-6 sm:space-y-8"
+            className="max-w-3xl space-y-6 sm:space-y-8 text-left"
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
             {/* Clear Value Proposition */}
-            <motion.h1 className="font-bold text-slate-900 tracking-tight text-3xl sm:text-5xl lg:text-6xl xl:text-7xl leading-tight mx-auto max-w-6xl">
-              Turn Your Business Into a <span className="font-payout">Sales Machine</span>
+            <motion.h1 className="font-bold text-white tracking-tight text-4xl sm:text-6xl lg:text-7xl leading-[1.05]">
+              Technology That Works
             </motion.h1>
-            
-            {/* Problem Statement */}
-            <motion.div 
-              className="bg-slate-50/80 backdrop-blur-sm border border-slate-200/50 rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
+            <motion.p
+              className="text-base sm:text-xl text-gray-200 max-w-2xl leading-relaxed"
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              <h2 className="text-xl sm:text-2xl font-semibold text-slate-800 mb-4">
-                Your customers are searching online, but they're not finding you
-              </h2>
-              <p className="text-red-700 text-base sm:text-lg leading-relaxed">
-                Without a strong digital presence, you're invisible to 90% of your potential customers. 
-                They're finding your competitors instead of you.
-              </p>
-            </motion.div>
-
-            {/* Solution */}
-            <motion.div 
-              className="bg-green-50/80 backdrop-blur-sm border border-green-200/50 rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-            >
-              <h2 className="text-xl sm:text-2xl font-semibold text-green-800 mb-4">
-                We build software that converts visitors into customers
-              </h2>
-              <p className="text-green-700 text-base sm:text-lg leading-relaxed mb-4">
-                Custom websites, mobile apps, and digital systems that make your business irresistible to customers.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4 text-sm sm:text-base">
-                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Web Development</span>
-                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Mobile Apps</span>
-                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">HR Systems</span>
-                <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">E-commerce</span>
-              </div>
-            </motion.div>
+              We build fast, clear and dependable digital products, including websites, apps and internal tools, crafted to convert and scale with your team.
+            </motion.p>
 
             {/* CTA */}
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-4 items-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
             >
               <Link 
                 href="/contact" 
-                className="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg"
+                className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg"
               >
-                Get Your Free Quote →
+                Book a call →
               </Link>
               <Link 
                 href="/portfolio" 
-                className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg"
+                className="border-2 border-white/30 text-white hover:border-white/60 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg"
               >
-                See Our Work
+                See our work
               </Link>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* Why Work With Us Section */}
+      <section className="px-2 sm:px-3 md:px-4 py-20 sm:py-28 bg-white">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+          {/* Left: Feature Image with stats overlay */}
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="overflow-hidden rounded-3xl shadow-xl border border-gray-200">
+              <img
+                src="/girl.webp"
+                alt="Happy client using our solutions"
+                className="w-full h-[560px] lg:h-[640px] object-cover"
+              />
+            </div>
+
+            {/* Stats card removed */}
+          </motion.div>
+
+          {/* Right: Copy like the shared reference */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">PARTNER WITH US</p>
+            <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              We set a new standard for business experience
+            </h2>
+            <div className="mt-8 space-y-8 max-w-2xl">
+              <div>
+                <div className="font-semibold text-slate-900 text-[20px] leading-[28px]">We've Mastered the Craft</div>
+                <p className="text-slate-700 text-[20px] leading-[28px] font-medium">
+                Our cross-functional team collaborate seamlessly to launch solutions that work in your business environment.
+                </p>
+              </div>
+              <div className="pt-6 border-t border-gray-200">
+                <div className="font-semibold text-slate-900 text-[20px] leading-[28px]">Built Around Your Needs</div>
+                <p className="text-slate-700 text-[20px] leading-[28px] font-medium">
+                  Your context drives our approach. We design and develop to your constraints and objectives, producing solutions that fit like a glove.
+                </p>
+              </div>
+              <div className="pt-2">
+                <Link href="/contact" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold">
+                  Get A Quote
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Our Clients Section */}
+      <section className="relative px-4 sm:px-8 py-16 sm:py-24 bg-white overflow-hidden min-h-[70vh]">
+        {/* Globe background - visible, large, top half, full width */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+          <Globe
+            fluid
+            opacity={0.4}
+            positionClassName="absolute bottom-0 left-1/2 -translate-x-1/2"
+            className="w-[200%] h-[200%]"
+          />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">OUR CLIENTS</p>
+            <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Trusted by businesses across industries.
+            </h2>
+          </motion.div>
+
+          <ClientsCarousel />
+        </div>
+      </section>
+
+      <FeaturedProjects />
+
+      {/* Pricing Section - removed */}
+      {false && (
       <section className="px-4 sm:px-8 py-16 sm:py-24 bg-white/50 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto">
           <motion.div 
@@ -386,116 +422,20 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+      )}
 
-      {/* Services Section */}
-      <section id="genesis" className={`px-4 sm:px-8 py-16 sm:py-24 bg-gradient-to-b from-transparent via-blue-50/30 to-blue-100/50 ${
-        isScrolled ? 'mt-12 sm:mt-16' : ''
-      }`}>
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-slate-900 mb-3 sm:mb-4">
-              How We Turn Your Business Into a <span className="font-payout">Sales Machine</span>
-            </h2>
-            
-            <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              We don't just build websites and apps. We build systems that convert visitors into customers and grow your revenue.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {[
-              {
-                title: "Convert More Visitors Into Customers",
-                subtitle: "Design that sells",
-                description: "We create websites and apps that don't just look good—they convert. Every element is designed to guide visitors toward becoming customers.",
-                gradient: "from-blue-400 to-blue-500",
-                shadowColor: "shadow-blue-400/25"
-              },
-              {
-                title: "Build Fast, Scale Smart",
-                subtitle: "Performance that pays",
-                description: "Your digital presence loads fast, works everywhere, and grows with your business. No technical debt, just results.",
-                gradient: "from-blue-500 to-blue-600", 
-                shadowColor: "shadow-blue-500/25"
-              },
-              {
-                title: "Connect Everything Together",
-                subtitle: "Systems that work",
-                description: "We integrate your website, mobile app, payment systems, and business tools into one seamless experience for you and your customers.",
-                gradient: "from-emerald-500 to-teal-500",
-                shadowColor: "shadow-emerald-500/25"
-              },
-              {
-                title: "Grow Your Revenue",
-                subtitle: "Results that matter",
-                description: "From HR systems to e-commerce platforms, we build solutions that directly impact your bottom line and business growth.",
-                gradient: "from-orange-500 to-red-500",
-                shadowColor: "shadow-orange-500/25"
-              }
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="p-4 sm:p-6 bg-white/60 backdrop-blur-xl rounded-xl border border-white/20 shadow-xl"
-              >
-                <h3 className="text-xl font-semibold text-slate-800 mb-2">{service.title}</h3>
-                <h4 className="text-sm font-medium text-slate-600 mb-3">{service.subtitle}</h4>
-                <p className="text-slate-600 leading-relaxed text-sm">{service.description}</p>
-              </div>
-            ))}
-          </div>
-
-          
-        </div>
-      </section>
+      
 
       {/* Success Story Section */}
-      <section className="px-4 sm:px-8 py-16 sm:py-24 bg-gradient-to-br from-green-50 to-blue-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
-              From Invisible to Irresistible
-            </h2>
-            <div className="bg-white/80 backdrop-blur-sm border border-green-200/50 rounded-2xl p-8 sm:p-12 shadow-xl">
-              <blockquote className="text-lg sm:text-xl text-slate-700 italic mb-6 leading-relaxed">
-                "Before Origin, our website was just a business card online. Now it's our best salesperson, working 24/7 to convert visitors into customers. Our online revenue increased by 300% in just 6 months."
-              </blockquote>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm sm:text-base">
-                <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-green-600">300%</div>
-                  <div className="text-slate-600">Revenue Increase</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-blue-600">6 months</div>
-                  <div className="text-slate-600">Time to Results</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-purple-600">24/7</div>
-                  <div className="text-slate-600">Sales Machine</div>
-                </div>
-              </div>
-            </div>
-            <div className="mt-8">
-              <Link 
-                href="/contact" 
-                className="bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg inline-block"
-              >
-                Get Your Success Story Started →
-              </Link>
-            </div>
-          </motion.div>
+      <section className="relative px-4 sm:px-8 py-12 sm:py-16 bg-white overflow-hidden">
+        {/* Globe as subtle background */}
+        <Globe size={900} opacity={0.4} className="-z-10" />
+        <div className="relative z-10 text-[20px] leading-[28px] font-medium">
+          <TestimonialsCarousel />
         </div>
       </section>
+
+      <GlobalPresence />
 
       {/* Footer */}
       <Footer />
