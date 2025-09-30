@@ -38,6 +38,7 @@ const testimonials = [
 
 const TestimonialsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -51,14 +52,24 @@ const TestimonialsCarousel = () => {
     setCurrentIndex(index);
   };
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Auto-slide functionality like Bootstrap carousel
   useEffect(() => {
+    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return; // disable auto-advance for reduced motion users
+
     const interval = setInterval(() => {
       nextTestimonial();
-    }, 5000); // 5 seconds like Bootstrap default
+    }, isMobile ? 3000 : 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="max-w-6xl mx-auto">

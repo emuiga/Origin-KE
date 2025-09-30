@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -10,7 +10,6 @@ import CardStack from "../../components/CardStack";
 
 
 export default function Portfolio() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [shuffledServices, setShuffledServices] = useState<string[]>([]);
   const [shuffledServicesRow1, setShuffledServicesRow1] = useState<string[]>([]);
@@ -19,7 +18,6 @@ export default function Portfolio() {
   const [shuffledServicesRow4, setShuffledServicesRow4] = useState<string[]>([]);
   const [activeFilter, setActiveFilter] = useState('All');
   const [countedStats, setCountedStats] = useState({ customers: 0, agents: 0, hours: 0, projects: 0 });
-  const { scrollYProgress } = useScroll();
 
   // Services list - easy to add/remove items
   const services = [
@@ -64,15 +62,6 @@ export default function Portfolio() {
     setShuffledServicesRow4(shuffleArray(services));
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Counter animation effect
   useEffect(() => {
@@ -209,213 +198,145 @@ export default function Portfolio() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100 overflow-hidden">
-
-      
-      {/* Floating Background Elements */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <motion.div 
-          className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-blue-400/10 to-blue-300/10 rounded-full blur-3xl"
-          animate={{ 
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ 
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-40 right-20 w-96 h-96 bg-gradient-to-r from-blue-400/10 to-cyan-400/10 rounded-full blur-3xl"
-          animate={{ 
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            scale: [1.2, 1, 1.2]
-          }}
-          transition={{ 
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      </div>
-
-      {/* Navigation */}
-      <div className="pt-3 sm:pt-0">
-        <Header isScrolled={isScrolled} />
-      </div>
+    <div className="min-h-screen bg-white overflow-hidden">
+      <Header />
 
       {/* Hero Section */}
-      <section className="relative px-4 sm:px-8 pt-16 sm:pt-24 pb-10 sm:pb-16">
-        <div className="max-w-6xl mx-auto">
-          <motion.div 
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-              Our Portfolios
+      <section className="relative min-h-[40vh] flex items-center overflow-hidden py-12 sm:py-16">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-no-repeat bg-cover bg-center"
+          style={{
+            backgroundImage: "url('/dream.webp')",
+          }}
+        />
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-blue-800/80 to-slate-900/40" />
+        
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 text-center">
+          <div className="text-white space-y-6">
+            <div className="inline-block px-4 py-2 rounded-full border border-blue-400/30">
+              <span className="text-sm font-medium text-white-200">OUR SERVICES</span>
+            </div>
+            
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+              What We Do
             </h1>
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
-              Discover our successful projects across web development, mobile apps, branding, and digital solutions that drive real business results.
+            
+            <p className="text-lg sm:text-xl text-blue-200 max-w-2xl mx-auto leading-relaxed">
+              From market research to web development, we provide comprehensive digital solutions that drive your business forward.
             </p>
-          </motion.div>
+            
+            <div className="pt-4">
+              <Link href="/contact">
+                <span className="inline-block py-3 px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-lg transition-colors duration-300">
+                  Start Your Project
+                </span>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Portfolio Section */}
-      <section className="px-4 sm:px-8 py-16 sm:py-24 bg-white/50 backdrop-blur-sm">
+      {/* Services Section */}
+      <section id="services" className="px-4 sm:px-8 py-16 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto">
-          {/* Filter Buttons */}
-          <motion.div 
-            className="flex flex-wrap justify-center gap-4 mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveFilter(category)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  activeFilter === category
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white/80 text-slate-700 hover:bg-blue-50 hover:text-blue-600 border border-slate-200'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </motion.div>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-4">
+              What We Do
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              Comprehensive digital solutions tailored to your business needs and goals.
+            </p>
+          </div>
 
-          {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
+          {/* Services Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Market Research",
+                description: "Data-driven insights to understand your market, competitors, and customer needs for informed business decisions.",
+                image: "/food.webp"
+              },
+              {
+                title: "Web Development",
+                description: "Custom websites and web applications built with modern technologies for optimal performance and user experience.",
+                image: "/web.webp"
+              },
+              {
+                title: "Branding",
+                description: "Complete brand identity solutions including logo design, brand guidelines, and visual identity systems.",
+                image: "/individual.webp"
+              },
+              {
+                title: "Mobile Apps",
+                description: "Native and cross-platform mobile applications that engage users and drive business growth.",
+                image: "/laptop.png"
+              },
+              {
+                title: "UI/UX Design",
+                description: "User-centered design solutions that create intuitive and engaging digital experiences for your customers.",
+                image: "/girl.webp"
+              },
+              {
+                title: "Digital Marketing",
+                description: "Strategic digital marketing campaigns that increase brand awareness and drive qualified leads to your business.",
+                image: "/lead.webp"
+              },
+              {
+                title: "AI Solutions",
+                description: "Artificial intelligence implementations including chatbots, automation, and machine learning models to streamline operations.",
+                image: "/ent.webp"
+              },
+              {
+                title: "Data Analytics",
+                description: "Advanced data analysis and visualization tools to extract meaningful insights from your business data.",
+                image: "/change.webp"
+              },
+              {
+                title: "System Integration",
+                description: "Seamless integration of various software systems and platforms to create unified business workflows.",
+                image: "/dream.webp"
+              }
+            ].map((service, index) => (
               <div
-                key={project.id}
-                className="group bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                key={index}
+                className="bg-white overflow-hidden"
               >
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-                      {project.category}
-                    </span>
+                <div className="flex flex-col h-full">
+                  <div className="flex items-center justify-center bg-gray-100 h-48 sm:h-56">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-slate-600 mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span 
-                        key={tag}
-                        className="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded-md"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    <button className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 px-4 rounded-lg font-medium transition-colors duration-300">
-                      Read More
-                    </button>
-                    <Link href="/contact" className="flex-1">
-                      <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-300 group-hover:shadow-lg">
-                        Get a Quote
-                      </button>
-                    </Link>
+                  <div className="p-6 flex-1 flex flex-col">
+                    <h3 className="text-2xl font-bold text-black mb-4">
+                      {service.title}
+                    </h3>
+                    <p className="text-lg font-medium text-gray-600 leading-7 flex-1">
+                      {service.description}
+                    </p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-
-          {/* Empty State */}
-          {filteredProjects.length === 0 && (
-            <motion.div 
-              className="text-center py-16"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-2">No projects found</h3>
-              <p className="text-slate-600">Try selecting a different category to see more projects.</p>
-            </motion.div>
-          )}
         </div>
-      </section>
+      </section>    
 
       {/* Statistics Section */}
-      <section className="px-4 sm:px-8 py-16 sm:py-24 bg-white/80 backdrop-blur-sm relative overflow-hidden">
-        {/* World Map Background */}
-        <div className="absolute inset-0 opacity-10">
-          <svg 
-            className="w-full h-full" 
-            viewBox="0 0 1000 500" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Simplified World Map */}
-            <path d="M50 200 L150 180 L200 200 L250 180 L300 200 L350 180 L400 200 L450 180 L500 200 L550 180 L600 200 L650 180 L700 200 L750 180 L800 200 L850 180 L900 200 L950 180" stroke="#3b82f6" strokeWidth="2" fill="none"/>
-            <path d="M100 250 L200 230 L300 250 L400 230 L500 250 L600 230 L700 250 L800 230 L900 250" stroke="#3b82f6" strokeWidth="2" fill="none"/>
-            <path d="M150 300 L250 280 L350 300 L450 280 L550 300 L650 280 L750 300 L850 280" stroke="#3b82f6" strokeWidth="2" fill="none"/>
-            
-            {/* Continents */}
-            <circle cx="200" cy="200" r="30" fill="#3b82f6" opacity="0.3"/>
-            <circle cx="400" cy="180" r="25" fill="#3b82f6" opacity="0.3"/>
-            <circle cx="600" cy="220" r="35" fill="#3b82f6" opacity="0.3"/>
-            <circle cx="300" cy="300" r="20" fill="#3b82f6" opacity="0.3"/>
-            <circle cx="500" cy="280" r="28" fill="#3b82f6" opacity="0.3"/>
-            <circle cx="700" cy="250" r="22" fill="#3b82f6" opacity="0.3"/>
-            
-            {/* Kenya marker */}
-            <circle cx="500" cy="280" r="8" fill="#ef4444" opacity="0.8"/>
-            <text x="500" y="320" textAnchor="middle" className="text-xs fill-red-500 font-semibold">Kenya</text>
-          </svg>
-        </div>
-        
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-600 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-600 to-transparent"></div>
-          <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent"></div>
-        </div>
-        
-        <div className="max-w-6xl mx-auto relative z-10">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-              Our Impact in Numbers
+      <section className="px-4 sm:px-8 py-16 sm:py-24 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">OUR IMPACT</p>
+            <h2 className="text-2xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Real results from real projects that drive business growth
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Real results from real projects that drive business growth
-            </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -424,47 +345,32 @@ export default function Portfolio() {
               { number: countedStats.hours, label: "Hours Support", suffix: "/7" },
               { number: countedStats.projects, label: "Project Finished", suffix: "+" }
             ].map((stat, index) => (
-              <motion.div
+              <div
                 key={index}
                 className="text-center relative"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
               >
-                {/* Divider lines */}
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 w-px h-16 bg-gradient-to-b from-transparent via-blue-200 to-transparent transform -translate-y-1/2"></div>
-                )}
-                
                 <div className="text-4xl sm:text-5xl font-bold text-blue-600 mb-3">
                   {stat.number}{stat.suffix}
                 </div>
                 <div className="text-slate-600 font-medium text-sm sm:text-base">{stat.label}</div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Services Carousel Section */}
-      <section className="relative px-4 sm:px-8 py-16 sm:py-24 bg-gradient-to-br from-slate-100 via-blue-100 to-indigo-100 overflow-hidden">
+      <section className="relative px-4 sm:px-8 py-16 sm:py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto">
           {/* Title */}
-          <motion.div 
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-2">
               At our core, we are builders
             </h2>
             <p className="text-lg text-slate-600">
               <span className="font-payout">our focus</span>
             </p>
-          </motion.div>
+          </div>
 
           {/* Services Carousel - Multiple Rows */}
           <div className="relative mb-12">
@@ -613,17 +519,11 @@ export default function Portfolio() {
       </section>
 
       {/* CTA Section */}
-      <section className="px-4 sm:px-8 py-20 sm:py-32 bg-gradient-to-br from-slate-50 to-blue-50">
+      <section className="px-4 sm:px-8 py-20 sm:py-32 bg-white">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
             <div className="flex-1 text-center">
-              <motion.div 
-                className="h-auto mb-8 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-              >
+              <div className="h-auto mb-8 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
                 <span className="text-3xl sm:text-4xl font-semibold text-slate-900">
                   You're into
                 </span>
@@ -642,19 +542,14 @@ export default function Portfolio() {
                     {words[currentWordIndex]}?
                   </motion.span>
                 </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-              >
+              </div>
+              <div>
                 <Link href="/contact">
-                  <span className="inline-block py-3 sm:py-4 px-8 sm:px-10 bg-black text-white rounded-full font-bold hover:bg-slate-800 transition-colors duration-300 text-lg" data-cursor="hover" data-cursor-text="Let's Ship It">
+                  <span className="inline-block py-3 sm:py-4 px-8 sm:px-10 bg-black text-white rounded-full font-bold hover:bg-slate-800 transition-colors duration-300 text-lg">
                     Let's Ship It Already
                   </span>
                 </Link>
-              </motion.div>
+              </div>
             </div>
             <div className="flex-1 flex justify-center md:justify-end">
               <div className="w-full max-w-xs md:max-w-[380px]">

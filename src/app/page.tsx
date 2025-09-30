@@ -1,15 +1,16 @@
 'use client';
 
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useRef } from "react";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Globe from "../components/Globe";
-import TestimonialsCarousel from "../components/TestimonialsCarousel";
-import ClientsCarousel from "../components/ClientsCarousel";
-import FeaturedProjects from "../components/FeaturedProjects";
-import GlobalPresence from "../components/GlobalPresence";
+import dynamic from "next/dynamic";
+const Globe = dynamic(() => import("../components/Globe"), { ssr: false });
+const TestimonialsCarousel = dynamic(() => import("../components/TestimonialsCarousel"), { ssr: false });
+const ClientsCarousel = dynamic(() => import("../components/ClientsCarousel"), { ssr: false });
+const FeaturedProjects = dynamic(() => import("../components/FeaturedProjects"));
+const GlobalPresence = dynamic(() => import("../components/GlobalPresence"));
 
 
 
@@ -60,23 +61,7 @@ const MagneticCard = ({ children, className = "", ...props }: { children: React.
 };
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll();
-  const yPos = useTransform(scrollYProgress, [0, 1], [0, -100]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      // Change navbar style when scrolled past the hero section (roughly 80vh)
-      setIsScrolled(scrollPosition > window.innerHeight * 0.8);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
 
 
@@ -85,42 +70,32 @@ export default function Home() {
 
       
 
-      {/* Navigation with extra top padding on mobile */}
-      <div className="pt-3 sm:pt-0">
-        <Header isScrolled={isScrolled} />
-      </div>
+      <Header />
 
       {/* Hero Section - StoryBrand Approach */}
-      <section className="relative px-2 sm:px-3 md:px-4 pt-12 sm:pt-24 pb-12 sm:pb-32 min-h-[80vh] flex items-center bg-no-repeat bg-cover bg-center md:bg-[position:50%_40%]" style={{ backgroundImage: "url(/bg.webp)" }}>
-        {/* Overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/40" />
-        <div className="max-w-6xl mx-auto w-full relative z-10">
-          <motion.div 
-            className="max-w-3xl space-y-6 sm:space-y-8 text-left"
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
+      <section className="relative px-2 sm:px-3 md:px-4 pt-12 sm:pt-24 pb-12 sm:pb-32 min-h-[100vh] flex flex-col md:flex-row md:items-center md:bg-[url('/bg.webp')] md:bg-no-repeat md:bg-cover md:bg-[position:50%_40%]">
+        {/* Overlay for readability - only on desktop */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/40 hidden md:block" />
+        {/* Mobile image */}
+        <div className="md:hidden w-full h-64 overflow-hidden rounded-2xl mb-8">
+          <img
+            src="/bg.webp"
+            alt="Hero background"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="max-w-6xl mx-auto w-full relative z-10 md:flex-1">
+          <div className="max-w-3xl space-y-6 sm:space-y-8 text-left">
             {/* Clear Value Proposition */}
-            <motion.h1 className="font-bold text-white tracking-tight text-4xl sm:text-6xl lg:text-7xl leading-[1.05]">
+            <h1 className="font-bold text-black md:text-white tracking-tight text-4xl sm:text-6xl lg:text-7xl leading-[1.05]">
               Technology That Works
-            </motion.h1>
-            <motion.p
-              className="text-base sm:text-xl text-gray-200 max-w-2xl leading-relaxed"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-700 md:text-gray-200 max-w-2xl leading-7">
               We build fast, clear and dependable digital products, including websites, apps and internal tools, crafted to convert and scale with your team.
-            </motion.p>
+            </p>
 
             {/* CTA */}
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4 items-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-            >
+            <div className="flex flex-col sm:flex-row gap-4 items-center">
               <Link 
                 href="/contact" 
                 className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg"
@@ -129,17 +104,17 @@ export default function Home() {
               </Link>
               <Link 
                 href="/portfolio" 
-                className="border-2 border-white/30 text-white hover:border-white/60 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg"
+                className="border-2 border-gray-300 md:border-white/30 text-gray-900 md:text-white hover:border-gray-400 md:hover:border-white/60 hover:text-gray-900 md:hover:text-white px-8 py-4 rounded-xl font-semibold text-lg"
               >
                 See our work
               </Link>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Why Work With Us Section */}
-      <section className="px-2 sm:px-3 md:px-4 py-20 sm:py-28 bg-white">
+      <section className="px-2 sm:px-3 md:px-4 py-1 sm:py-28 bg-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           {/* Left: Feature Image with stats overlay */}
           <motion.div
@@ -153,7 +128,7 @@ export default function Home() {
               <img
                 src="/girl.webp"
                 alt="Happy client using our solutions"
-                className="w-full h-[560px] lg:h-[640px] object-cover"
+                className="w-full h-[300px] sm:h-[400px] lg:h-[640px] object-cover"
               />
             </div>
 
@@ -240,7 +215,7 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
               Simple, Transparent Pricing
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="text-lg font-medium text-slate-600 max-w-2xl mx-auto leading-7">
               No hidden fees. No surprises. Just results that grow your business.
             </p>
           </motion.div>
@@ -257,28 +232,28 @@ export default function Home() {
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Starter</h3>
                 <div className="text-4xl font-bold text-blue-600 mb-2">KSh 150,000</div>
-                <p className="text-slate-600">Perfect for small businesses</p>
+                <p className="text-lg font-medium text-slate-600">Perfect for small businesses</p>
               </div>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   Professional Website (5 pages)
                 </li>
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   Mobile Responsive Design
                 </li>
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   Contact Forms & Analytics
                 </li>
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
@@ -302,39 +277,39 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">Most Popular</span>
+                <span className="bg-blue-500 text-white px-4 py-2 rounded-full text-lg font-semibold">Most Popular</span>
               </div>
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Professional</h3>
                 <div className="text-4xl font-bold text-blue-600 mb-2">KSh 350,000</div>
-                <p className="text-slate-600">For growing businesses</p>
+                <p className="text-lg font-medium text-slate-600">For growing businesses</p>
               </div>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   Custom Website (10 pages)
                 </li>
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   E-commerce Integration
                 </li>
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   Mobile App (iOS/Android)
                 </li>
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   Payment Gateway Setup
                 </li>
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
@@ -360,34 +335,34 @@ export default function Home() {
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Enterprise</h3>
                 <div className="text-4xl font-bold text-blue-600 mb-2">Custom</div>
-                <p className="text-slate-600">Tailored solutions</p>
+                <p className="text-lg font-medium text-slate-600">Tailored solutions</p>
               </div>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   Custom Software Development
                 </li>
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   HR Management Systems
                 </li>
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   API Integration & Development
                 </li>
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                   Cloud Infrastructure Setup
                 </li>
-                <li className="flex items-center text-slate-700">
+                <li className="flex items-center text-lg font-medium text-slate-700">
                   <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
@@ -410,7 +385,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <p className="text-slate-600 mb-4">
+            <p className="text-lg font-medium text-slate-600 mb-4 leading-7">
               All packages include free consultation and project planning
             </p>
             <Link 

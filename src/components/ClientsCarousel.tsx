@@ -34,17 +34,28 @@ const clients = [
 const ClientsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [disableTransition, setDisableTransition] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Duplicate slides for seamless looping
   const slides = [...clients, clients[0]]; // append first slide at the end
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return; // disable auto-advance for reduced motion users
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => prev + 1);
-    }, 5000);
+    }, isMobile ? 3000 : 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]);
 
   // Handle boundary jump: when we move to the duplicated last slide, jump back to 0 without animation
   useEffect(() => {
@@ -71,12 +82,12 @@ const ClientsCarousel = () => {
       <motion.div
         className="flex"
         animate={{ x: `-${currentIndex * 100}%` }}
-        transition={disableTransition ? { duration: 0 } : { duration: 0.8, ease: "easeInOut" }}
+        transition={disableTransition ? { duration: 0 } : { duration: isMobile ? 0.4 : 0.8, ease: "easeInOut" }}
       >
         {slides.map((client, index) => (
           <div
             key={index}
-            className="min-w-full flex-shrink-0 px-2"
+            className="min-w-full flex-shrink-0 px-0 md:px-2"
           >
             <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-lg">
               <div className="relative h-[400px] sm:h-[500px] lg:h-[600px]">

@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -9,95 +8,63 @@ import Footer from "../../components/Footer";
 
 
 export default function Process() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { scrollYProgress } = useScroll();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100 overflow-hidden">
+    <div className="min-h-screen bg-white overflow-hidden">
+      <Header />
 
-      
-      {/* Floating Background Elements */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <motion.div 
-          className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-blue-400/10 to-blue-300/10 rounded-full blur-3xl"
-          animate={{ 
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ 
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
+      {/* Hero Section */}
+      <section className="relative min-h-[40vh] flex items-center overflow-hidden py-12 sm:py-16">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-no-repeat bg-cover bg-center"
+          style={{
+            backgroundImage: "url('/change.webp')",
           }}
         />
-        <motion.div 
-          className="absolute bottom-40 right-20 w-96 h-96 bg-gradient-to-r from-blue-400/10 to-cyan-400/10 rounded-full blur-3xl"
-          animate={{ 
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            scale: [1.2, 1, 1.2]
-          }}
-          transition={{ 
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      </div>
-
-      {/* Navigation */}
-      <div className="pt-3 sm:pt-0">
-        <Header isScrolled={isScrolled} />
-      </div>
-
-      {/* Header Section */}
-      <section className="relative px-4 sm:px-8 pt-16 sm:pt-24 pb-10 sm:pb-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h1 
-            className="text-4xl sm:text-5xl lg:text-7xl font-semibold text-slate-900 mb-4 sm:mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            Our Process is Our <span className="relative inline-block">
-              Promise
-              <motion.span 
-                className="absolute -bottom-2 left-0 w-full h-1 bg-blue-500" 
-                initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 1, delay: 1 }}
-              />
-            </span>
-          </motion.h1>
-          
-          <motion.p 
-            className="text-lg sm:text-xl text-slate-600 leading-relaxed mt-6 sm:mt-8 max-w-3xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            From initial concept to final deployment, we follow a proven methodology that ensures your project succeeds. 
-            Every step is transparent, every decision is collaborative, and every outcome is designed to exceed your expectations.
-          </motion.p>
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-blue-800/80 to-slate-900/40" />
+        
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 text-center">
+          <div className="text-white space-y-6">
+            <div className="inline-block px-4 py-2 rounded-full border border-blue-400/30">
+              <span className="text-sm font-medium text-white-200">OUR METHODOLOGY</span>
+            </div>
+            
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+              Concept to Launch
+            </h1>
+            
+            <p className="text-lg sm:text-xl text-blue-200 max-w-2xl mx-auto leading-relaxed">
+              Every successful project follows a proven path. Discover our systematic approach that transforms ideas into digital excellence.
+            </p>
+            
+            <div className="pt-4">
+              <Link href="/contact">
+                <span className="inline-block py-3 px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-lg transition-colors duration-300">
+                  Start Your Journey
+                </span>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Process Steps */}
-      <section className="px-4 sm:px-8 py-16 sm:py-24" id="processSteps">
+      <section id="process" className="px-4 sm:px-8 py-16 sm:py-24 pb-6 bg-white">
         <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-4">
+              Our Process
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              A proven methodology that ensures your project succeeds from start to finish.
+            </p>
+          </div>
           <div className="relative">
             {/* Vertical line - positioned differently on mobile vs desktop */}
             <div className="absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2 top-0 bottom-0 w-[1px] bg-slate-200"></div>
@@ -106,42 +73,42 @@ export default function Process() {
             {[
               {
                 number: "01",
-                title: "Listen & Learn",
+                title: "Listen",
                 subtitle: "Discovery & Requirements",
                 deliverables: ["Project brief", "Technical requirements", "User personas"],
                 description: "We actively listen to understand your vision, goals, and challenges. Through detailed discovery sessions, we map out your business needs and technical requirements.",
               },
               {
                 number: "02",
-                title: "Strategy & Synergy",
+                title: "Strategy",
                 subtitle: "Planning & Architecture",
                 deliverables: ["Project roadmap", "Technical architecture", "Timeline & milestones"],
                 description: "Your thinking meets ours. Together, we craft a comprehensive roadmap that balances ambition with achievability, including detailed technical architecture and project timeline.",
               },
               {
                 number: "03",
-                title: "Design & Define",
+                title: "Design",
                 subtitle: "UI/UX & Prototyping",
                 deliverables: ["Wireframes", "UI designs", "Interactive prototypes"],
                 description: "Form follows function, and both need to impress. We create intuitive, engaging interfaces with detailed wireframes, visual designs, and interactive prototypes for your approval.",
               },
               {
                 number: "04",
-                title: "Build & Breathe",
+                title: "Build",
                 subtitle: "Development & Integration",
                 deliverables: ["Core functionality", "Database setup", "API integration"],
                 description: "Our developers write clean, efficient, and future-proof code. We build systems that scale with your success, implementing core features and integrating all necessary components.",
               },
               {
                 number: "05",
-                title: "Test & Triumph",
+                title: "Test",
                 subtitle: "Quality Assurance",
                 deliverables: ["Bug reports", "Performance optimization", "Security audit"],
                 description: "We thoroughly test every feature, optimize performance, and ensure security. Our quality assurance process guarantees your product works flawlessly across all devices and scenarios.",
               },
               {
                 number: "06",
-                title: "Launch & Learn",
+                title: "Launch",
                 subtitle: "Deployment & Support",
                 deliverables: ["Live deployment", "Training materials", "Ongoing support"],
                 description: "We orchestrate smooth launches and provide comprehensive training. Post-launch, we offer ongoing support, monitoring, and iterative improvements to ensure continued success.",
@@ -157,21 +124,21 @@ export default function Process() {
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 style={{ zIndex: 10 }}
               >
-                <div className={`lg:max-w-lg ${index % 2 === 0 ? 'lg:ml-auto' : ''} bg-white/50 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-sm border border-white/30 group`}>
-                  <div className={`flex items-center mb-3 sm:mb-4 ${index % 2 === 0 ? 'lg:justify-end' : 'justify-start'}`}>
-                    <div className="text-4xl sm:text-5xl font-light text-slate-200">{step.number}</div>
-                    <div className={`h-[1px] bg-slate-200 flex-grow ${index % 2 === 0 ? 'lg:mr-4' : 'ml-4'}`}></div>
+                <div className={`lg:max-w-lg ${index % 2 === 0 ? 'lg:ml-auto' : ''} bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100 group`}>
+                  <div className={`flex items-center mb-4 sm:mb-6 ${index % 2 === 0 ? 'lg:justify-end' : 'justify-start'}`}>
+                    <div className="text-5xl sm:text-6xl font-light text-blue-100">{step.number}</div>
+                    <div className={`h-[1px] bg-blue-200 flex-grow ${index % 2 === 0 ? 'lg:mr-4' : 'ml-4'}`}></div>
                   </div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-900 mb-1 sm:mb-2">{step.title}</h3>
-                  <h4 className="text-base sm:text-lg text-blue-600 font-medium mb-2">{step.subtitle}</h4>
+                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 sm:mb-4">{step.title}</h3>
+                  <h4 className="text-xl sm:text-2xl text-blue-600 font-semibold mb-4">{step.subtitle}</h4>
                   
                   {/* Deliverables */}
-                  <div className="mb-3">
+                  <div className="mb-4">
                     <div className="mb-3">
-                      <p className="text-xs font-medium text-slate-500 mb-1">What You Get:</p>
-                      <div className="flex flex-wrap gap-1">
+                      <p className="text-lg font-semibold text-slate-600 mb-3">What You Get:</p>
+                      <div className="flex flex-wrap gap-2">
                         {step.deliverables.map((deliverable, idx) => (
-                          <span key={idx} className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full">
+                          <span key={idx} className="text-lg font-medium bg-blue-50 text-blue-700 px-4 py-2 rounded-full">
                             {deliverable}
                           </span>
                         ))}
@@ -179,7 +146,7 @@ export default function Process() {
                     </div>
                   </div>
                   
-                  <p className="text-sm sm:text-base text-slate-600">{step.description}</p>
+                  <p className="text-lg sm:text-xl text-slate-700 leading-7">{step.description}</p>
                 </div>
                 
                 {/* Circle marker on timeline - positioned differently on mobile vs desktop */}
@@ -207,56 +174,32 @@ export default function Process() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="px-4 sm:px-8 py-20 sm:py-32 bg-gradient-to-br from-slate-50 to-blue-50">
+      <section className="px-4 sm:px-8 pt-6 pb-20 sm:pb-32 bg-white">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.h2 
-            className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-4 sm:mb-6"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-6">
             Ready to Bring Your Vision to Life?
-          </motion.h2>
+          </h2>
           
-          <motion.p 
-            className="text-base sm:text-lg text-slate-600 mb-8 sm:mb-10 max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
+          <p className="text-lg sm:text-xl text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed">
             Every successful project starts with a conversation. Let's discuss your goals, explore possibilities, and create something extraordinary together.
-          </motion.p>
+          </p>
           
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Link href="/contact">
-              <span className="inline-block py-3 sm:py-4 px-6 sm:px-8 bg-blue-600 text-white rounded-lg font-semibold text-lg transition-colors duration-300">
+              <span className="inline-block py-4 px-8 bg-blue-600 text-white rounded-xl font-semibold text-lg hover:bg-blue-700 transition-colors duration-300">
                 Get Your Free Consultation
               </span>
             </Link>
-            <div className="text-sm text-slate-500">
+            <div className="text-sm text-gray-600">
               <span className="font-medium">✓</span> No obligation • <span className="font-medium">✓</span> 30-minute call • <span className="font-medium">✓</span> Custom proposal
             </div>
-          </motion.div>
+          </div>
           
-          <motion.div
-            className="mt-8 pt-6 border-t border-slate-200"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-          >
-            <p className="text-sm text-slate-500">
+          <div className="pt-6 border-t border-gray-200">
+            <p className="text-sm text-gray-600">
               Join <span className="font-semibold text-blue-600">150+</span> satisfied clients who chose Origin for their digital transformation
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
