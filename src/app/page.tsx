@@ -7,72 +7,18 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import dynamic from "next/dynamic";
-const Globe = dynamic(() => import("../components/Globe"), { 
-  ssr: false,
-  loading: () => <div className="w-full h-full bg-gray-100 animate-pulse rounded-lg" />
-});
-const TestimonialsCarousel = dynamic(() => import("../components/TestimonialsCarousel"), { 
+const TestimonialsCarousel = dynamic(() => import("../components/TestimonialsCarousel"), {
   ssr: false,
   loading: () => <div className="h-32 bg-gray-100 animate-pulse rounded-lg" />
 });
-const ClientsCarousel = dynamic(() => import("../components/ClientsCarousel"), { 
+const ClientsCarousel = dynamic(() => import("../components/ClientsCarousel"), {
   ssr: false,
   loading: () => <div className="h-24 bg-gray-100 animate-pulse rounded-lg" />
 });
 const FeaturedProjects = dynamic(() => import("../components/FeaturedProjects"), {
   loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
-const GlobalPresence = dynamic(() => import("../components/GlobalPresence"), {
-  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
-});
 
-
-
-// Magnetic Card Component
-const MagneticCard = ({ children, className = "", ...props }: { children: React.ReactNode; className?: string; [key: string]: any }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useMotionValue(0);
-  const rotateY = useMotionValue(0);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
-    
-    const rect = ref.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    const rotateXValue = (e.clientY - centerY) / 10;
-    const rotateYValue = (centerX - e.clientX) / 10;
-    
-    x.set((e.clientX - centerX) / 10);
-    y.set((e.clientY - centerY) / 10);
-    rotateX.set(rotateXValue);
-    rotateY.set(rotateYValue);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-    rotateX.set(0);
-    rotateY.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      style={{ x, y, rotateX, rotateY }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      transition={{ type: "spring", damping: 20, stiffness: 300 }}
-      {...props}
-    >
-      {children}
-    </motion.div>
-  );
-};
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -81,8 +27,6 @@ export default function Home() {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-white overflow-hidden">
-
-      
 
       <Header />
 
@@ -190,17 +134,7 @@ export default function Home() {
       </section>
 
       {/* Our Clients Section */}
-      <section className="relative px-4 sm:px-8 py-16 sm:py-24 bg-white overflow-hidden min-h-[70vh]">
-        {/* Globe background - visible, large, top half, full width */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-          <Globe
-            fluid
-            opacity={0.4}
-            positionClassName="absolute bottom-0 left-1/2 -translate-x-1/2"
-            className="w-[200%] h-[200%]"
-          />
-        </div>
-
+      <section className="relative px-4 sm:px-8 py-8 sm:py-16 bg-white overflow-hidden min-h-[70vh]">
         <div className="relative z-10 max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -423,15 +357,21 @@ export default function Home() {
 
       {/* Success Story Section */}
       <section className="relative px-4 sm:px-8 py-12 sm:py-16 bg-white overflow-hidden">
-        {/* Globe as subtle background */}
-        <Globe size={900} opacity={0.4} className="-z-10" />
         <div className="relative z-10 text-[20px] leading-[28px] font-medium">
           <TestimonialsCarousel />
         </div>
       </section>
 
-      <GlobalPresence />
-
+      <section className="relative px-4 sm:px-8 py-12 sm:py-16 bg-white overflow-hidden">
+      <div className="relative w-full text-center">
+        <h2 className="w-full text-4xl sm:text-6xl lg:text-8xl font-extrabold text-slate-900 tracking-tight leading-[1.05]">
+          Serving The World, Based In
+        </h2>
+        <p className="mt-4 w-full text-4xl sm:text-6xl lg:text-7xl font-extrabold text-blue-600 tracking-tight">
+          GMT+3
+        </p>
+      </div>
+    </section>
       {/* Footer */}
       <Footer />
     </div>

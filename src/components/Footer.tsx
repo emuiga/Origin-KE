@@ -36,6 +36,9 @@ export default function Footer() {
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
               We build experiences that connect with people.
             </p>
+            <p className="text-slate-400 text-sm leading-relaxed max-w-xs mt-2">
+              Serving the world based in gemt.
+            </p>
           </div>
 
           {/* Center Column - Quote */}

@@ -1,132 +1,186 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-
 const clients = [
-  { 
+  {
     label: "Dreamers",
-    description: "People with personal ideas looking to bring them to life digitally.",
     image: "/dream.webp"
   },
-  { 
-    label: "Builders",
-    description: "Startup founders experimenting and scaling new ventures.",
+  {
+    label: "Startups",
     image: "/individual2.jpg"
   },
-  { 
-    label: "Challengers",
-    description: "SMEs aiming to compete by adopting smarter tools.",
+  {
+    label: "SMEs",
     image: "/change.webp"
   },
-  { 
-    label: "Leaders",
-    description: "Enterprises requiring security, scalability, and innovation.",
+  {
+    label: "Enterprises",
     image: "/lead.webp"
   },
-  { 
-    label: "Change-Makers",
-    description: "NGOs, education, and civic groups leveraging tech for social impact.",
+  {
+    label: "NGOs",
     image: "/ent.webp"
+  },
+  {
+    label: "Brands",
+    image: "/brand.webp"
+  },
+  {
+    label: "Data Companies",
+    image: "/data.webp"
+  },
+  {
+    label: "Food Businesses",
+    image: "/food.webp"
+  },
+  {
+    label: "Marketplaces",
+    image: "/market.webp"
+  },
+  {
+    label: "Social Platforms",
+    image: "/socials.webp"
+  },
+  {
+    label: "Apps",
+    image: "/app.webp"
+  },
+  {
+    label: "Systems",
+    image: "/sys.webp"
+  },
+  {
+    label: "UI/UX",
+    image: "/uiux.webp"
+  },
+  {
+    label: "Websites",
+    image: "/web.webp"
   }
 ];
 
-const ClientsCarousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [disableTransition, setDisableTransition] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Duplicate slides for seamless looping
-  const slides = [...clients, clients[0]]; // append first slide at the end
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return; // disable auto-advance for reduced motion users
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => prev + 1);
-    }, isMobile ? 3000 : 5000);
-
-    return () => clearInterval(interval);
-  }, [isMobile]);
-
-  // Handle boundary jump: when we move to the duplicated last slide, jump back to 0 without animation
-  useEffect(() => {
-    if (currentIndex === slides.length - 1) {
-      const timeout = setTimeout(() => {
-        setDisableTransition(true);
-        setCurrentIndex(0);
-        // Re-enable transition on next tick
-        requestAnimationFrame(() => {
-          setDisableTransition(false);
-        });
-      }, 820); // slightly longer than transition duration for smoothness
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, slides.length]);
-
-  const handleDotClick = (index: number) => {
-    setDisableTransition(false);
-    setCurrentIndex(index);
-  };
-
+const ClientsCollage = () => {
   return (
-    <div className="relative overflow-hidden">
-      <motion.div
-        className="flex"
-        animate={{ x: `-${currentIndex * 100}%` }}
-        transition={disableTransition ? { duration: 0 } : { duration: isMobile ? 0.4 : 0.8, ease: "easeInOut" }}
-      >
-        {slides.map((client, index) => (
-          <div
-            key={index}
-            className="min-w-full flex-shrink-0 px-0 md:px-2"
-          >
-            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-lg">
-              <div className="relative h-[400px] sm:h-[500px] lg:h-[600px]">
-                <img
-                  src={client.image}
-                  alt={client.label}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/45" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-                  <span className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight drop-shadow-[0_6px_20px_rgba(0,0,0,0.5)]">
-                    {client.label}
-                  </span>
-                  {client.description && (
-                    <p className="mt-4 text-white/90 text-sm sm:text-base md:text-lg max-w-3xl">
-                      {client.description}
-                    </p>
-                  )}
-                </div>
-              </div>
+    <div className="py-1 bg-white">
+      <div>
+
+        {/* Collage Grid */}
+        <div className="grid grid-cols-12 gap-3 auto-rows-[100px] md:auto-rows-[120px]">
+          {/* Dreamers - small left */}
+          <div className="col-span-4 md:col-span-3 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[0].image} alt={clients[0].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[0].label}</h3>
             </div>
           </div>
-        ))}
-      </motion.div>
 
-      {/* Dots indicator */}
-      <div className="flex justify-center mt-8 gap-2">
-        {clients.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handleDotClick(index)}
-            className={`w-3 h-3 rounded-full transition-colors ${
-              index === (currentIndex % clients.length) ? 'bg-blue-600' : 'bg-gray-300'
-            }`}
-          />
-        ))}
+          {/* Startups - medium left */}
+          <div className="col-span-8 md:col-span-4 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[1].image} alt={clients[1].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[1].label}</h3>
+            </div>
+          </div>
+
+          {/* SMEs - tall right */}
+          <div className="col-span-12 md:col-span-5 row-span-2 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[2].image} alt={clients[2].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[2].label}</h3>
+            </div>
+          </div>
+
+          {/* Enterprises - wide bottom left */}
+          <div className="col-span-12 md:col-span-7 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[3].image} alt={clients[3].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[3].label}</h3>
+            </div>
+          </div>
+
+          {/* NGOs - small bottom right */}
+          <div className="col-span-6 md:col-span-5 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[4].image} alt={clients[4].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[4].label}</h3>
+            </div>
+          </div>
+
+          {/* Brands - small */}
+          <div className="col-span-6 md:col-span-2 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[5].image} alt={clients[5].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[5].label}</h3>
+            </div>
+          </div>
+
+          {/* Data Companies - small */}
+          <div className="col-span-6 md:col-span-3 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[6].image} alt={clients[6].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[6].label}</h3>
+            </div>
+          </div>
+
+          {/* Food Businesses - small */}
+          <div className="col-span-6 md:col-span-3 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[7].image} alt={clients[7].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[7].label}</h3>
+            </div>
+          </div>
+
+          {/* Marketplaces - small */}
+          <div className="col-span-6 md:col-span-3 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[8].image} alt={clients[8].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[8].label}</h3>
+            </div>
+          </div>
+
+          {/* Social Platforms - small */}
+          <div className="col-span-6 md:col-span-3 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[9].image} alt={clients[9].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[9].label}</h3>
+            </div>
+          </div>
+
+          {/* Apps - small */}
+          <div className="col-span-6 md:col-span-3 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[10].image} alt={clients[10].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[10].label}</h3>
+            </div>
+          </div>
+
+          {/* Systems - small */}
+          <div className="col-span-6 md:col-span-3 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[11].image} alt={clients[11].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[11].label}</h3>
+            </div>
+          </div>
+
+          {/* UI/UX - small */}
+          <div className="col-span-6 md:col-span-3 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[12].image} alt={clients[12].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[12].label}</h3>
+            </div>
+          </div>
+
+          {/* Websites - small */}
+          <div className="col-span-6 md:col-span-3 row-span-1 relative overflow-hidden rounded-lg shadow-md">
+            <img src={clients[13].image} alt={clients[13].label} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <h3 className="text-white font-bold text-sm md:text-base uppercase text-center">{clients[13].label}</h3>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default ClientsCarousel;
+export default ClientsCollage;
