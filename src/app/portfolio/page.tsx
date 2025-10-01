@@ -7,60 +7,10 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CardStack from "../../components/CardStack";
 
-
-
 export default function Portfolio() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [shuffledServices, setShuffledServices] = useState<string[]>([]);
-  const [shuffledServicesRow1, setShuffledServicesRow1] = useState<string[]>([]);
-  const [shuffledServicesRow2, setShuffledServicesRow2] = useState<string[]>([]);
-  const [shuffledServicesRow3, setShuffledServicesRow3] = useState<string[]>([]);
-  const [shuffledServicesRow4, setShuffledServicesRow4] = useState<string[]>([]);
   const [activeFilter, setActiveFilter] = useState('All');
   const [countedStats, setCountedStats] = useState({ customers: 0, agents: 0, hours: 0, projects: 0 });
-
-  // Services list - easy to add/remove items
-  const services = [
-    
-    "POS Systems",
-    "Logo Design",
-    "HR Systems",
-    "Web Development",
-    "Mobile Apps",
-    "UI/UX Design",
-    "Brand Identity",
-    "Digital Marketing",
-    "E-commerce",
-    "API Development",
-    "Cloud Solutions",
-    "Consulting",
-    "Maintenance",
-    "Content Strategy",
-    "Social Media Management",
-    "SEO Optimization",
-    "Email Marketing",
-    "Analytics & Reporting",
-    "Copywriting",
-    "Graphic Design",
-    "Impossible, Possible"
-  ];
-
-  useEffect(() => {
-    const shuffleArray = (array: string[]) => {
-      const shuffled = [...array];
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-      return shuffled;
-    };
-    
-    setShuffledServices(shuffleArray(services));
-    setShuffledServicesRow1(shuffleArray(services));
-    setShuffledServicesRow2(shuffleArray(services));
-    setShuffledServicesRow3(shuffleArray(services));
-    setShuffledServicesRow4(shuffleArray(services));
-  }, []);
 
 
   // Counter animation effect
@@ -327,7 +277,7 @@ export default function Portfolio() {
       </section>    
 
       {/* Statistics Section */}
-      <section className="px-4 sm:px-8 py-16 sm:py-24 bg-white">
+      <section className="px-4 sm:px-8 py-16 sm:py-14 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">OUR IMPACT</p>
@@ -358,166 +308,15 @@ export default function Portfolio() {
       </section>
 
       {/* Services Carousel Section */}
-      <section className="relative px-4 sm:px-8 py-16 sm:py-24 bg-white overflow-hidden">
+      <section className="relative px-4 sm:px-8 py-16 sm:py-14 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          {/* Title */}
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-2">
               At our core, we are builders
             </h2>
-            <p className="text-lg text-slate-600">
-              <span className="font-payout">our focus</span>
-            </p>
           </div>
-
-          {/* Services Carousel - Multiple Rows */}
-          <div className="relative mb-12">
-            {/* Row 1 */}
-            <div className="overflow-hidden mb-4">
-              <motion.div 
-                className="flex gap-4 whitespace-nowrap"
-                animate={{ 
-                  x: [0, -100 * shuffledServicesRow1.length]
-                }}
-                transition={{ 
-                  duration: 1 * shuffledServicesRow1.length,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              >
-                {shuffledServicesRow1.length > 0 && shuffledServicesRow1.map((service, index) => (
-                  <motion.div
-                    key={`row1-${index}`}
-                    className="inline-block"
-                    whileHover={{ 
-                      scale: 1.05,
-                      borderColor: "rgb(59 130 246)",
-                      color: "rgb(59 130 246)"
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <span className="inline-block px-6 py-3 bg-transparent text-slate-700 rounded-full font-medium border-2 border-slate-300 hover:border-blue-500 hover:text-blue-600 transition-all duration-300 cursor-pointer">
-                      {service}
-                    </span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* Row 2 */}
-            <div className="overflow-hidden mb-4">
-              <motion.div 
-                className="flex gap-4 whitespace-nowrap"
-                animate={{ 
-                  x: [-100 * shuffledServicesRow2.length, 0]
-                }}
-                transition={{ 
-                  duration: 3 * shuffledServicesRow2.length,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              >
-                {shuffledServicesRow2.length > 0 && shuffledServicesRow2.map((service, index) => (
-                  <motion.div
-                    key={`row2-${index}`}
-                    className="inline-block"
-                    whileHover={{ 
-                      scale: 1.05,
-                      borderColor: "rgb(59 130 246)",
-                      color: "rgb(59 130 246)"
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <span className="inline-block px-6 py-3 bg-transparent text-slate-700 rounded-full font-medium border-2 border-slate-300 hover:border-blue-500 hover:text-blue-600 transition-all duration-300 cursor-pointer">
-                      {service}
-                    </span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* Row 3 */}
-            <div className="overflow-hidden mb-4">
-              <motion.div 
-                className="flex gap-4 whitespace-nowrap"
-                animate={{ 
-                  x: [0, -100 * shuffledServicesRow3.length]
-                }}
-                transition={{ 
-                  duration: 4 * shuffledServicesRow3.length,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              >
-                {shuffledServicesRow3.length > 0 && shuffledServicesRow3.map((service, index) => (
-                  <motion.div
-                    key={`row3-${index}`}
-                    className="inline-block"
-                    whileHover={{ 
-                      scale: 1.05,
-                      borderColor: "rgb(59 130 246)",
-                      color: "rgb(59 130 246)"
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <span className="inline-block px-6 py-3 bg-transparent text-slate-700 rounded-full font-medium border-2 border-slate-300 hover:border-blue-500 hover:text-blue-600 transition-all duration-300 cursor-pointer">
-                      {service}
-                    </span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* Row 4 */}
-            <div className="overflow-hidden">
-              <motion.div 
-                className="flex gap-4 whitespace-nowrap"
-                animate={{ 
-                  x: [-100 * shuffledServicesRow4.length, 0]
-                }}
-                transition={{ 
-                  duration: 2 * shuffledServicesRow4.length,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              >
-                {shuffledServicesRow4.length > 0 && shuffledServicesRow4.map((service, index) => (
-                  <motion.div
-                    key={`row4-${index}`}
-                    className="inline-block"
-                    whileHover={{ 
-                      scale: 1.05,
-                      borderColor: "rgb(59 130 246)",
-                      color: "rgb(59 130 246)"
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <span className="inline-block px-6 py-3 bg-transparent text-slate-700 rounded-full font-medium border-2 border-slate-300 hover:border-blue-500 hover:text-blue-600 transition-all duration-300 cursor-pointer">
-                      {service}
-                    </span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Descriptive Text Below Carousel */}
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Your story needs an Origin, we handle every aspect of your digital journey.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="px-4 sm:px-8 py-20 sm:py-32 bg-white">
+          
+          <section className="px-4 sm:px-8 py-10 sm:py-12 bg-white">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
             <div className="flex-1 text-center">
@@ -555,6 +354,20 @@ export default function Portfolio() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+          {/* Descriptive Text Below Carousel */}
+          <motion.div 
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Your story needs an Origin, we handle every aspect of your digital journey.
+            </p>
+          </motion.div>
         </div>
       </section>
 
