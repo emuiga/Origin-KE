@@ -7,11 +7,11 @@ export default async function LetterPage() {
   const originBlog = await getBlogPosts();
 
   return (
-    <div className="min-h-screen bg-[#84a98c] text-white flex flex-col">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col">
      <div className="pt-3 sm:pt-0">
         <Header />
       </div>
-      <section className="w-full bg-[#84a98c] flex flex-col items-center py-12 border-b border-white/10">
+      <section className="w-full bg-white flex flex-col items-center py-12 border-b border-gray-200">
         <NewsletterSection />
       </section>
       
@@ -19,7 +19,7 @@ export default async function LetterPage() {
         {originBlog.map((post: any) => (
           <section
             key={post.slug}
-            className="relative flex items-center justify-center h-[40vh] md:h-[50vh] w-full overflow-hidden border-b border-white/10"
+            className="relative flex items-center justify-center h-[40vh] md:h-[50vh] w-full overflow-hidden border-b border-gray-200"
             style={{ background: post.image ? `url(${post.image}) center/cover, #222` : '#222' }}
           >
             <a href={`/letter/${post.slug}`} className="absolute inset-0 z-10" tabIndex={-1} aria-label={post.title}></a>

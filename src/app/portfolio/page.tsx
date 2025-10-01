@@ -244,12 +244,10 @@ export default function Portfolio() {
       <section id="services" className="px-4 sm:px-8 py-16 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-4">
-              What We Do
+            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">THE FUNDAMENTALS</p>
+            <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Comprehensive digital solutions tailored to your business needs and goals.
             </h2>
-            <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive digital solutions tailored to your business needs and goals.
-            </p>
           </div>
 
           {/* Services Grid */}
@@ -258,47 +256,47 @@ export default function Portfolio() {
               {
                 title: "Market Research",
                 description: "Data-driven insights to understand your market, competitors, and customer needs for informed business decisions.",
-                image: "/food.webp"
+                image: "/market.webp"
               },
               {
                 title: "Web Development",
                 description: "Custom websites and web applications built with modern technologies for optimal performance and user experience.",
-                image: "/web.webp"
+                image: "/webdev.webp"
               },
               {
                 title: "Branding",
                 description: "Complete brand identity solutions including logo design, brand guidelines, and visual identity systems.",
-                image: "/individual.webp"
+                image: "/brand.webp"
               },
               {
                 title: "Mobile Apps",
                 description: "Native and cross-platform mobile applications that engage users and drive business growth.",
-                image: "/laptop.png"
+                image: "/app.webp"
               },
               {
                 title: "UI/UX Design",
                 description: "User-centered design solutions that create intuitive and engaging digital experiences for your customers.",
-                image: "/girl.webp"
+                image: "/uiux.webp"
               },
               {
                 title: "Digital Marketing",
                 description: "Strategic digital marketing campaigns that increase brand awareness and drive qualified leads to your business.",
-                image: "/lead.webp"
+                image: "/socials.webp"
               },
               {
                 title: "AI Solutions",
                 description: "Artificial intelligence implementations including chatbots, automation, and machine learning models to streamline operations.",
-                image: "/ent.webp"
+                image: "/AI.webp"
               },
               {
                 title: "Data Analytics",
                 description: "Advanced data analysis and visualization tools to extract meaningful insights from your business data.",
-                image: "/change.webp"
+                image: "/data.webp"
               },
               {
                 title: "System Integration",
                 description: "Seamless integration of various software systems and platforms to create unified business workflows.",
-                image: "/dream.webp"
+                image: "/sys.webp"
               }
             ].map((service, index) => (
               <div

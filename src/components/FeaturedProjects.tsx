@@ -77,7 +77,7 @@ export default function FeaturedProjects() {
                   />
                 </div>
                 <div className="p-5 sm:p-6 text-center min-h-[64px] sm:min-h-[72px] flex items-center justify-center">
-                  <h3 className="text-lg sm:text-xl font-semibold text-black">
+                  <h3 className="text-lg sm:text-2xl font-semibold text-black">
                     {project.title}
                   </h3>
                 </div>

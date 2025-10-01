@@ -74,12 +74,10 @@ const TestimonialsCarousel = () => {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-          What Our Clients Say
-        </h2>
-        <p className="text-lg text-slate-600">
-          We serve people all over the world with innovative digital solutions.
-        </p>
+        <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">WHAT OUR CLIENTS SAY</p>
+            <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            We serve people all over the world with innovative digital solutions.
+            </h2>
       </div>
 
       <div className="relative">

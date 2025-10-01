@@ -250,8 +250,8 @@ export default function ContactPage() {
               {/* Office Hours */}
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Clock size={20} className="text-blue-600" />
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+                    <Clock size={20}  />
                   </div>
                   <h3 className="text-xl font-semibold text-slate-900">Office Time</h3>
                 </div>
@@ -297,7 +297,7 @@ export default function ContactPage() {
               </div>
 
               {/* Quick Response */}
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-6 border border-blue-200">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-6">
                 <h3 className="text-xl font-semibold text-slate-900 mb-3">Quick Response Guarantee</h3>
                 <p className="text-slate-600 mb-4">
                   We respond to all quote requests within 24 hours. For urgent projects, call us directly.
