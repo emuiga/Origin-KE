@@ -86,27 +86,56 @@ const TestimonialsCarousel = () => {
         >
           <div className="flex flex-col md:flex-row items-stretch gap-4">
             {/* Left: Image with overlay icon */}
-            <div className="md:w-1/2 w-full relative"> <Image src={testimonials[currentIndex].image} alt={testimonials[currentIndex].name} width={560} height={420} className="object-cover w-full h-full max-h-[360px] md:max-h-[420px]" /> <div className="absolute top-2 left-2"> <Image src="/quote.png" alt="quote" width={56} height={56} className="opacity-80" /> </div> </div>
+            <div className="md:w-1/2 w-full relative">
+              <Image 
+                src={testimonials[currentIndex].image} 
+                alt={testimonials[currentIndex].name} 
+                width={560} 
+                height={420} 
+                className="object-cover w-full h-full max-h-[360px] md:max-h-[420px]" 
+                priority={currentIndex === 0}
+                loading={currentIndex === 0 ? "eager" : "lazy"}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute top-2 left-2">
+                <Image 
+                  src="/quote.png" 
+                  alt="quote" 
+                  width={56} 
+                  height={56} 
+                  className="opacity-80"
+                  priority={currentIndex === 0}
+                />
+              </div>
+            </div>
 
             {/* Right: Content */}
             <div className="md:w-1/2 w-full flex flex-col justify-center">
               <blockquote className="text-base sm:text-lg md:text-xl text-slate-700 mb-4 sm:mb-6 leading-relaxed">
                 {testimonials[currentIndex].quote}
               </blockquote>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 relative">
                 <Image
                   src={testimonials[currentIndex].image}
                   alt={testimonials[currentIndex].name}
                   width={48}
                   height={48}
                   className="rounded-full object-cover"
+                  loading="lazy"
                 />
-                <div className="absolute bottom-3.7 right-2">
-                <Image src="/quote.png" alt="quote" width={56} height={56} className="opacity-80" />
-              </div>
                 <div>
                   <div className="font-semibold text-slate-900">{testimonials[currentIndex].name}</div>
                   <div className="text-slate-600">{testimonials[currentIndex].company}</div>
+                </div>
+                <div className="absolute bottom-0 right-0">
+                  <Image 
+                    src="/quote.png" 
+                    alt="quote" 
+                    width={56} 
+                    height={56} 
+                    className="opacity-80"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>

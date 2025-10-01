@@ -20,6 +20,11 @@ export default function RootLayout({
       <head>
         <link
           rel="preload"
+          href="/bg.webp"
+          as="image"
+        />
+        <link
+          rel="preload"
           href="/Aeonik Font/New Aeonik Trials/AeonikTRIAL-Regular.otf"
           as="font"
           type="font/otf"

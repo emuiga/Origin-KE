@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 type GridBackgroundProps = {
@@ -69,11 +70,14 @@ export default function FeaturedProjects() {
               viewport={{ once: true }}
             >
               <Link href={project.href} className="flex h-full flex-col" target={project.href.startsWith('http') ? '_blank' : undefined} rel={project.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
-                <div className="flex items-center justify-center bg-gray-100 h-72 sm:h-80 md:h-[420px] lg:h-[480px]">
-                  <img
+                <div className="flex items-center justify-center bg-gray-100 h-72 sm:h-80 md:h-[420px] lg:h-[480px] relative">
+                  <Image
                     src={project.image}
                     alt={project.title}
-                    className="max-h-full w-auto object-contain"
+                    fill
+                    className="object-contain"
+                    loading="lazy"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
                 <div className="p-5 sm:p-6 text-center min-h-[64px] sm:min-h-[72px] flex items-center justify-center">

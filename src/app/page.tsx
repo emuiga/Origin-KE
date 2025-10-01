@@ -31,7 +31,19 @@ export default function Home() {
       <Header />
 
       {/* Hero Section - StoryBrand Approach */}
-      <section className="relative px-2 sm:px-3 md:px-4 pt-12 sm:pt-24 pb-12 sm:pb-32 min-h-[100vh] flex flex-col md:flex-row md:items-center md:bg-[url('/bg.webp')] md:bg-no-repeat md:bg-cover md:bg-[position:50%_40%]">
+      <section className="relative px-2 sm:px-3 md:px-4 pt-12 sm:pt-24 pb-12 sm:pb-32 min-h-[100vh] flex flex-col md:flex-row md:items-center">
+        {/* Desktop background image with proper loading */}
+        <div className="hidden md:block absolute inset-0">
+          <Image
+            src="/bg.webp"
+            alt="Hero background"
+            fill
+            className="object-cover object-[50%_40%]"
+            priority
+            sizes="100vw"
+            quality={90}
+          />
+        </div>
         {/* Overlay for readability - only on desktop */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/40 hidden md:block" />
         {/* Mobile image */}
@@ -43,6 +55,7 @@ export default function Home() {
             className="object-cover"
             priority
             sizes="100vw"
+            quality={90}
           />
         </div>
         <div className="max-w-6xl mx-auto w-full relative z-10 md:flex-1">
