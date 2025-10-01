@@ -34,11 +34,6 @@ export default function Header({ isScrolled = false }: HeaderProps) {
             }`}>
               Portfolio
             </Link>
-            <Link href="/letter" className={`transition-colors font-medium ${
-              pathname === "/letter" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"
-            }`}>
-              Letter
-            </Link>
             <Link href="/contact" className={`transition-colors font-medium ${
               pathname === "/contact" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"
             }`}>
@@ -68,9 +63,6 @@ export default function Header({ isScrolled = false }: HeaderProps) {
               </Link>
               <Link href="/portfolio" className={`block px-3 py-2 text-base font-medium ${pathname === "/portfolio" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`}>
                 Portfolio
-              </Link>
-              <Link href="/letter" className={`block px-3 py-2 text-base font-medium ${pathname === "/letter" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`}>
-                Letter
               </Link>
               <Link href="/contact" className={`block px-3 py-2 text-base font-medium ${pathname === "/contact" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"}`}>
                 Get a Quote
