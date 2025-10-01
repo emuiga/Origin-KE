@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SmoothScrollProvider from "../components/SmoothScrollProvider";
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "Origin - Digital Agency",
@@ -19,6 +20,8 @@ export default function RootLayout({
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
