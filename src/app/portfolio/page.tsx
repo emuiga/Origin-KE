@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CardStack from "../../components/CardStack";
@@ -13,11 +14,11 @@ export default function Portfolio() {
   const [countedStats, setCountedStats] = useState({ customers: 0, agents: 0, hours: 0, projects: 0 });
 
 
-  // Counter animation effect
+  // Counter animation effect - optimized
   useEffect(() => {
     const targetStats = { customers: 150, agents: 12, hours: 24, projects: 75 };
-    const duration = 2000; // 2 seconds
-    const steps = 60;
+    const duration = 1500; // Reduced duration
+    const steps = 30; // Reduced steps for better performance
     const stepDuration = duration / steps;
 
     let currentStep = 0;
@@ -46,7 +47,7 @@ export default function Portfolio() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWordIndex((prev) => (prev + 1) % words.length);
-    }, 2000);
+    }, 3000); // Increased interval for better performance
 
     return () => clearInterval(interval);
   }, []);
@@ -154,12 +155,16 @@ export default function Portfolio() {
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center overflow-hidden py-12 sm:py-16">
         {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-no-repeat bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/dream.webp')",
-          }}
-        />
+        <div className="absolute inset-0">
+          <Image
+            src="/dream.webp"
+            alt="Hero background"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        </div>
         
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-blue-800/80 to-slate-900/40" />
@@ -254,11 +259,14 @@ export default function Portfolio() {
                 className="bg-white overflow-hidden"
               >
                 <div className="flex flex-col h-full">
-                  <div className="flex items-center justify-center bg-gray-100 h-48 sm:h-56">
-                    <img 
+                  <div className="relative bg-gray-100 h-48 sm:h-56">
+                    <Image 
                       src={service.image} 
                       alt={service.title}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      loading="lazy"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>
                   <div className="p-6 flex-1 flex flex-col">

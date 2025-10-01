@@ -20,11 +20,11 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     }
 
     const lenis = new Lenis({
-      duration: 1.0,
+      duration: 0.8, // Reduced duration for better performance
       smoothWheel: true,
       syncTouch: false,
       gestureOrientation: "vertical",
-      touchMultiplier: 1.2,
+      touchMultiplier: 1.0, // Reduced for better performance
     });
     lenisRef.current = lenis;
 

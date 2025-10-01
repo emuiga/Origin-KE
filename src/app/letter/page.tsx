@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { getBlogPosts } from '@/lib/contentful';
 import NewsletterSection from '@/components/NewsletterSection';
+import Image from 'next/image';
 
 export default async function LetterPage() {
   const originBlog = await getBlogPosts();
@@ -20,8 +21,18 @@ export default async function LetterPage() {
           <section
             key={post.slug}
             className="relative flex items-center justify-center h-[40vh] md:h-[50vh] w-full overflow-hidden border-b border-gray-200"
-            style={{ background: post.image ? `url(${post.image}) center/cover, #222` : '#222' }}
           >
+            {post.image && (
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover"
+                loading="lazy"
+                sizes="100vw"
+              />
+            )}
+            {!post.image && <div className="absolute inset-0 bg-gray-800" />}
             <a href={`/letter/${post.slug}`} className="absolute inset-0 z-10" tabIndex={-1} aria-label={post.title}></a>
             <h2 className="relative z-20 text-3xl md:text-5xl font-bold text-white text-center drop-shadow-lg">
               {post.title}

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
@@ -18,12 +19,16 @@ export default function Process() {
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center overflow-hidden py-12 sm:py-16">
         {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-no-repeat bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/change.webp')",
-          }}
-        />
+        <div className="absolute inset-0">
+          <Image
+            src="/change.webp"
+            alt="Process background"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        </div>
         
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-blue-800/80 to-slate-900/40" />
@@ -120,8 +125,9 @@ export default function Process() {
                   index % 2 === 0 ? 'lg:pr-32 lg:text-right lg:pl-0' : 'lg:pl-32 lg:ml-auto lg:text-left'
                 } ${index === 5 ? 'mb-0 sm:mb-0' : ''}`}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
                 style={{ zIndex: 10 }}
               >
                 <div className={`lg:max-w-lg ${index % 2 === 0 ? 'lg:ml-auto' : ''} bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100 group`}>

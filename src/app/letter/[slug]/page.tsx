@@ -5,6 +5,7 @@ import { getBlogPostBySlug } from '@/lib/contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document } from '@contentful/rich-text-types';
 import NewsletterSection from '@/components/NewsletterSection';
+import Image from 'next/image';
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -88,7 +89,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </div>
       <section className="w-full h-[40vh] md:h-[60vh] relative flex items-center justify-center overflow-hidden">
         {post.image && typeof post.image === 'string' && (
-          <img src={post.image} alt={typeof post.title === 'string' ? post.title : 'Blog post'} className="absolute inset-0 w-full h-full object-cover object-center opacity-80" />
+          <Image
+            src={post.image}
+            alt={typeof post.title === 'string' ? post.title : 'Blog post'}
+            fill
+            className="object-cover object-center opacity-80"
+            priority
+            sizes="100vw"
+          />
         )}
         <h1 className="relative z-10 text-4xl md:text-6xl font-bold text-white text-center drop-shadow-lg">{typeof post.title === 'string' ? post.title : 'Blog Post'}</h1>
         <div className="absolute inset-0 bg-black/30" />

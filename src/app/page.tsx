@@ -3,14 +3,28 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import dynamic from "next/dynamic";
-const Globe = dynamic(() => import("../components/Globe"), { ssr: false });
-const TestimonialsCarousel = dynamic(() => import("../components/TestimonialsCarousel"), { ssr: false });
-const ClientsCarousel = dynamic(() => import("../components/ClientsCarousel"), { ssr: false });
-const FeaturedProjects = dynamic(() => import("../components/FeaturedProjects"));
-const GlobalPresence = dynamic(() => import("../components/GlobalPresence"));
+const Globe = dynamic(() => import("../components/Globe"), { 
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-gray-100 animate-pulse rounded-lg" />
+});
+const TestimonialsCarousel = dynamic(() => import("../components/TestimonialsCarousel"), { 
+  ssr: false,
+  loading: () => <div className="h-32 bg-gray-100 animate-pulse rounded-lg" />
+});
+const ClientsCarousel = dynamic(() => import("../components/ClientsCarousel"), { 
+  ssr: false,
+  loading: () => <div className="h-24 bg-gray-100 animate-pulse rounded-lg" />
+});
+const FeaturedProjects = dynamic(() => import("../components/FeaturedProjects"), {
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
+});
+const GlobalPresence = dynamic(() => import("../components/GlobalPresence"), {
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />
+});
 
 
 
@@ -77,11 +91,14 @@ export default function Home() {
         {/* Overlay for readability - only on desktop */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/40 hidden md:block" />
         {/* Mobile image */}
-        <div className="md:hidden w-full h-64 overflow-hidden rounded-2xl mb-8">
-          <img
+        <div className="md:hidden w-full h-64 overflow-hidden rounded-2xl mb-8 relative">
+          <Image
             src="/bg.webp"
             alt="Hero background"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
           />
         </div>
         <div className="max-w-6xl mx-auto w-full relative z-10 md:flex-1">
@@ -124,11 +141,14 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="overflow-hidden rounded-3xl shadow-xl border border-gray-200">
-              <img
+            <div className="overflow-hidden rounded-3xl shadow-xl border border-gray-200 relative h-[300px] sm:h-[400px] lg:h-[640px]">
+              <Image
                 src="/girl.webp"
                 alt="Happy client using our solutions"
-                className="w-full h-[300px] sm:h-[400px] lg:h-[640px] object-cover"
+                fill
+                className="object-cover"
+                loading="lazy"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
 
