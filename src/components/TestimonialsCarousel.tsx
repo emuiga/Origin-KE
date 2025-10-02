@@ -66,7 +66,7 @@ const TestimonialsCarousel = () => {
 
     const interval = setInterval(() => {
       nextTestimonial();
-    }, isMobile ? 3000 : 5000);
+    }, isMobile ? 5000 : 5000);
 
     return () => clearInterval(interval);
   }, [isMobile]);
