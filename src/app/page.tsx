@@ -136,7 +136,7 @@ export default function Home() {
                   Your context drives our approach. We design and develop to your constraints and objectives, producing solutions that fit like a glove.
                 </p>
               </div>
-              <div className="pt-2">
+              <div className="pt-2 flex justify-center sm:justify-start">
                 <Link href="/contact" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold">
                   Get A Quote
                 </Link>
