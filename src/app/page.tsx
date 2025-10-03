@@ -119,7 +119,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">PARTNER WITH US</p>
+            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">WHY CHOOSE US</p>
             <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
               We set a new standard for business experience
             </h2>
