@@ -16,7 +16,7 @@ export default function Portfolio() {
 
   // Counter animation effect - optimized
   useEffect(() => {
-    const targetStats = { customers: 150, agents: 12, hours: 24, projects: 75 };
+    const targetStats = { customers: 15, agents: 12, hours: 24, projects: 15 };
     const duration = 1500; // Reduced duration
     const steps = 30; // Reduced steps for better performance
     const stepDuration = duration / steps;
