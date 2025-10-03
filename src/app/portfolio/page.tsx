@@ -299,7 +299,7 @@ export default function Portfolio() {
               { number: countedStats.customers, label: "Satisfied Customers", suffix: "+" },
               { number: countedStats.agents, label: "Professional Agents", suffix: "" },
               { number: countedStats.hours, label: "Hours Support", suffix: "/7" },
-              { number: countedStats.projects, label: "Project Finished", suffix: "+" }
+              { number: countedStats.projects, label: "Projects Finished", suffix: "+" }
             ].map((stat, index) => (
               <div
                 key={index}
