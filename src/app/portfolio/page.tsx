@@ -7,6 +7,7 @@ import Image from "next/image";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import CardStack from "../../components/CardStack";
+import { PortfolioPatterns } from "../../components/DecorativePatterns";
 
 export default function Portfolio() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -149,54 +150,12 @@ export default function Portfolio() {
 
 
   return (
-    <div className="min-h-screen bg-white overflow-hidden">
+    <div className="min-h-screen bg-white overflow-hidden relative">
+      <PortfolioPatterns />
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[40vh] flex items-center overflow-hidden py-12 sm:py-16">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/dream.webp"
-            alt="Hero background"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-        </div>
-        
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-blue-800/80 to-slate-900/40" />
-        
-        {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 text-center">
-          <div className="text-white space-y-6">
-            <div className="inline-block px-4 py-2 rounded-full border border-blue-400/30">
-              <span className="text-sm font-medium text-white-200">OUR SERVICES</span>
-            </div>
-            
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-              What We Do
-            </h1>
-            
-            <p className="text-lg sm:text-xl text-blue-200 max-w-2xl mx-auto leading-relaxed">
-              From market research to web development, we provide comprehensive digital solutions that drive your business forward.
-            </p>
-            
-            <div className="pt-4">
-              <Link href="/contact">
-                <span className="inline-block py-3 px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-lg transition-colors duration-300">
-                  Start Your Project
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Services Section */}
-      <section id="services" className="px-4 sm:px-8 py-16 sm:py-24 bg-white">
+      <section id="services" className="px-4 sm:px-8 pt-16 sm:pt-24 py-16 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">THE FUNDAMENTALS</p>
@@ -298,7 +257,7 @@ export default function Portfolio() {
             {[
               { number: countedStats.customers, label: "Satisfied Customers", suffix: "+" },
               { number: countedStats.agents, label: "Professional Agents", suffix: "" },
-              { number: countedStats.hours, label: "Hours Support", suffix: "/7" },
+              { number: countedStats.hours, label: "24/7 Support", suffix: "/7" },
               { number: countedStats.projects, label: "Projects Finished", suffix: "+" }
             ].map((stat, index) => (
               <div

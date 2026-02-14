@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import SmoothScrollProvider from "../components/SmoothScrollProvider";
-import PerformanceOptimizer from "../components/PerformanceOptimizer";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -16,13 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
-        <link
-          rel="preload"
-          href="/bg.webp"
-          as="image"
-        />
         <link
           rel="preload"
           href="/Aeonik Font/New Aeonik Trials/AeonikTRIAL-Regular.otf"
@@ -39,10 +32,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <PerformanceOptimizer />
-        <SmoothScrollProvider>
-          {children}
-        </SmoothScrollProvider>
+        {children}
         <Analytics />
         <SpeedInsights />
       </body>

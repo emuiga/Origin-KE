@@ -3,38 +3,29 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 
-type GridBackgroundProps = {
-  angle?: number;
-  className?: string;
-};
-
-function GridBackground({ angle = 65, className }: GridBackgroundProps) {
-  return (
-    <div
-      className={cn(
-        'selection:pointer-events-none absolute size-full overflow-hidden [perspective:200px]',
-        className,
-      )}
-      style={{
-        ['--grid-angle' as any]: `${angle}deg`,
-      }}
-      aria-hidden
-    >
-      <div className="absolute inset-0 [transform:rotateX(var(--grid-angle))]">
-        <div
-          className={cn(
-            'animate-grid',
-            '[background-repeat:repeat] [background-size:60px_60px] [height:300vh] [inset:0%_0px] [margin-left:-50%] [transform-origin:100%_0_0] [width:600vw]',
-            '[background-image:linear-gradient(to_right,rgba(0,0,0,0.7)_2px,transparent_0),linear-gradient(to_bottom,rgba(0,0,0,0.7)_2px,transparent_0)]',
-            'dark:[background-image:linear-gradient(to_right,rgba(255,255,255,0.6)_2px,transparent_0),linear-gradient(to_bottom,rgba(255,255,255,0.6)_2px,transparent_0)]',
-          )}
-        />
-      </div>
-    </div>
-  );
-}
+const projects = [
+  {
+    id: 1,
+    title: "Bechfam.io",
+    subtitle: "Cloud Solutions",
+    description:
+      "When Bechfam.io needed enterprise-grade cloud infrastructure paired with an intuitive management interface, we rose to the occasion — delivering a scalable platform that makes complex cloud operations feel effortless.",
+    tags: ["Strategy", "Development", "Cloud", "UX"],
+    image: "/Screenshot from 2025-09-09 07-07-25.png",
+    href: "https://bechfam.io",
+  },
+  {
+    id: 2,
+    title: "KIFWA",
+    subtitle: "Clearing & Forwarding System",
+    description:
+      "When Kenya's largest freight and warehousing association needed a system to unify cargo tracking, documentation, and member operations, we built a comprehensive logistics platform that keeps the industry moving.",
+    tags: ["Strategy", "Logistics", "Custom Software", "Database"],
+    image: "/Screenshot from 2025-07-02 14-38-44.png",
+    href: "https://kifwa-agents.sitytechnologies.co.ke/login",
+  },
+];
 
 export default function FeaturedProjects() {
   return (
@@ -47,43 +38,62 @@ export default function FeaturedProjects() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          
-          <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">OUR FEATURED PROJECTS</p>
-            <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">
+            OUR FEATURED PROJECTS
+          </p>
+          <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
             Everything you may ask from a Web Agency.
-            </h2>
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
-          {[
-            { id: 1, title: "Adorned Family Home", image: "/adorned.png", href: "https://adornedafh.com" },
-            { id: 2, title: "KIFWA Clearing & Forwarding System", image: "/Screenshot from 2025-07-02 14-38-44.png", href: "https://kifwa.sitytechnologies.co.ke" },
-            { id: 3, title: "Bechfam.io Cloud Solutions", image: "/Screenshot from 2025-09-09 07-07-25.png", href: "https://bechfam.io" },
-            { id: 4, title: "Open Source", image: "/track.webp", href: "/" },
-          ].map((project, index) => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+          {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="bg-white overflow-hidden h-full"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
+              transition={{ duration: 0.8, delay: index * 0.15 }}
               viewport={{ once: true }}
             >
-              <Link href={project.href} className="flex h-full flex-col" target={project.href.startsWith('http') ? '_blank' : undefined} rel={project.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
-                <div className="flex items-center justify-center bg-gray-100 h-72 sm:h-80 md:h-[420px] lg:h-[480px] relative">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-contain"
-                    loading="lazy"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-                <div className="p-5 sm:p-6 text-center min-h-[64px] sm:min-h-[72px] flex items-center justify-center">
-                  <h3 className="text-lg sm:text-2xl font-semibold text-black">
-                    {project.title}
-                  </h3>
+              <Link
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block h-full"
+              >
+                <div className="h-full rounded-2xl border border-slate-200 overflow-hidden transition-shadow duration-300 hover:shadow-xl">
+                  {/* Screenshot area */}
+                  <div className="bg-gray-100 relative h-64 sm:h-72 md:h-80 lg:h-96 overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={`${project.title} screenshot`}
+                      fill
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  {/* Content area */}
+                  <div className="p-6 sm:p-8">
+                    <div className="mb-4">
+                      <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1">
+                        {project.title}
+                      </h3>
+                      <p className="text-lg sm:text-xl font-medium text-blue-600">
+                        {project.subtitle}
+                      </p>
+                    </div>
+
+                    <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-6">
+                      {project.description}
+                    </p>
+
+                    {/* Tags */}
+                    <p className="text-sm font-medium text-slate-400 tracking-wide">
+                      {project.tags.join(" — ")}
+                    </p>
+                  </div>
                 </div>
               </Link>
             </motion.div>
@@ -108,5 +118,3 @@ export default function FeaturedProjects() {
     </section>
   );
 }
-
-

@@ -93,7 +93,7 @@ export default function Footer() {
         {/* Copyright and Back to Top */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-slate-500 text-sm">
-            © 2025 Origin. All rights reserved.
+            © {new Date().getFullYear()} Origin. All rights reserved.
           </p>
           <button
             onClick={scrollToTop}

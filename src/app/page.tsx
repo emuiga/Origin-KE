@@ -1,11 +1,11 @@
 'use client';
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { HomePatterns } from "../components/DecorativePatterns";
 import dynamic from "next/dynamic";
 const TestimonialsCarousel = dynamic(() => import("../components/TestimonialsCarousel"), {
   ssr: false,
@@ -21,12 +21,9 @@ const FeaturedProjects = dynamic(() => import("../components/FeaturedProjects"),
 
 
 export default function Home() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-
-
   return (
-    <div ref={containerRef} className="min-h-screen bg-white overflow-hidden">
+    <div className="min-h-screen bg-white overflow-hidden relative">
+      <HomePatterns />
 
       <Header />
 
@@ -82,6 +79,14 @@ export default function Home() {
               >
                 See our work
               </Link>
+            </div>
+
+            {/* Social Proof */}
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-gray-500 md:text-gray-300 pt-2">
+              <span className="flex items-center gap-1.5">
+                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                15+ projects delivered
+              </span>
             </div>
           </div>
         </div>
@@ -168,204 +173,6 @@ export default function Home() {
 
       <FeaturedProjects />
 
-      {/* Pricing Section - removed */}
-      {false && (
-      <section className="px-4 sm:px-8 py-16 sm:py-24 bg-white/50 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto">
-          <motion.div 
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-              Simple, Transparent Pricing
-            </h2>
-            <p className="text-lg font-medium text-slate-600 max-w-2xl mx-auto leading-7">
-              No hidden fees. No surprises. Just results that grow your business.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Starter Package */}
-            <motion.div 
-              className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Starter</h3>
-                <div className="text-4xl font-bold text-blue-600 mb-2">KSh 150,000</div>
-                <p className="text-lg font-medium text-slate-600">Perfect for small businesses</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Professional Website (5 pages)
-                </li>
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Mobile Responsive Design
-                </li>
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Contact Forms & Analytics
-                </li>
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  3 Months Support
-                </li>
-              </ul>
-              <Link 
-                href="/contact" 
-                className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold text-center block"
-              >
-                Get Started
-              </Link>
-            </motion.div>
-
-            {/* Professional Package */}
-            <motion.div 
-              className="bg-white/80 backdrop-blur-sm border-2 border-blue-500 rounded-2xl p-8 shadow-xl relative"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-blue-500 text-white px-4 py-2 rounded-full text-lg font-semibold">Most Popular</span>
-              </div>
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Professional</h3>
-                <div className="text-4xl font-bold text-blue-600 mb-2">KSh 350,000</div>
-                <p className="text-lg font-medium text-slate-600">For growing businesses</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Custom Website (10 pages)
-                </li>
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  E-commerce Integration
-                </li>
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Mobile App (iOS/Android)
-                </li>
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Payment Gateway Setup
-                </li>
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  6 Months Support
-                </li>
-              </ul>
-              <Link 
-                href="/contact" 
-                className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold text-center block"
-              >
-                Get Started
-              </Link>
-            </motion.div>
-
-            {/* Enterprise Package */}
-            <motion.div 
-              className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Enterprise</h3>
-                <div className="text-4xl font-bold text-blue-600 mb-2">Custom</div>
-                <p className="text-lg font-medium text-slate-600">Tailored solutions</p>
-              </div>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Custom Software Development
-                </li>
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  HR Management Systems
-                </li>
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  API Integration & Development
-                </li>
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  Cloud Infrastructure Setup
-                </li>
-                <li className="flex items-center text-lg font-medium text-slate-700">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  12 Months Support
-                </li>
-              </ul>
-              <Link 
-                href="/contact" 
-                className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold text-center block"
-              >
-                Contact Us
-              </Link>
-            </motion.div>
-          </div>
-
-          <motion.div 
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-lg font-medium text-slate-600 mb-4 leading-7">
-              All packages include free consultation and project planning
-            </p>
-            <Link 
-              href="/contact" 
-              className="text-blue-600 hover:text-blue-700 font-semibold underline"
-            >
-              Need a custom solution? Let's talk →
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-      )}
-
       
 
       {/* Success Story Section */}
@@ -382,6 +189,9 @@ export default function Home() {
         </h2>
         <p className="mt-4 w-full text-4xl sm:text-6xl lg:text-7xl font-extrabold text-blue-600 tracking-tight">
           GMT+3
+        </p>
+        <p className="mt-4 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">
+          We operate from Nairobi, Kenya — delivering to clients worldwide.
         </p>
       </div>
     </section>

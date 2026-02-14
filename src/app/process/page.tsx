@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { ProcessPatterns } from "../../components/DecorativePatterns";
 
 
 
@@ -13,58 +13,16 @@ export default function Process() {
 
 
   return (
-    <div className="min-h-screen bg-white overflow-hidden">
+    <div className="min-h-screen bg-white overflow-hidden relative">
+      <ProcessPatterns />
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[40vh] flex items-center overflow-hidden py-12 sm:py-16">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/change.webp"
-            alt="Process background"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-        </div>
-        
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-blue-800/80 to-slate-900/40" />
-        
-        {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 text-center">
-          <div className="text-white space-y-6">
-            <div className="inline-block px-4 py-2 rounded-full border border-blue-400/30">
-              <span className="text-sm font-medium text-white-200">OUR METHODOLOGY</span>
-            </div>
-            
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-              Concept to Launch
-            </h1>
-            
-            <p className="text-lg sm:text-xl text-blue-200 max-w-2xl mx-auto leading-relaxed">
-              Every successful project follows a proven path. Discover our systematic approach that transforms ideas into digital excellence.
-            </p>
-            
-            <div className="pt-4">
-              <Link href="/contact">
-                <span className="inline-block py-3 px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-lg transition-colors duration-300">
-                  Start Your Journey
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Process Steps */}
-      <section id="process" className="px-4 sm:px-8 py-16 sm:py-24 pb-6 bg-white">
+      <section id="process" className="px-4 sm:px-8 pt-16 sm:pt-24 py-16 sm:py-24 pb-6 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-4">
-              Our Process
+              Concept to Launch
             </h2>
             <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
               A proven methodology that ensures your project succeeds from start to finish.
@@ -203,7 +161,7 @@ export default function Process() {
           
           <div className="pt-6 border-t border-gray-200">
             <p className="text-sm text-gray-600">
-              Join <span className="font-semibold text-blue-600">150+</span> satisfied clients who chose Origin for their digital transformation
+              Join <span className="font-semibold text-blue-600">15+</span> satisfied clients who chose Origin for their digital transformation
             </p>
           </div>
         </div>

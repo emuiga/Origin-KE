@@ -11,12 +11,6 @@ const testimonials = [
     image: '/becher.jpg'
   },
   {
-    name: 'Grace Wanjiku',
-    company: 'KIFWA',
-    quote: 'The software has positively impacted our operations.',
-    image: '/womann.jpg'
-  },
-  {
     name: 'Vivian Wacera',
     company: 'Business Owner, Nakuru',
     quote: 'What I liked most about Origin is how you kept things simple but effective. Our systems are running smoothly now, and our clients have noticed the difference.',
