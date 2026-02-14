@@ -10,8 +10,7 @@ const projects = [
     title: "Bechfam.io",
     subtitle: "Cloud Solutions",
     description:
-      "When Bechfam.io needed enterprise-grade cloud infrastructure paired with an intuitive management interface, we rose to the occasion — delivering a scalable platform that makes complex cloud operations feel effortless.",
-    tags: ["Strategy", "Development", "Cloud", "UX"],
+      "Bechfam Cloud Company needed enterprise-grade cloud infrastructure paired with an intuitive management interface, we delived a platform that makes complex cloud operations feel effortless.",
     image: "/Screenshot from 2025-09-09 07-07-25.png",
     href: "https://bechfam.io",
   },
@@ -21,7 +20,6 @@ const projects = [
     subtitle: "Clearing & Forwarding System",
     description:
       "When Kenya's largest freight and warehousing association needed a system to unify cargo tracking, documentation, and member operations, we built a comprehensive logistics platform that keeps the industry moving.",
-    tags: ["Strategy", "Logistics", "Custom Software", "Database"],
     image: "/Screenshot from 2025-07-02 14-38-44.png",
     href: "https://kifwa-agents.sitytechnologies.co.ke/login",
   },
@@ -61,14 +59,14 @@ export default function FeaturedProjects() {
                 rel="noopener noreferrer"
                 className="group block h-full"
               >
-                <div className="h-full rounded-2xl border border-slate-200 overflow-hidden transition-shadow duration-300 hover:shadow-xl">
+                <div className="h-full rounded-2xl border border-slate-200 overflow-hidden">
                   {/* Screenshot area */}
                   <div className="bg-gray-100 relative h-64 sm:h-72 md:h-80 lg:h-96 overflow-hidden">
                     <Image
                       src={project.image}
                       alt={`${project.title} screenshot`}
                       fill
-                      className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover object-top"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       loading="lazy"
                     />
@@ -87,11 +85,6 @@ export default function FeaturedProjects() {
 
                     <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-6">
                       {project.description}
-                    </p>
-
-                    {/* Tags */}
-                    <p className="text-sm font-medium text-slate-400 tracking-wide">
-                      {project.tags.join(" — ")}
                     </p>
                   </div>
                 </div>
