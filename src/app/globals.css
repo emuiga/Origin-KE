@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* Aeonik Font Declarations - Optimized for performance */
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/Aeonik Font/New Aeonik Trials/AeonikTRIAL-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  preload: true;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('/Aeonik Font/New Aeonik Trials/AeonikTRIAL-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  preload: true;
+}
+
+@font-face {
+  font-family: 'Payout';
+  src: url('/payout/Payout.otf') format('opentype'),
+       url('/payout/Payout.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HeyAugust';
+  src: url('/hey_august/Hey August.otf') format('opentype'),
+       url('/hey_august/Hey August.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HeyAugust';
+  src: url('/hey_august/Hey August.otf') format('opentype'),
+       url('/hey_august/Hey August.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-white text-slate-900;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
+    font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+  
+  .font-playfair {
+    font-family: var(--font-playfair), serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.1;
+    font-weight: 700;
+    font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+  
+  .font-payout {
+    font-family: 'Payout', cursive, sans-serif;
+  }
+  
+  .font-hey-august {
+    font-family: 'HeyAugust', cursive, sans-serif;
+  }
+}
+
+@layer utilities {
+  
+  /* Seamless marquee for horizontal carousels */
+  @keyframes marquee-horizontal {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .marquee {
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: 200%; /* two copies side-by-side */
+    will-change: transform;
+    animation: marquee-horizontal 8s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      transform: translateX(0);
+    }
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .shadow-glow {
+    box-shadow: 0 0 40px rgba(147, 51, 234, 0.15);
+  }
+  
+  .shadow-glow-blue {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+  }
+  
+  .shadow-glow-orange {
+    box-shadow: 0 0 40px rgba(249, 115, 22, 0.15);
+  }
+  
+  .underline-artistic {
+    position: relative;
+  }
+  .underline-artistic::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0.1em;
+    width: 100%;
+    height: 0.25em;
+    background: #3b82f6;
+    border-radius: 0.15em;
+    opacity: 0.7;
+    z-index: 0;
+  }
+
+  .underline-curved {
+    position: relative;
+  }
+  .underline-curved::after {
+    content: '';
+    position: absolute;
+    left: -5%;
+    bottom: -0.2em;
+    width: 110%;
+    height: 0.15em;
+    background: #3b82f6;
+    border-radius: 50% 50% 0 0;
+    opacity: 0.8;
+    z-index: 0;
+    transform: scaleY(1.5);
+  }
+} 
