@@ -158,9 +158,9 @@ export default function Portfolio() {
       <section id="services" className="px-4 sm:px-8 pt-16 sm:pt-24 py-16 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">THE FUNDAMENTALS</p>
+            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">WHAT WE BUILD</p>
             <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Comprehensive digital solutions tailored to your business needs and goals.
+              Tell us what&apos;s broken. We&apos;ll know how to fix it.
             </h2>
           </div>
 
@@ -209,7 +209,7 @@ export default function Portfolio() {
               },
               {
                 title: "System Integration",
-                description: "Seamless integration of various software systems and platforms to create unified business workflows.",
+                description: "Connecting your software systems and platforms so your business runs as one, without the manual workarounds.",
                 image: "/sys.webp"
               }
             ].map((service, index) => (
@@ -249,16 +249,16 @@ export default function Portfolio() {
           <div className="text-center mb-16">
             <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">OUR IMPACT</p>
             <h2 className="text-2xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Real results from real projects that drive business growth
+              Numbers that mean something.
             </h2>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { number: countedStats.customers, label: "Satisfied Customers", suffix: "+" },
-              { number: countedStats.agents, label: "Professional Agents", suffix: "" },
-              { number: countedStats.hours, label: "24/7 Support", suffix: "/7" },
-              { number: countedStats.projects, label: "Projects Finished", suffix: "+" }
+              { number: countedStats.customers, label: "Satisfied Clients", suffix: "+" },
+              { number: countedStats.agents, label: "Engineers and Collaborators", suffix: "+" },
+              { number: countedStats.hours, label: "Hour Availability", suffix: "/7" },
+              { number: countedStats.projects, label: "Projects Delivered", suffix: "+" }
             ].map((stat, index) => (
               <div
                 key={index}
@@ -309,7 +309,7 @@ export default function Portfolio() {
               </div>
               <div>
                 <Link href="/contact">
-                  <span className="inline-block py-3 sm:py-4 px-8 sm:px-10 bg-black text-white rounded-full font-bold hover:bg-slate-800 transition-colors duration-300 text-lg">
+                  <span className="inline-block py-3 sm:py-4 px-8 sm:px-10 bg-blue-600 text-white rounded-xl font-bold shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 text-lg">
                     Let's Ship It Already
                   </span>
                 </Link>
@@ -332,7 +332,7 @@ export default function Portfolio() {
             transition={{ duration: 0.8 }}
           >
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Your story needs an Origin, we handle every aspect of your digital journey.
+              Whatever your business needs, we have built it before or we know how to build it.
             </p>
           </motion.div>
         </div>

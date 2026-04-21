@@ -56,8 +56,7 @@ export default function AboutPage() {
             We are a lean team of builders
           </h1>
           <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Origin is a Nairobi-based digital studio. We&apos;re on a mission to build the best solutions for businesses and individuals. We design, build, and
-            launch tools and applications to drive business growth.
+            Origin is a Nairobi-based digital agency. We work directly with business owners to design, build and ship websites, apps and internal tools that solve real problems.
           </p>
         </div>
       </section>
@@ -124,7 +123,7 @@ export default function AboutPage() {
                   href="/contact"
                   className="group relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full border-4 border-dashed border-slate-300 hover:border-blue-400 flex items-center justify-center transition-colors duration-300 bg-slate-50 hover:bg-blue-50"
                 >
-                  <span className="text-5xl sm:text-6xl font-bold text-slate-300 group-hover:text-blue-500 transition-colors duration-300">
+                  <span className="text-5xl sm:text-6xl font-bold text-slate-300 group-hover:text-blue-600 transition-colors duration-300">
                     ?
                   </span>
                 </Link>

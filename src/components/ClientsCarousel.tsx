@@ -3,7 +3,7 @@
 const clients = [
   {
     name: "Startups",
-    description: "Innovative ventures"
+    description: "Early-stage ventures"
   },
   {
     name: "SMEs", 

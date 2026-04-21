@@ -25,7 +25,7 @@ export default function Process() {
               Concept to Launch
             </h2>
             <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              A proven methodology that ensures your project succeeds from start to finish.
+              Six steps. No surprises.
             </p>
           </div>
           <div className="relative">
@@ -141,27 +141,27 @@ export default function Process() {
       <section className="px-4 sm:px-8 pt-6 pb-20 sm:pb-32 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-6">
-            Ready to Bring Your Vision to Life?
+            Have a project in mind? Let&apos;s scope it out.
           </h2>
-          
+
           <p className="text-lg sm:text-xl text-gray-700 mb-10 max-w-3xl mx-auto leading-relaxed">
-            Every successful project starts with a conversation. Let's discuss your goals, explore possibilities, and create something extraordinary together.
+            Pick a time on the calendar and tell us what you need. We will come back with a scope, a timeline and a price.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Link href="/contact">
-              <span className="inline-block py-4 px-8 bg-blue-600 text-white rounded-xl font-semibold text-lg hover:bg-blue-700 transition-colors duration-300">
-                Get Your Free Consultation
+              <span className="inline-block py-4 px-8 bg-blue-600 text-white rounded-xl font-bold shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 text-lg">
+                Book a free 30-minute call
               </span>
             </Link>
             <div className="text-sm text-gray-600">
               <span className="font-medium">✓</span> No obligation • <span className="font-medium">✓</span> 30-minute call • <span className="font-medium">✓</span> Custom proposal
             </div>
           </div>
-          
+
           <div className="pt-6 border-t border-gray-200">
             <p className="text-sm text-gray-600">
-              Join <span className="font-semibold text-blue-600">15+</span> satisfied clients who chose Origin for their digital transformation
+              Join <span className="font-semibold text-blue-600">15+</span> businesses that shipped with Origin.
             </p>
           </div>
         </div>

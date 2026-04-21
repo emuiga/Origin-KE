@@ -122,7 +122,7 @@ export default function BlogPostsGrid({ posts }: { posts: BlogPost[] }) {
               onClick={() => setPage(num)}
               className={`w-10 h-10 text-sm font-medium transition-colors ${
                 num === page
-                  ? 'bg-slate-900 text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'text-slate-700 border border-slate-300 hover:bg-slate-50'
               }`}
             >

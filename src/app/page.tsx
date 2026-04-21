@@ -67,15 +67,15 @@ export default function Home() {
 
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-4 items-center">
-              <Link 
-                href="/contact" 
-                className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg"
+              <Link
+                href="/contact"
+                className="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 text-lg"
               >
                 Book a call →
               </Link>
-              <Link 
-                href="/portfolio" 
-                className="border-2 border-gray-300 md:border-white/30 text-gray-900 md:text-white hover:border-gray-400 md:hover:border-white/60 hover:text-gray-900 md:hover:text-white px-8 py-4 rounded-xl font-semibold text-lg"
+              <Link
+                href="/portfolio"
+                className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-xl font-bold shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 text-lg md:bg-white/10 md:text-white md:border-white/20"
               >
                 See our work
               </Link>
@@ -130,9 +130,9 @@ export default function Home() {
             </h2>
             <div className="mt-8 space-y-8 max-w-2xl">
               <div>
-                <div className="font-semibold text-slate-900 text-[20px] leading-[28px]">We've Mastered the Craft</div>
+                <div className="font-semibold text-slate-900 text-[20px] leading-[28px]">Proven Across Industries</div>
                 <p className="text-slate-700 text-[20px] leading-[28px] font-medium">
-                Our cross-functional team collaborate seamlessly to launch solutions that work in your business environment.
+                  We have shipped platforms for organisations in different sectors and are building our own products. We understand what works.
                 </p>
               </div>
               <div className="pt-6 border-t border-gray-200">
@@ -142,7 +142,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="pt-2 flex justify-center sm:justify-start">
-                <Link href="/contact" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold">
+                <Link href="/contact" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
                   Get A Quote
                 </Link>
               </div>
@@ -191,7 +191,7 @@ export default function Home() {
           GMT+3
         </p>
         <p className="mt-4 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">
-          We operate from Nairobi, Kenya — delivering to clients worldwide.
+          We operate from Nairobi, Kenya, delivering to clients worldwide.
         </p>
       </div>
     </section>

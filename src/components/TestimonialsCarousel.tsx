@@ -32,14 +32,9 @@ const testimonials = [
 
 const TestimonialsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
   const goToTestimonial = (index: number) => {
@@ -47,108 +42,76 @@ const TestimonialsCarousel = () => {
   };
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const interval = setInterval(nextTestimonial, 5000);
+    return () => clearInterval(interval);
   }, []);
 
-  // Auto-slide functionality like Bootstrap carousel
-  useEffect(() => {
-    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return; // disable auto-advance for reduced motion users
-
-    const interval = setInterval(() => {
-      nextTestimonial();
-    }, isMobile ? 5000 : 5000);
-
-    return () => clearInterval(interval);
-  }, [isMobile]);
+  const t = testimonials[currentIndex];
 
   return (
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-8">
         <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">WHAT OUR CLIENTS SAY</p>
-            <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            We serve people all over the world with innovative digital solutions.
-            </h2>
+        <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          Don&apos;t take our word for it.
+        </h2>
       </div>
 
-      <div className="relative">
-        <div
-          className="bg-white/85 border border-slate-200 rounded-xl p-4 sm:p-6 lg:p-8 shadow"
-        >
-          <div className="flex flex-col md:flex-row items-stretch gap-4">
-            {/* Left: Image with overlay icon */}
-            <div className="md:w-1/2 w-full relative">
-              <Image 
-                src={testimonials[currentIndex].image} 
-                alt={testimonials[currentIndex].name} 
-                width={560} 
-                height={420} 
-                className="object-cover w-full h-full max-h-[360px] md:max-h-[420px]" 
-                priority={currentIndex === 0}
-                loading={currentIndex === 0 ? "eager" : "lazy"}
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className="absolute top-2 left-2">
-                <Image 
-                  src="/quote.png" 
-                  alt="quote" 
-                  width={56} 
-                  height={56} 
-                  className="opacity-80"
-                  priority={currentIndex === 0}
-                />
-              </div>
-            </div>
+      <div className="relative bg-white/85 border border-slate-200 rounded-xl p-8 sm:p-10 lg:p-12 shadow overflow-hidden">
+        {/* Decorative quote mark */}
+        <Image
+          src="/quote.png"
+          alt=""
+          width={96}
+          height={96}
+          className="absolute top-6 right-6 opacity-10 pointer-events-none select-none"
+          aria-hidden="true"
+          loading="lazy"
+        />
 
-            {/* Right: Content */}
-            <div className="md:w-1/2 w-full flex flex-col justify-center">
-              <blockquote className="text-base sm:text-lg md:text-xl text-slate-700 mb-4 sm:mb-6 leading-relaxed">
-                {testimonials[currentIndex].quote}
-              </blockquote>
-              <div className="flex items-center gap-4 relative">
-                <Image
-                  src={testimonials[currentIndex].image}
-                  alt={testimonials[currentIndex].name}
-                  width={48}
-                  height={48}
-                  className="rounded-full object-cover"
-                  loading="lazy"
-                />
-                <div>
-                  <div className="font-semibold text-slate-900">{testimonials[currentIndex].name}</div>
-                  <div className="text-slate-600">{testimonials[currentIndex].company}</div>
-                </div>
-                <div className="absolute bottom-0 right-0">
-                  <Image 
-                    src="/quote.png" 
-                    alt="quote" 
-                    width={56} 
-                    height={56} 
-                    className="opacity-80"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
+        {/* Fixed-height quote area prevents layout shift between slides */}
+        <div className="min-h-[120px] flex items-start mb-8">
+          <blockquote className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-800 leading-snug">
+            &ldquo;{t.quote}&rdquo;
+          </blockquote>
+        </div>
+
+        {/* Attribution */}
+        <div className="flex items-center gap-3">
+          <div className="relative w-10 h-10 shrink-0 rounded-full overflow-hidden">
+            <Image
+              src={t.image}
+              alt={t.name}
+              fill
+              className="object-cover"
+              sizes="40px"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <div className="font-semibold text-slate-900 text-sm">{t.name}</div>
+            <div className="text-slate-500 text-sm">{t.company}</div>
           </div>
         </div>
+      </div>
 
-        {/* Dots */}
-        <div className="flex justify-center mt-8 gap-2">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToTestimonial(index)}
-              className={`w-3 h-3 rounded-full ${
-                index === currentIndex ? 'bg-blue-600' : 'bg-slate-300'
-              }`}
-              aria-label={`Go to testimonial ${index + 1}`}
-            />
-          ))}
-        </div>
+      {/* Dots */}
+      <div className="flex justify-center mt-6 gap-2">
+        {testimonials.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToTestimonial(index)}
+            className={`w-2.5 h-2.5 rounded-full transition-colors duration-200 ${
+              index === currentIndex ? 'bg-blue-600' : 'bg-slate-300'
+            }`}
+            aria-label={`Go to testimonial ${index + 1}`}
+          />
+        ))}
       </div>
     </div>
   );

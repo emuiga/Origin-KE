@@ -4,7 +4,7 @@ import { BlogPatterns } from "@/components/DecorativePatterns";
 import BlogPostsGrid from "@/components/BlogPostsGrid";
 import { getBlogPosts } from "@/lib/contentful";
 
-export const revalidate = 60; // revalidate every 60 seconds
+export const revalidate = 3600;
 
 export default async function BlogPage() {
   let posts: Awaited<ReturnType<typeof getBlogPosts>> = [];

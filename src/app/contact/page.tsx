@@ -164,7 +164,7 @@ export default function ContactPage() {
               Let&apos;s talk about what you&apos;re building
             </h1>
             <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              We&apos;re excited to learn more about your business and explore how Origin can serve you.
+              Tell us what&apos;s slowing your business down. We&apos;ll come back with a plan.
             </p>
           </motion.div>
 
@@ -317,7 +317,7 @@ export default function ContactPage() {
                       onBlur={handleBlur}
                       rows={5}
                       className={`${inputClass('message')} resize-none`}
-                      placeholder="Tell us what you have in mind — a project idea, a problem to solve, or anything else..."
+                      placeholder="Tell us what you have in mind: a project idea, a problem to solve, or anything else..."
                     />
                     {errors.message && touched.message && (
                       <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
@@ -329,7 +329,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2"
+                    className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white py-3 px-6 rounded-xl font-bold shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>
