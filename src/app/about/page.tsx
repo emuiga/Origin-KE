@@ -16,7 +16,7 @@ const team = [
   {
     name: "Steve Muiga",
     role: "Software Engineer",
-    focus: "Frontend & Product",
+    focus: "FullStack & Product",
     bio: "Muiga drives product vision and frontend development at Origin. He combines strong engineering fundamentals with a product-oriented mindset, ensuring every solution is built with the end user in mind.",
     image: "/steve.png",
     linkedin: "https://www.linkedin.com/in/stevemuiga/",
