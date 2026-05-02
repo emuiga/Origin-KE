@@ -69,13 +69,13 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 items-center">
               <Link
                 href="/contact"
-                className="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 text-lg"
+                className="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200 text-lg"
               >
                 Book a call →
               </Link>
               <Link
                 href="/portfolio"
-                className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-xl font-bold shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 text-lg md:bg-white/10 md:text-white md:border-white/20"
+                className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-xl font-bold shadow-sm hover:shadow-md transition-all duration-200 text-lg"
               >
                 See our work
               </Link>
@@ -85,11 +85,14 @@ export default function Home() {
             <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-gray-500 md:text-gray-300 pt-2">
               <span className="flex items-center gap-1.5">
                 <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                15+ projects delivered
+                15+ businesses helped
               </span>
-              <span className="flex items-center gap-1.5 bg-yellow-400/10 md:bg-yellow-400/20 text-yellow-700 md:text-yellow-300 border border-yellow-400/30 px-3 py-1 rounded-full font-semibold">
-                🏆 Best Overall — E4C Global AI Hackathon
-              </span>
+              <Link
+                href="/case-studies/e4c"
+                className="flex items-center gap-1.5 text-yellow-700 md:text-yellow-300 font-semibold hover:underline transition-colors"
+              >
+                🏆 Winner @ The E4C AI Pilot Competition
+              </Link>
             </div>
           </div>
         </div>
@@ -145,7 +148,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="pt-2 flex justify-center sm:justify-start">
-                <Link href="/contact" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <Link href="/contact" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200">
                   Get A Quote
                 </Link>
               </div>
@@ -176,7 +179,55 @@ export default function Home() {
 
       <FeaturedProjects />
 
-      
+      {/* Recognition Section */}
+      <section className="relative px-4 sm:px-8 py-16 sm:py-24 bg-slate-950 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(59,130,246,0.12),_transparent_60%)]" />
+        <div className="relative z-10 max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="flex flex-col md:flex-row md:items-center gap-10 md:gap-16"
+          >
+            <div className="flex-1">
+              <span className="inline-flex items-center gap-2 text-yellow-400 text-xs font-bold tracking-widest uppercase bg-yellow-400/10 border border-yellow-400/20 px-3 py-1.5 rounded-full mb-6">
+                🏆 Winner @ The E4C AI Pilot Competition
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+                Recognised globally for responsible AI innovation
+              </h2>
+              <p className="text-slate-400 text-lg leading-relaxed mb-8 max-w-xl">
+                Out of 33 teams across all tracks, Origin won Best Overall at the 2026 Engineering for Change AI Pilot Competition. We built E4CInsights - an AI pipeline that turns 15 years of vetted sustainable development knowledge into fully cited, decision-grade policy briefs, with a human in the loop.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/case-studies/e4c"
+                  className="bg-white text-slate-900 px-7 py-3.5 rounded-xl font-bold hover:shadow-xl transition-all duration-200 text-center"
+                >
+                  Read the case study →
+                </Link>
+                <Link
+                  href="/contact"
+                  className="border border-white/20 text-white px-7 py-3.5 rounded-xl font-bold hover:bg-white/10 transition-all duration-200 text-center"
+                >
+                  Partner with us
+                </Link>
+              </div>
+            </div>
+            <div className="shrink-0 flex flex-col items-center gap-3">
+              <Image
+                src="/badge.png"
+                alt="Winner badge"
+                width={160}
+                height={160}
+                className="object-contain"
+              />
+              <p className="text-white font-semibold text-sm tracking-wide text-center">Best Overall winner</p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Success Story Section */}
       <section className="relative px-4 sm:px-8 py-12 sm:py-16 bg-white overflow-hidden">

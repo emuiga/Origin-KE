@@ -41,7 +41,7 @@ export default function Footer() {
           {/* Center Column - Quote */}
           <div className="flex flex-col items-center md:items-center text-center">
             <blockquote className="text-slate-400 text-sm italic leading-relaxed max-w-xs">
-              "The best way to predict the future is to invent it."
+              &ldquo;The best way to predict the future is to invent it.&rdquo;
             </blockquote>
             <cite className="text-slate-500 text-xs mt-2">Alan Kay</cite>
           </div>
@@ -95,6 +95,13 @@ export default function Footer() {
                 </svg>
               </a>
             </div>
+            <a
+              href="/blog#case-studies"
+              className="text-slate-400 hover:text-white transition-colors text-xs tracking-wider uppercase mt-3"
+              suppressHydrationWarning
+            >
+              Case Studies
+            </a>
           </div>
         </div>
 
@@ -103,7 +110,7 @@ export default function Footer() {
 
         {/* Copyright and Back to Top */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-slate-500 text-sm">
+          <p className="text-slate-500 text-sm" suppressHydrationWarning>
             © {new Date().getFullYear()} Origin. All rights reserved.
           </p>
           <button

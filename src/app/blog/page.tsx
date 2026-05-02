@@ -2,18 +2,28 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { BlogPatterns } from "@/components/DecorativePatterns";
 import BlogPostsGrid from "@/components/BlogPostsGrid";
-import { getBlogPosts } from "@/lib/contentful";
+import { getBlogPosts, getCaseStudies } from "@/lib/contentful";
+import Link from "next/link";
+import Image from "next/image";
 
 export const revalidate = 3600;
 
 export default async function BlogPage() {
   let posts: Awaited<ReturnType<typeof getBlogPosts>> = [];
-  let error = false;
+  let caseStudies: Awaited<ReturnType<typeof getCaseStudies>> = [];
+  let postsError = false;
 
+  // Fetch independently so a CMS error on one doesn't break the other
   try {
     posts = await getBlogPosts();
   } catch {
-    error = true;
+    postsError = true;
+  }
+
+  try {
+    caseStudies = await getCaseStudies();
+  } catch {
+    // content type may not exist yet — silently fall back to hardcoded entries
   }
 
   return (
@@ -21,14 +31,13 @@ export default async function BlogPage() {
       <BlogPatterns />
       <Header />
 
+      {/* Blog posts */}
       <section className="px-4 sm:px-8 pt-16 sm:pt-24 pb-16 sm:pb-24 bg-white">
         <div className="max-w-6xl mx-auto">
-          {/* Top-left label */}
           <p className="text-[13px] font-semibold tracking-[0.2em] text-blue-700 uppercase mb-8 sm:mb-10">
-            Insights & Updates
+            Insights &amp; Updates
           </p>
-
-          {error ? (
+          {postsError ? (
             <div className="text-center py-16">
               <p className="text-slate-500 text-lg">
                 Unable to load blog posts right now. Please try again later.
@@ -37,6 +46,92 @@ export default async function BlogPage() {
           ) : (
             <BlogPostsGrid posts={posts} />
           )}
+        </div>
+      </section>
+
+      {/* Case studies */}
+      <section id="case-studies" className="px-4 sm:px-8 py-16 sm:py-24 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-6xl mx-auto">
+          <p className="text-[13px] font-semibold tracking-[0.2em] text-blue-700 uppercase mb-8 sm:mb-10">
+            Research &amp; Case Studies
+          </p>
+
+          <div className="divide-y divide-slate-200">
+            {/* Hardcoded E4C entry — remove once added to Contentful */}
+            <Link
+              href="/case-studies/e4c"
+              className="group flex flex-col sm:flex-row gap-6 py-8 hover:bg-white transition-colors"
+            >
+              <div className="shrink-0 relative w-full sm:w-44 h-32 rounded-lg overflow-hidden bg-slate-100">
+                <Image
+                  src="/Explore-feature-image2-470x470.jpg"
+                  alt="Engineering for Change"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 176px"
+                />
+              </div>
+              <div className="flex-1">
+                <div className="flex flex-wrap items-center gap-3 mb-1">
+                  <span className="text-xs font-semibold text-yellow-600">🏆 Winner @ The E4C AI Pilot Competition</span>
+                  <span className="text-xs text-slate-400">2026</span>
+                </div>
+                <p className="text-xs font-semibold tracking-widest text-blue-600 uppercase mb-1">Engineering for Change</p>
+                <h2 className="text-lg font-bold text-slate-900 leading-snug mb-2 group-hover:text-blue-700 transition-colors">
+                  Turning 15 Years of Sustainable Development Knowledge into Decision-Ready AI
+                </h2>
+                <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">
+                  Origin won the E4C AI Pilot Competition by building E4CInsights, an AI pipeline that synthesises vetted knowledge, live World Bank and WHO data, and human review into fully cited policy briefs.
+                </p>
+                <div className="flex gap-3 mt-2">
+                  {["AI", "Policy", "Sustainable Development"].map((tag) => (
+                    <span key={tag} className="text-xs text-slate-400 italic">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </Link>
+
+            {/* CMS-driven entries */}
+            {caseStudies.map((cs) => (
+              <Link
+                key={cs.slug}
+                href={`/case-studies/${cs.slug}`}
+                className="group flex flex-col sm:flex-row gap-6 py-8 hover:bg-white transition-colors"
+              >
+                {cs.thumbnail && (
+                  <div className="shrink-0 relative w-full sm:w-44 h-32 rounded-lg overflow-hidden bg-slate-100">
+                    <Image
+                      src={cs.thumbnail}
+                      alt={cs.client}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, 176px"
+                    />
+                  </div>
+                )}
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-center gap-3 mb-1">
+                    {cs.award && (
+                      <span className="text-xs font-semibold text-yellow-600">🏆 {cs.award}</span>
+                    )}
+                    <span className="text-xs text-slate-400">
+                      {cs.date ? new Date(cs.date).getFullYear() : ""}
+                    </span>
+                  </div>
+                  <p className="text-xs font-semibold tracking-widest text-blue-600 uppercase mb-1">{cs.client}</p>
+                  <h2 className="text-lg font-bold text-slate-900 leading-snug mb-2 group-hover:text-blue-700 transition-colors">
+                    {cs.title}
+                  </h2>
+                  <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">{cs.excerpt}</p>
+                  <div className="flex gap-3 mt-2">
+                    {cs.tags.map((tag: string) => (
+                      <span key={tag} className="text-xs text-slate-400 italic">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
