@@ -61,6 +61,28 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Awards & Recognition */}
+      <section className="relative px-4 sm:px-8 py-12 sm:py-16 bg-slate-50">
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+          <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">
+            RECOGNITION
+          </p>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-12">
+            Award-winning work
+          </h2>
+          <div className="inline-flex flex-col sm:flex-row items-center gap-6 bg-white border border-yellow-300 rounded-2xl px-8 py-8 shadow-md max-w-2xl mx-auto">
+            <div className="text-6xl">🏆</div>
+            <div className="text-left">
+              <p className="text-xs font-bold tracking-widest text-yellow-600 uppercase mb-1">Best Overall</p>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-1">Engineering for Change Global AI Hackathon</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Our AI pipeline — <span className="font-semibold">#E4CInsights</span> — queries vetted sustainable-development knowledge, pulls live stats from World Bank and WHO, and synthesises fully cited, decision-grade policy briefs with a human in the loop.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Team Section */}
       <section className="relative px-4 sm:px-8 py-16 sm:py-24">
         <div className="relative z-10 max-w-5xl mx-auto">

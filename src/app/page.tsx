@@ -87,6 +87,9 @@ export default function Home() {
                 <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
                 15+ projects delivered
               </span>
+              <span className="flex items-center gap-1.5 bg-yellow-400/10 md:bg-yellow-400/20 text-yellow-700 md:text-yellow-300 border border-yellow-400/30 px-3 py-1 rounded-full font-semibold">
+                🏆 Best Overall — E4C Global AI Hackathon
+              </span>
             </div>
           </div>
         </div>
