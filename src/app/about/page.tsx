@@ -76,7 +76,7 @@ export default function AboutPage() {
               <p className="text-xs font-bold tracking-widest text-yellow-600 uppercase mb-1">Winner @ The E4C AI Pilot Competition</p>
               <h3 className="text-xl font-extrabold text-slate-900 mb-1">Engineering for Change</h3>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Our AI pipeline — <span className="font-semibold">#E4CInsights</span> — queries vetted sustainable-development knowledge, pulls live stats from World Bank and WHO, and synthesises fully cited, decision-grade policy briefs with a human in the loop.
+                We built <span className="font-semibold">#E4CInsights</span>, an AI pipeline that queries vetted sustainable-development knowledge, pulls live stats from World Bank and WHO, and synthesises fully cited, decision-grade policy briefs with a human in the loop.
               </p>
             </div>
           </div>

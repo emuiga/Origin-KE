@@ -79,10 +79,9 @@ export default function E4CCaseStudy() {
 
       {/* Quick stats bar */}
       <section className="border-b border-slate-100 px-4 sm:px-8 py-6">
-        <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 gap-6">
           {[
             { label: "Result", value: "1st Place" },
-            { label: "Prize", value: "$2,500" },
             { label: "Track", value: "Track 1: Knowledge Access" },
             { label: "Year", value: "2026" },
           ].map(({ label, value }) => (
@@ -216,10 +215,9 @@ export default function E4CCaseStudy() {
               have to choose between being useful and being trustworthy.
             </p>
           </div>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { metric: "Best Overall", detail: "Top award across all tracks and teams" },
-              { metric: "$2,500", detail: "Prize awarded" },
               { metric: "Track 1", detail: "Knowledge access and relevance" },
             ].map(({ metric, detail }) => (
               <div key={metric} className="bg-slate-50 rounded-xl p-5 border border-slate-100">

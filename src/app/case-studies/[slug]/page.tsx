@@ -14,6 +14,11 @@ export async function generateStaticParams() {
   return studies.map((s) => ({ slug: s.slug }));
 }
 
+function excerptString(excerpt: any): string {
+  if (!excerpt || typeof excerpt !== "string") return "";
+  return excerpt;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -24,7 +29,7 @@ export async function generateMetadata({
   if (!study) return {};
   return {
     title: `${study.title} | Origin`,
-    description: study.excerpt,
+    description: excerptString(study.excerpt),
   };
 }
 
@@ -45,11 +50,18 @@ const richTextOptions = {
     [BLOCKS.OL_LIST]: (_: any, children: any) => (
       <ol className="list-decimal pl-6 mb-4 space-y-1 text-slate-700 text-[1.0625rem]">{children}</ol>
     ),
-    [BLOCKS.LIST_ITEM]: (_: any, children: any) => <li className="leading-relaxed">{children}</li>,
+    [BLOCKS.LIST_ITEM]: (_: any, children: any) => (
+      <li className="leading-relaxed">{children}</li>
+    ),
     [BLOCKS.QUOTE]: (_: any, children: any) => (
-      <blockquote className="border-l-2 border-slate-300 pl-5 italic text-slate-500 my-6">{children}</blockquote>
+      <blockquote className="border-l-2 border-slate-300 pl-5 italic text-slate-500 my-6">
+        {children}
+      </blockquote>
     ),
     [BLOCKS.HR]: () => <hr className="border-slate-200 my-8" />,
+    // Suppress embedded entries/assets that have no renderer — prevents raw object rendering
+    [BLOCKS.EMBEDDED_ENTRY]: () => null,
+    [BLOCKS.EMBEDDED_ASSET]: () => null,
     [INLINES.HYPERLINK]: (node: any, children: any) => (
       <a
         href={node.data.uri}
@@ -60,8 +72,15 @@ const richTextOptions = {
         {children}
       </a>
     ),
+    [INLINES.EMBEDDED_ENTRY]: () => null,
   },
 };
+
+function renderField(field: any) {
+  if (!field) return null;
+  if (field?.nodeType) return documentToReactComponents(field, richTextOptions);
+  return null;
+}
 
 export default async function CaseStudyPage({
   params,
@@ -72,13 +91,21 @@ export default async function CaseStudyPage({
   const study = await getCaseStudyBySlug(slug);
   if (!study) notFound();
 
-  const sections = [
-    { label: "The Challenge", content: study.challenge },
-    { label: "Why We Were Selected", content: study.whySelected },
-    { label: "What We Built", content: study.whatWeBuilt },
-    { label: "The Results", content: study.results },
-    { label: "References", content: study.references },
-  ].filter((s) => s.content);
+  const isResearch = study.type === "research";
+
+  const sections = (
+    isResearch
+      ? [{ label: "Overview", content: study.body }]
+      : [
+          { label: "The Challenge", content: study.challenge },
+          { label: "Why We Were Selected", content: study.whySelected },
+          { label: "What We Built", content: study.whatWeBuilt },
+          { label: "The Results", content: study.results },
+          { label: "References", content: study.references },
+        ]
+  ).filter((s) => s.content);
+
+  const excerpt = excerptString(study.excerpt);
 
   return (
     <div className="min-h-screen bg-white">
@@ -88,10 +115,10 @@ export default async function CaseStudyPage({
 
         {/* Back */}
         <Link
-          href="/blog"
+          href="/blog#case-studies"
           className="text-xs tracking-widest uppercase text-slate-400 hover:text-slate-700 transition-colors"
         >
-          ← Blog &amp; Case Studies
+          ← Research &amp; Case Studies
         </Link>
 
         {/* Tags */}
@@ -130,18 +157,20 @@ export default async function CaseStudyPage({
         <hr className="border-slate-200 mb-8" />
 
         {/* Excerpt */}
-        <p className="text-slate-600 italic text-center mb-10 leading-relaxed">
-          {study.excerpt}
-        </p>
+        {excerpt && (
+          <p className="text-slate-600 italic text-center mb-10 leading-relaxed">
+            {excerpt}
+          </p>
+        )}
 
-        <hr className="border-slate-200 mb-10" />
+        {excerpt && <hr className="border-slate-200 mb-10" />}
 
         {/* Sections */}
         {sections.map(({ label, content }) => (
           <section key={label} className="mb-10">
             <h2 className="text-lg font-bold text-slate-900 mb-3">{label}</h2>
             <hr className="border-slate-200 mb-4" />
-            <div>{documentToReactComponents(content, richTextOptions)}</div>
+            <div>{renderField(content)}</div>
           </section>
         ))}
 
@@ -156,7 +185,7 @@ export default async function CaseStudyPage({
             Partner with us →
           </Link>
           <Link
-            href="/blog"
+            href="/blog#case-studies"
             className="border border-slate-200 text-slate-700 px-7 py-3 rounded-xl font-bold text-center hover:shadow-sm transition-all duration-200 text-sm"
           >
             More case studies

@@ -57,41 +57,6 @@ export default async function BlogPage() {
           </p>
 
           <div className="divide-y divide-slate-200">
-            {/* Hardcoded E4C entry — remove once added to Contentful */}
-            <Link
-              href="/case-studies/e4c"
-              className="group flex flex-col sm:flex-row gap-6 py-8 hover:bg-white transition-colors"
-            >
-              <div className="shrink-0 relative w-full sm:w-44 h-32 rounded-lg overflow-hidden bg-slate-100">
-                <Image
-                  src="/Explore-feature-image2-470x470.jpg"
-                  alt="Engineering for Change"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 176px"
-                />
-              </div>
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-3 mb-1">
-                  <span className="text-xs font-semibold text-yellow-600">🏆 Winner @ The E4C AI Pilot Competition</span>
-                  <span className="text-xs text-slate-400">2026</span>
-                </div>
-                <p className="text-xs font-semibold tracking-widest text-blue-600 uppercase mb-1">Engineering for Change</p>
-                <h2 className="text-lg font-bold text-slate-900 leading-snug mb-2 group-hover:text-blue-700 transition-colors">
-                  Turning 15 Years of Sustainable Development Knowledge into Decision-Ready AI
-                </h2>
-                <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">
-                  Origin won the E4C AI Pilot Competition by building E4CInsights, an AI pipeline that synthesises vetted knowledge, live World Bank and WHO data, and human review into fully cited policy briefs.
-                </p>
-                <div className="flex gap-3 mt-2">
-                  {["AI", "Policy", "Sustainable Development"].map((tag) => (
-                    <span key={tag} className="text-xs text-slate-400 italic">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </Link>
-
-            {/* CMS-driven entries */}
             {caseStudies.map((cs) => (
               <Link
                 key={cs.slug}
