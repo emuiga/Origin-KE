@@ -80,6 +80,29 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
+
+          <div className="inline-flex flex-col sm:flex-row items-center gap-6 bg-white border border-dashed border-slate-300 rounded-2xl px-8 py-8 max-w-2xl mx-auto mt-6">
+            <div className="text-6xl">📰</div>
+            <div className="text-left">
+              <p className="text-xs font-bold tracking-widest text-slate-400 uppercase mb-1">Part of the team was also involved in</p>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-1">Marine Cargo Insurance Platform</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                The digital marine cargo insurance module on the KIFWA platform, launched as{" "}
+                <a href="https://marinebonds.co.ke/" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-600 hover:underline">
+                  Marine Bonds
+                </a>
+                {" "}for importers and clearing agents, covered on national TV and in the press ahead of its July 1 rollout.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-x-4 gap-y-1 text-sm">
+                <a href="https://youtu.be/LHrZX6vOT94?si=Hkw9tiJWXyD6ETO_" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-600 hover:underline">
+                  Watch the TV feature →
+                </a>
+                <a href="https://newstrends.co.ke/importers-clearing-agents-get-new-digital-marine-cargo-insurance-kifwa-platform-ahead-of-july-1-deadline/" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-600 hover:underline">
+                  Read the NewsTrends article →
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
