@@ -22,7 +22,7 @@ const FeaturedProjects = dynamic(() => import("../components/FeaturedProjects"),
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white overflow-hidden relative">
+    <div className="min-h-screen bg-surface overflow-hidden relative">
       <HomePatterns />
 
       <Header />
@@ -32,21 +32,23 @@ export default function Home() {
         {/* Desktop background image with proper loading */}
         <div className="hidden md:block absolute inset-0">
           <Image
-            src="/bg.webp"
+            src="/hero-guy.jpg"
             alt="Hero background"
             fill
-            className="object-cover object-[50%_40%]"
+            className="object-cover object-[50%_20%]"
             priority
             sizes="100vw"
             quality={90}
           />
         </div>
         {/* Overlay for readability - only on desktop */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/40 hidden md:block" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent hidden md:block" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#062a26]/90 via-black/10 to-transparent hidden md:block" />
+        <div className="absolute -bottom-24 -left-24 w-[500px] h-[500px] bg-teal-400/20 rounded-full blur-[120px] hidden md:block" />
         {/* Mobile image */}
         <div className="md:hidden w-full h-64 overflow-hidden rounded-2xl mb-8 relative">
           <Image
-            src="/bg.webp"
+            src="/hero-guy.jpg"
             alt="Hero background"
             fill
             className="object-cover"
@@ -58,10 +60,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto w-full relative z-10 md:flex-1">
           <div className="max-w-3xl space-y-6 sm:space-y-8 text-left">
             {/* Clear Value Proposition */}
-            <h1 className="font-bold text-black md:text-white tracking-tight text-4xl sm:text-6xl lg:text-7xl leading-[1.05]">
-              Technology That Works
+            <p className="text-teal-400 md:text-teal-300 font-bold tracking-widest text-sm sm:text-base uppercase">
+              Nairobi-based digital agency
+            </p>
+            <h1 className="font-bold text-black md:text-white tracking-tight text-4xl sm:text-6xl lg:text-7xl leading-[1.05] md:drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
+              Technology That <span className="text-teal-400">Works</span>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-700 md:text-gray-200 max-w-2xl leading-7">
+            <p className="text-lg sm:text-xl text-gray-700 md:text-gray-100 max-w-2xl leading-7">
               We build fast, clear and dependable digital products, including websites, apps and internal tools, crafted to convert and scale with your team.
             </p>
 
@@ -69,7 +74,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 items-center">
               <Link
                 href="/contact"
-                className="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200 text-lg"
+                className="bg-teal-600 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200 text-lg"
               >
                 Book a call →
               </Link>
@@ -84,7 +89,7 @@ export default function Home() {
             {/* Social Proof */}
             <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-gray-500 md:text-gray-300 pt-2">
               <span className="flex items-center gap-1.5">
-                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                <span className="w-2 h-2 bg-teal-500 rounded-full"></span>
                 15+ businesses helped
               </span>
               <Link
@@ -99,7 +104,7 @@ export default function Home() {
       </section>
 
       {/* Why Work With Us Section */}
-      <section className="px-2 sm:px-3 md:px-4 py-1 sm:py-28 bg-white">
+      <section className="px-2 sm:px-3 md:px-4 py-1 sm:py-28 bg-surface">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           {/* Left: Feature Image with stats overlay */}
           <motion.div
@@ -111,8 +116,8 @@ export default function Home() {
           >
             <div className="overflow-hidden rounded-3xl shadow-xl border border-gray-200 relative h-[300px] sm:h-[400px] lg:h-[640px]">
               <Image
-                src="/girl.webp"
-                alt="Happy client using our solutions"
+                src="/why-choose.jpg"
+                alt="Origin team member at work"
                 fill
                 className="object-cover"
                 loading="lazy"
@@ -130,7 +135,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">WHY CHOOSE US</p>
+            <p className="text-[20px] leading-[28px] font-medium text-teal-700 mb-4">WHY CHOOSE US</p>
             <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
               We set a new standard for business experience
             </h2>
@@ -148,7 +153,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="pt-2 flex justify-center sm:justify-start">
-                <Link href="/contact" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200">
+                <Link href="/contact" className="inline-block bg-teal-600 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200">
                   Get A Quote
                 </Link>
               </div>
@@ -158,7 +163,7 @@ export default function Home() {
       </section>
 
       {/* Our Clients Section */}
-      <section className="relative px-4 sm:px-8 py-8 sm:py-16 bg-white overflow-hidden min-h-[70vh]">
+      <section className="relative px-4 sm:px-8 py-8 sm:py-16 bg-surface overflow-hidden min-h-[70vh]">
         <div className="relative z-10 max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -167,7 +172,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">OUR CLIENTS</p>
+            <p className="text-[20px] leading-[28px] font-medium text-teal-700 mb-4">OUR CLIENTS</p>
             <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
             Trusted by businesses across industries.
             </h2>
@@ -180,8 +185,8 @@ export default function Home() {
       <FeaturedProjects />
 
       {/* Recognition Section */}
-      <section className="relative px-4 sm:px-8 py-16 sm:py-24 bg-slate-950 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(59,130,246,0.12),_transparent_60%)]" />
+      <section className="relative px-4 sm:px-8 py-16 sm:py-24 bg-gradient-to-br from-brand-dark to-brand-dark-2 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(119,203,185,0.18),_transparent_60%)]" />
         <div className="relative z-10 max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -197,13 +202,13 @@ export default function Home() {
               <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
                 Recognised globally for responsible AI innovation
               </h2>
-              <p className="text-slate-400 text-lg leading-relaxed mb-8 max-w-xl">
+              <p className="text-teal-100/70 text-lg leading-relaxed mb-8 max-w-xl">
                 Out of 33 teams across all tracks, Origin won Best Overall at the 2026 Engineering for Change AI Pilot Competition. We built E4CInsights - an AI pipeline that turns 15 years of vetted sustainable development knowledge into fully cited, decision-grade policy briefs, with a human in the loop.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/case-studies/e4c"
-                  className="bg-white text-slate-900 px-7 py-3.5 rounded-xl font-bold hover:shadow-xl transition-all duration-200 text-center"
+                  className="bg-teal-400 text-slate-900 px-7 py-3.5 rounded-xl font-bold hover:shadow-xl hover:bg-teal-300 transition-all duration-200 text-center"
                 >
                   Read the case study →
                 </Link>
@@ -230,18 +235,18 @@ export default function Home() {
       </section>
 
       {/* Success Story Section */}
-      <section className="relative px-4 sm:px-8 py-12 sm:py-16 bg-white overflow-hidden">
+      <section className="relative px-4 sm:px-8 py-12 sm:py-16 bg-surface overflow-hidden">
         <div className="relative z-10 text-[20px] leading-[28px] font-medium">
           <TestimonialsCarousel />
         </div>
       </section>
 
-      <section className="relative px-4 sm:px-8 py-12 sm:py-16 bg-white overflow-hidden">
+      <section className="relative px-4 sm:px-8 py-12 sm:py-16 bg-surface overflow-hidden">
       <div className="relative w-full text-center">
         <h2 className="w-full text-4xl sm:text-6xl lg:text-8xl font-extrabold text-slate-900 tracking-tight leading-[1.05]">
           Serving The World, Based In
         </h2>
-        <p className="mt-4 w-full text-4xl sm:text-6xl lg:text-7xl font-extrabold text-blue-600 tracking-tight">
+        <p className="mt-4 w-full text-4xl sm:text-6xl lg:text-7xl font-extrabold text-teal-600 tracking-tight">
           GMT+3
         </p>
         <p className="mt-4 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">

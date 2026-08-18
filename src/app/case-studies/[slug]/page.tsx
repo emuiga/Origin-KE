@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
+import ArticleHero from "../../../components/ArticleHero";
 import { getCaseStudyBySlug, getCaseStudies } from "../../../lib/contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
@@ -67,7 +68,7 @@ const richTextOptions = {
         href={node.data.uri}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-600 hover:underline"
+        className="text-teal-600 hover:underline"
       >
         {children}
       </a>
@@ -107,63 +108,36 @@ export default async function CaseStudyPage({
 
   const excerpt = excerptString(study.excerpt);
 
+  const formattedDate = study.date
+    ? new Date(study.date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : null;
+
+  const stats = [
+    ...(study.client ? [{ label: "Client", value: study.client }] : []),
+    ...(formattedDate ? [{ label: "Date", value: formattedDate }] : []),
+    ...(study.tags.length > 0 ? [{ label: "Focus", value: study.tags.join(", ") }] : []),
+  ];
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-surface">
       <Header />
 
-      <article className="max-w-2xl mx-auto px-5 pt-24 pb-32">
+      <ArticleHero
+        backHref="/blog"
+        backLabel="Research & Case Studies"
+        badge={study.award ? `🏆 ${study.award}` : null}
+        badgeMeta={study.award && formattedDate ? formattedDate : null}
+        eyebrow={study.client || "Case Study"}
+        title={study.title}
+        subtitle={excerpt}
+        stats={stats}
+      />
 
-        {/* Back */}
-        <Link
-          href="/blog#case-studies"
-          className="text-xs tracking-widest uppercase text-slate-400 hover:text-slate-700 transition-colors"
-        >
-          ← Research &amp; Case Studies
-        </Link>
-
-        {/* Tags */}
-        {study.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-8">
-            {study.tags.map((tag: string) => (
-              <span key={tag} className="text-xs text-slate-500 italic">
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Title */}
-        <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mt-4 mb-3 text-center">
-          {study.title}
-        </h1>
-
-        {/* Meta */}
-        <p className="text-sm text-slate-400 text-center mb-2">
-          {study.date
-            ? new Date(study.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })
-            : ""}
-        </p>
-
-        {study.award && (
-          <p className="text-sm text-center text-yellow-600 font-semibold mb-6">
-            🏆 {study.award}
-          </p>
-        )}
-
-        <hr className="border-slate-200 mb-8" />
-
-        {/* Excerpt */}
-        {excerpt && (
-          <p className="text-slate-600 italic text-center mb-10 leading-relaxed">
-            {excerpt}
-          </p>
-        )}
-
-        {excerpt && <hr className="border-slate-200 mb-10" />}
+      <article className="max-w-2xl mx-auto px-5 py-16">
 
         {/* Sections */}
         {sections.map(({ label, content }) => (
@@ -180,12 +154,12 @@ export default async function CaseStudyPage({
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
             href="/contact"
-            className="bg-blue-600 text-white px-7 py-3 rounded-xl font-bold text-center hover:shadow-lg transition-all duration-200 text-sm"
+            className="bg-teal-600 text-white px-7 py-3 rounded-xl font-bold text-center hover:shadow-lg transition-all duration-200 text-sm"
           >
             Partner with us →
           </Link>
           <Link
-            href="/blog#case-studies"
+            href="/blog"
             className="border border-slate-200 text-slate-700 px-7 py-3 rounded-xl font-bold text-center hover:shadow-sm transition-all duration-200 text-sm"
           >
             More case studies

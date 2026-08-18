@@ -140,11 +140,11 @@ export default function ContactPage() {
     `w-full px-4 py-3 bg-white/60 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all ${
       errors[field] && touched[field as string]
         ? 'border-red-400 focus:ring-red-400'
-        : 'border-slate-200 focus:ring-blue-500'
+        : 'border-slate-200 focus:ring-teal-500'
     }`;
 
   return (
-    <div className="min-h-screen bg-white flex flex-col relative overflow-hidden">
+    <div className="min-h-screen bg-surface flex flex-col relative overflow-hidden">
       <ContactPatterns />
       <Header />
 
@@ -157,7 +157,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">
+            <p className="text-[20px] leading-[28px] font-medium text-teal-700 mb-4">
               BOOK A CALL
             </p>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
@@ -221,7 +221,7 @@ export default function ContactPage() {
                   <p className="text-slate-600 mb-6">{submitMessage}</p>
                   <button
                     onClick={() => setSubmitState('idle')}
-                    className="text-blue-600 hover:text-blue-700 font-medium underline"
+                    className="text-teal-600 hover:text-teal-700 font-medium underline"
                   >
                     Send another message
                   </button>
@@ -285,7 +285,7 @@ export default function ContactPage() {
                         name="company"
                         value={formData.company}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-white/60 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 bg-white/60 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
                         placeholder="Your company name"
                       />
                     </div>
@@ -329,7 +329,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white py-3 px-6 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
+                    className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-teal-400 text-white py-3 px-6 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>
@@ -374,7 +374,7 @@ export default function ContactPage() {
                       'Connect to the video call using the Google Meet link in your meeting invite.',
                     ].map((text, i) => (
                       <li key={i} className="flex gap-3">
-                        <span className="shrink-0 w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">
+                        <span className="shrink-0 w-7 h-7 rounded-full bg-teal-100 text-teal-700 font-bold text-xs flex items-center justify-center">
                           {i + 1}
                         </span>
                         <p className="text-slate-600 leading-relaxed pt-0.5">{text}</p>
@@ -431,7 +431,7 @@ export default function ContactPage() {
                     <div className="flex flex-col sm:flex-row gap-3 text-sm">
                       <a
                         href="mailto:info@origin.co.ke"
-                        className="text-blue-600 hover:text-blue-700 font-medium underline"
+                        className="text-teal-600 hover:text-teal-700 font-medium underline"
                       >
                         info@origin.co.ke
                       </a>
@@ -440,7 +440,7 @@ export default function ContactPage() {
                         href="https://wa.me/254768519115"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-700 font-medium underline"
+                        className="text-teal-600 hover:text-teal-700 font-medium underline"
                       >
                         +254 768 519 115
                       </a>
@@ -457,10 +457,10 @@ export default function ContactPage() {
                   onClick={() => toggleAccordion(index)}
                   className="w-full flex items-center justify-between py-5 text-left group"
                 >
-                  <span className="text-lg font-semibold text-slate-900 group-hover:text-blue-700 transition-colors pr-4">
+                  <span className="text-lg font-semibold text-slate-900 group-hover:text-teal-700 transition-colors pr-4">
                     {item.question}
                   </span>
-                  <span className="shrink-0 text-slate-400 group-hover:text-blue-700 transition-colors">
+                  <span className="shrink-0 text-slate-400 group-hover:text-teal-700 transition-colors">
                     {openAccordion === index ? <Minus size={20} /> : <Plus size={20} />}
                   </span>
                 </button>

@@ -1,17 +1,36 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const exploreLinks = [
+    { href: '/about', label: 'About Us' },
+    { href: '/process', label: 'Our Process' },
+    { href: '/portfolio', label: 'Portfolio' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/blog', label: 'Case Studies' },
+    { href: '/contact', label: 'Contact Us' },
+  ];
+
+  const serviceLinks = [
+    { href: '/contact', label: 'Web Development' },
+    { href: '/contact', label: 'App Development' },
+    { href: '/contact', label: 'Business Systems (Odoo, ERP, POS)' },
+    { href: '/contact', label: 'Internal Tools' },
+    { href: '/contact', label: 'AI & Automation' },
+    { href: '/contact', label: 'UI/UX Design' },
+  ];
+
   return (
     <footer className="relative bg-gradient-to-br from-[#0e0e10] to-[#111] text-white overflow-hidden">
       {/* Animated glowing blob */}
       <motion.div
-        className="absolute top-1/2 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full filter blur-[80px] opacity-30"
+        className="absolute top-1/2 left-1/4 w-96 h-96 bg-gradient-to-r from-teal-500/30 to-purple-500/30 rounded-full filter blur-[80px] opacity-30"
         animate={{
           scale: [1, 1.2, 1],
           x: [0, 50, 0],
@@ -22,41 +41,86 @@ export default function Footer() {
           ease: "easeInOut"
         }}
       />
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          
-          {/* Branding - Left Column */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
+
+          {/* Branding */}
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
             <div className="flex items-center mb-3">
               <img src="/logo.png" alt="Origin Logo" className="h-8 w-auto mr-3" />
               <span className="text-xl font-semibold">Origin.</span>
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-              We build experiences that connect with people.
+            <p className="text-slate-400 text-sm leading-relaxed max-w-xs mb-6">
+              We blend culture and technology to build digital experiences that connect with people.
             </p>
-          </div>
-
-          {/* Center Column - Quote */}
-          <div className="flex flex-col items-center md:items-center text-center">
-            <blockquote className="text-slate-400 text-sm italic leading-relaxed max-w-xs">
+            <blockquote className="text-slate-500 text-xs italic leading-relaxed max-w-xs">
               &ldquo;The best way to predict the future is to invent it.&rdquo;
             </blockquote>
-            <cite className="text-slate-500 text-xs mt-2">Alan Kay</cite>
+            <cite className="text-slate-600 text-xs mt-1">— Alan Kay</cite>
           </div>
 
-          {/* Social Links - Right Column */}
-          <div className="flex flex-col items-center md:items-end text-center md:text-right">
+          {/* Explore */}
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
             <h3 className="text-sm font-semibold text-slate-300 mb-4 uppercase tracking-wider">
-              Follow Us
+              Explore
             </h3>
+            <ul className="space-y-2.5">
+              {exploreLinks.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-slate-400 hover:text-white text-sm transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+            <h3 className="text-sm font-semibold text-slate-300 mb-4 uppercase tracking-wider">
+              Services
+            </h3>
+            <ul className="space-y-2.5">
+              {serviceLinks.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-slate-400 hover:text-white text-sm transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact + Newsletter */}
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+            <h3 className="text-sm font-semibold text-slate-300 mb-4 uppercase tracking-wider">
+              Get In Touch
+            </h3>
+            <ul className="space-y-2.5 mb-6">
+              <li>
+                <a href="mailto:hello@origin.co.ke" className="text-slate-400 hover:text-white text-sm transition-colors">
+                  hello@origin.co.ke
+                </a>
+              </li>
+              <li className="text-slate-400 text-sm">Nairobi, Kenya · GMT+3</li>
+            </ul>
+            <a
+              href="https://origintech.substack.com/subscribe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center bg-teal-600 hover:bg-teal-500 text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors mb-6"
+            >
+              Subscribe for Updates
+            </a>
+
             <div className="flex space-x-4">
               <a 
                 href="https://www.linkedin.com/company/origin-hq" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0e0e10] rounded p-2"
+                className="text-slate-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-[#0e0e10] rounded p-2"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -67,7 +131,7 @@ export default function Footer() {
                 href="https://x.com/origin_hq" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0e0e10] rounded p-2"
+                className="text-slate-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-[#0e0e10] rounded p-2"
                 aria-label="X (Twitter)"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -78,7 +142,7 @@ export default function Footer() {
                 href="https://instagram.com/origin_hq"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0e0e10] rounded p-2"
+                className="text-slate-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-[#0e0e10] rounded p-2"
                 aria-label="Instagram"
               >
                 <img src="/instagram.svg" alt="Instagram" className="w-5 h-5 filter brightness-0 invert" />
@@ -87,7 +151,7 @@ export default function Footer() {
                 href="https://whatsapp.com/channel/0029VbCsR5gGzzKJcn6S6r1s"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0e0e10] rounded p-2"
+                className="text-slate-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-[#0e0e10] rounded p-2"
                 aria-label="Follow us on WhatsApp"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -95,13 +159,6 @@ export default function Footer() {
                 </svg>
               </a>
             </div>
-            <a
-              href="/blog#case-studies"
-              className="text-slate-400 hover:text-white transition-colors text-xs tracking-wider uppercase mt-3"
-              suppressHydrationWarning
-            >
-              Case Studies
-            </a>
           </div>
         </div>
 
@@ -115,7 +172,7 @@ export default function Footer() {
           </p>
           <button
             onClick={scrollToTop}
-            className="inline-flex items-center text-slate-400 hover:text-white transition-colors duration-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#0e0e10] rounded"
+            className="inline-flex items-center text-slate-400 hover:text-white transition-colors duration-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-[#0e0e10] rounded"
           >
             <span>Back to top</span>
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

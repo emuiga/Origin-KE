@@ -56,7 +56,7 @@ const TestimonialsCarousel = () => {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-8">
-        <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">WHAT OUR CLIENTS SAY</p>
+        <p className="text-[20px] leading-[28px] font-medium text-teal-700 mb-4">WHAT OUR CLIENTS SAY</p>
         <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
           Don&apos;t take our word for it.
         </h2>
@@ -64,15 +64,16 @@ const TestimonialsCarousel = () => {
 
       <div className="relative bg-white/85 border border-slate-200 rounded-xl p-8 sm:p-10 lg:p-12 shadow overflow-hidden">
         {/* Decorative quote mark */}
-        <Image
-          src="/quote.png"
-          alt=""
+        <svg
+          viewBox="0 0 24 24"
           width={96}
           height={96}
-          className="absolute top-6 right-6 opacity-10 pointer-events-none select-none"
+          fill="currentColor"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 text-brand-dark opacity-[0.07] pointer-events-none select-none"
           aria-hidden="true"
-          loading="lazy"
-        />
+        >
+          <path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z" />
+        </svg>
 
         {/* Fixed-height quote area prevents layout shift between slides */}
         <div className="min-h-[120px] flex items-start mb-8">
@@ -107,7 +108,7 @@ const TestimonialsCarousel = () => {
             key={index}
             onClick={() => goToTestimonial(index)}
             className={`w-2.5 h-2.5 rounded-full transition-colors duration-200 ${
-              index === currentIndex ? 'bg-blue-600' : 'bg-slate-300'
+              index === currentIndex ? 'bg-teal-600' : 'bg-slate-300'
             }`}
             aria-label={`Go to testimonial ${index + 1}`}
           />

@@ -150,7 +150,7 @@ export default function Portfolio() {
 
 
   return (
-    <div className="min-h-screen bg-white overflow-hidden relative">
+    <div className="min-h-screen bg-surface overflow-hidden relative">
       <PortfolioPatterns />
       <Header />
 
@@ -158,7 +158,7 @@ export default function Portfolio() {
       <section id="services" className="px-4 sm:px-8 pt-16 sm:pt-24 py-16 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">WHAT WE BUILD</p>
+            <p className="text-[20px] leading-[28px] font-medium text-teal-700 mb-4">WHAT WE BUILD</p>
             <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
               Tell us what&apos;s broken. We&apos;ll know how to fix it.
             </h2>
@@ -211,6 +211,11 @@ export default function Portfolio() {
                 title: "System Integration",
                 description: "Connecting your software systems and platforms so your business runs as one, without the manual workarounds.",
                 image: "/sys.webp"
+              },
+              {
+                title: "Business Systems (Odoo, ERP, POS)",
+                description: "Odoo customisations, ERP implementations, and point-of-sale systems that bring inventory, sales, and operations into one place.",
+                image: "/sys.webp"
               }
             ].map((service, index) => (
               <div
@@ -247,7 +252,7 @@ export default function Portfolio() {
       <section className="px-4 sm:px-8 py-16 sm:py-14 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">OUR IMPACT</p>
+            <p className="text-[20px] leading-[28px] font-medium text-teal-700 mb-4">OUR IMPACT</p>
             <h2 className="text-2xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
               Numbers that mean something.
             </h2>
@@ -264,7 +269,7 @@ export default function Portfolio() {
                 key={index}
                 className="text-center relative"
               >
-                <div className="text-4xl sm:text-5xl font-bold text-blue-600 mb-3">
+                <div className="text-4xl sm:text-5xl font-bold text-teal-600 mb-3">
                   {stat.number}{stat.suffix}
                 </div>
                 <div className="text-slate-600 font-medium text-sm sm:text-base">{stat.label}</div>
@@ -309,7 +314,7 @@ export default function Portfolio() {
               </div>
               <div>
                 <Link href="/contact">
-                  <span className="inline-block py-3 sm:py-4 px-8 sm:px-10 bg-blue-600 text-white rounded-xl font-bold shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 text-lg">
+                  <span className="inline-block py-3 sm:py-4 px-8 sm:px-10 bg-teal-600 text-white rounded-xl font-bold shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 text-lg">
                     Let's Ship It Already
                   </span>
                 </Link>

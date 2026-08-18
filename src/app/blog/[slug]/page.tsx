@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import InsightsCard from "@/components/InsightsCard";
+import ArticleHero from "@/components/ArticleHero";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
-import { ArrowLeft } from "lucide-react";
 
 export const revalidate = 3600;
 
@@ -45,7 +45,7 @@ const richTextOptions = {
       </ol>
     ),
     [BLOCKS.QUOTE]: (_node: any, children: any) => (
-      <blockquote className="border-l-4 border-blue-500 pl-4 py-2 my-6 text-slate-600 italic">
+      <blockquote className="border-l-4 border-teal-500 pl-4 py-2 my-6 text-slate-600 italic">
         {children}
       </blockquote>
     ),
@@ -68,13 +68,23 @@ const richTextOptions = {
         href={node.data.uri}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-600 hover:text-blue-700 underline"
+        className="text-teal-600 hover:text-teal-700 underline"
       >
         {children}
       </a>
     ),
   },
 };
+
+function formatDate(date?: string) {
+  if (!date) return null;
+  return new Date(date).toLocaleDateString('en-US', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
 
 export default async function BlogPostPage({
   params,
@@ -93,34 +103,37 @@ export default async function BlogPostPage({
 
   if (!post) notFound();
 
+  let related: Awaited<ReturnType<typeof getBlogPosts>> = [];
+  try {
+    const allPosts = await getBlogPosts();
+    related = allPosts.filter((p) => p.slug !== slug).slice(0, 4);
+  } catch {
+    // ignore — related articles are optional
+  }
+
+  const stats = [
+    ...(formatDate(post.date) ? [{ label: "Published", value: formatDate(post.date)! }] : []),
+    ...(post.author ? [{ label: "Author", value: post.author as string }] : []),
+  ];
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-surface">
       <Header />
 
-      <article className="px-4 sm:px-8 pt-12 sm:pt-20 pb-16 sm:pb-24">
-        <div className="max-w-3xl mx-auto">
-          {/* Back link */}
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium mb-8"
-          >
-            <ArrowLeft size={18} />
-            Back to Blog
-          </Link>
+      <ArticleHero
+        backHref="/blog"
+        backLabel="Insights & Updates"
+        eyebrow="Blog"
+        title={post.title as string}
+        subtitle={post.excerpt as string}
+        stats={stats}
+      />
 
-          {/* Title */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
-            {post.title as string}
-          </h1>
-
-          {/* Author */}
-          {post.author && (
-            <p className="text-slate-500 mb-8">By {post.author as string}</p>
-          )}
-
+      <article className="px-4 sm:px-8 py-16">
+        <div className="max-w-4xl mx-auto">
           {/* Hero image */}
           {post.image && (
-            <div className="relative h-64 sm:h-96 rounded-2xl overflow-hidden mb-10 bg-slate-100">
+            <div className="relative w-full aspect-[16/9] overflow-hidden mb-10 bg-slate-100">
               <Image
                 src={post.image}
                 alt={post.title as string}
@@ -133,13 +146,37 @@ export default async function BlogPostPage({
           )}
 
           {/* Content */}
-          <div className="prose-origin">
+          <div className="prose-origin max-w-2xl mx-auto">
             {post.content
               ? documentToReactComponents(post.content as any, richTextOptions)
               : null}
           </div>
         </div>
       </article>
+
+      {/* Related articles */}
+      {related.length > 0 && (
+        <section className="px-4 sm:px-8 pb-16 sm:pb-24 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-8">
+              Related Articles
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+              {related.map((p) => (
+                <InsightsCard
+                  key={p.slug}
+                  href={`/blog/${p.slug}`}
+                  image={p.image}
+                  title={p.title as string}
+                  date={p.date}
+                  ctaLabel="Read Article →"
+                  accent="blue"
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <Footer />
     </div>

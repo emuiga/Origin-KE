@@ -73,8 +73,8 @@ export async function POST(request: NextRequest) {
               <h1 style="color: #1e293b; margin: 0; font-size: 24px;">Thank You, ${name}!</h1>
             </div>
             
-            <div style="background-color: #f0f9ff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #3b82f6;">
-               <p style="margin: 0; color: #1e40af; font-size: 16px; font-weight: 500;">
+            <div style="background-color: #f0fdfa; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #14b8a6;">
+               <p style="margin: 0; color: #0f766e; font-size: 16px; font-weight: 500;">
                 We've received your message and will get back to you within 24 hours.
               </p>
             </div>

@@ -17,6 +17,7 @@ export const getBlogPosts = unstable_cache(
         : null,
       excerpt: item.fields.excerpt || '',
       author: item.fields.author,
+      date: item.fields.date || item.sys.createdAt,
     }));
   },
   ['blog-posts'],
@@ -97,6 +98,8 @@ export const getBlogPostBySlug = unstable_cache(
         : null,
       content: item.fields.content,
       author: item.fields.author,
+      date: item.fields.date || item.sys.createdAt,
+      excerpt: item.fields.excerpt || '',
     };
   },
   ['blog-post'],

@@ -14,7 +14,7 @@ const projects = [
     tagColor: "bg-slate-100 text-slate-700",
     problem: "Kenya's largest freight and warehousing association had no unified system for custom bond tracking, documentation, or member operations.",
     built: "A full logistics platform connecting agents, insurance companies, and member management in one place.",
-    accentColor: "bg-blue-600",
+    accentColor: "bg-teal-600",
     logoBg: "bg-slate-50",
     logo: "/kifwa-logo.png",
     href: "https://marinebonds.co.ke/",
@@ -76,10 +76,10 @@ const projects = [
     title: "Kayasend",
     subtitle: "Money Transfers",
     tag: "Our Product",
-    tagColor: "bg-blue-600 text-white",
+    tagColor: "bg-teal-600 text-white",
     problem: "Sending money across borders takes too long and costs too much.",
     built: "Kayasend is our own fast, direct money transfer product built for the Kenyan market.",
-    accentColor: "bg-blue-500",
+    accentColor: "bg-teal-500",
     logoBg: "bg-white",
     logo: "/kayasend.png",
     href: "https://kayasend.com",
@@ -103,7 +103,7 @@ export default function FeaturedProjects() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <p className="text-[20px] leading-[28px] font-medium text-blue-700 mb-4">
+          <p className="text-[20px] leading-[28px] font-medium text-teal-700 mb-4">
             FEATURED WORK
           </p>
           <h2 className="text-3xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
@@ -152,7 +152,7 @@ export default function FeaturedProjects() {
                     <button
                       onClick={() => toggle(project.id)}
                       aria-expanded={isOpen}
-                      className="ml-4 shrink-0 flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+                      className="ml-4 shrink-0 flex items-center gap-1.5 text-sm font-semibold text-teal-600 hover:text-teal-700 transition-colors"
                     >
                       {isOpen ? "Less" : "More"}
                       <svg
@@ -195,7 +195,7 @@ export default function FeaturedProjects() {
                               href={project.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-block pt-1 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+                              className="inline-block pt-1 text-sm font-semibold text-teal-600 hover:text-teal-700 transition-colors"
                               onClick={(e) => e.stopPropagation()}
                             >
                               Visit site →
@@ -220,7 +220,7 @@ export default function FeaturedProjects() {
         >
           <Link
             href="/portfolio"
-            className="inline-block bg-blue-600 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+            className="inline-block bg-teal-600 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
           >
             View All Projects
           </Link>

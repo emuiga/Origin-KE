@@ -24,23 +24,23 @@ export default function Header() {
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center font-semibold text-slate-900 text-lg">
+        <div className="flex items-center justify-between h-16 sm:h-20">
+          <div className="flex items-center font-semibold text-slate-900 text-xl">
             <Link href="/" className="flex items-center">
-              <img src="/logo.png" alt="Origin Logo" className="h-6 w-auto mr-2" />
-              <span>Origin.</span>
+              <img src="/logo.png" alt="Origin Logo" className="h-7 sm:h-9 w-auto mr-3" />
+              <span className="text-xl sm:text-2xl">Origin.</span>
             </Link>
           </div>
-          
-          <div className="items-center hidden lg:flex space-x-8">
+
+          <div className="items-center hidden lg:flex space-x-10">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`transition-colors font-medium ${
+                className={`transition-colors font-medium text-base ${
                   pathname === link.href
-                    ? "text-blue-700 font-bold underline underline-offset-4"
-                    : "text-slate-700 hover:text-blue-700"
+                    ? "text-teal-700 font-bold underline underline-offset-4"
+                    : "text-slate-700 hover:text-teal-700"
                 }`}
               >
                 {link.label}
@@ -53,7 +53,7 @@ export default function Header() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
             </svg>
           </button>
@@ -66,7 +66,7 @@ export default function Header() {
               <Link
                 href="/"
                 className={`block px-3 py-2 text-base font-medium ${
-                  pathname === "/" ? "text-blue-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-blue-700"
+                  pathname === "/" ? "text-teal-700 font-bold underline underline-offset-4" : "text-slate-700 hover:text-teal-700"
                 }`}
               >
                 Home
@@ -77,8 +77,8 @@ export default function Header() {
                   href={link.href}
                   className={`block px-3 py-2 text-base font-medium ${
                     pathname === link.href
-                      ? "text-blue-700 font-bold underline underline-offset-4"
-                      : "text-slate-700 hover:text-blue-700"
+                      ? "text-teal-700 font-bold underline underline-offset-4"
+                      : "text-slate-700 hover:text-teal-700"
                   }`}
                 >
                   {link.label}

@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-teal-100">
       {/* Header Skeleton */}
       <div className="h-16 bg-white animate-pulse"></div>
       

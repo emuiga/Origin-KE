@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function E4CCaseStudy() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-surface">
       <Header />
 
       {/* Hero */}
@@ -33,7 +33,7 @@ export default function E4CCaseStudy() {
           <circle cx="92%" cy="-10%" r="280" fill="none" stroke="rgba(99,102,241,0.12)" strokeWidth="1" />
           <circle cx="92%" cy="-10%" r="180" fill="none" stroke="rgba(99,102,241,0.08)" strokeWidth="1" />
           {/* Small circle — bottom left */}
-          <circle cx="6%" cy="105%" r="140" fill="none" stroke="rgba(59,130,246,0.10)" strokeWidth="1" />
+          <circle cx="6%" cy="105%" r="140" fill="none" stroke="rgba(20,184,166,0.10)" strokeWidth="1" />
           {/* Diagonal lines — top left */}
           <line x1="0" y1="30%" x2="12%" y2="0" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
           <line x1="0" y1="50%" x2="20%" y2="0" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
@@ -54,7 +54,7 @@ export default function E4CCaseStudy() {
         </svg>
         <div className="relative z-10 max-w-4xl mx-auto">
           <Link
-            href="/blog#case-studies"
+            href="/blog"
             className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-slate-400 hover:text-white transition-colors mb-10"
           >
             ← Research &amp; Case Studies
@@ -65,7 +65,7 @@ export default function E4CCaseStudy() {
             </span>
             <span className="text-xs text-slate-400 tracking-widest uppercase">2026</span>
           </div>
-          <p className="text-xs font-semibold tracking-widest text-blue-400 uppercase mb-3">
+          <p className="text-xs font-semibold tracking-widest text-teal-400 uppercase mb-3">
             Engineering for Change
           </p>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-6">
@@ -97,7 +97,7 @@ export default function E4CCaseStudy() {
 
         {/* The Challenge */}
         <section>
-          <p className="text-xs font-semibold tracking-widest text-blue-600 uppercase mb-4">01 / The Challenge</p>
+          <p className="text-xs font-semibold tracking-widest text-teal-600 uppercase mb-4">01 / The Challenge</p>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">
             A decade and a half of knowledge, largely untapped
           </h2>
@@ -128,7 +128,7 @@ export default function E4CCaseStudy() {
 
         {/* Why Origin */}
         <section>
-          <p className="text-xs font-semibold tracking-widest text-blue-600 uppercase mb-4">02 / Why Origin Was Selected</p>
+          <p className="text-xs font-semibold tracking-widest text-teal-600 uppercase mb-4">02 / Why Origin Was Selected</p>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">
             Trust, transparency, and a human in the loop
           </h2>
@@ -155,7 +155,7 @@ export default function E4CCaseStudy() {
 
         {/* What We Built */}
         <section>
-          <p className="text-xs font-semibold tracking-widest text-blue-600 uppercase mb-4">03 / What We Built</p>
+          <p className="text-xs font-semibold tracking-widest text-teal-600 uppercase mb-4">03 / What We Built</p>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">
             E4CInsights: an AI pipeline for decision-grade policy briefs
           </h2>
@@ -188,7 +188,7 @@ export default function E4CCaseStudy() {
               },
             ].map(({ step, title, body }) => (
               <div key={step} className="border border-slate-100 rounded-xl p-5">
-                <p className="text-xs font-bold tracking-widest text-blue-500 uppercase mb-2">{step}</p>
+                <p className="text-xs font-bold tracking-widest text-teal-500 uppercase mb-2">{step}</p>
                 <h3 className="font-bold text-slate-900 mb-2">{title}</h3>
                 <p className="text-sm text-slate-500 leading-relaxed">{body}</p>
               </div>
@@ -200,7 +200,7 @@ export default function E4CCaseStudy() {
 
         {/* Results */}
         <section>
-          <p className="text-xs font-semibold tracking-widest text-blue-600 uppercase mb-4">04 / The Results</p>
+          <p className="text-xs font-semibold tracking-widest text-teal-600 uppercase mb-4">04 / The Results</p>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">
             Best Overall, out of all teams across all tracks
           </h2>
@@ -232,32 +232,32 @@ export default function E4CCaseStudy() {
 
         {/* External links */}
         <section>
-          <p className="text-xs font-semibold tracking-widest text-blue-600 uppercase mb-4">References</p>
+          <p className="text-xs font-semibold tracking-widest text-teal-600 uppercase mb-4">References</p>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">From E4C directly</h2>
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="https://www.engineeringforchange.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 border border-slate-200 rounded-xl px-5 py-4 hover:border-blue-300 hover:shadow-sm transition-all group"
+              className="flex items-center gap-3 border border-slate-200 rounded-xl px-5 py-4 hover:border-teal-300 hover:shadow-sm transition-all group"
             >
               <div className="flex-1">
-                <p className="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors text-sm">Engineering for Change</p>
+                <p className="font-semibold text-slate-900 group-hover:text-teal-700 transition-colors text-sm">Engineering for Change</p>
                 <p className="text-xs text-slate-400">engineeringforchange.org</p>
               </div>
-              <span className="text-slate-300 group-hover:text-blue-400 transition-colors">↗</span>
+              <span className="text-slate-300 group-hover:text-teal-400 transition-colors">↗</span>
             </a>
             <a
               href="https://www.engineeringforchange.org/news/solutions-built-on-transparency-trust-but-verify-and-design-for-failure-won-our-ai-hackathon/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 border border-slate-200 rounded-xl px-5 py-4 hover:border-blue-300 hover:shadow-sm transition-all group"
+              className="flex items-center gap-3 border border-slate-200 rounded-xl px-5 py-4 hover:border-teal-300 hover:shadow-sm transition-all group"
             >
               <div className="flex-1">
-                <p className="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors text-sm">E4C Coverage</p>
+                <p className="font-semibold text-slate-900 group-hover:text-teal-700 transition-colors text-sm">E4C Coverage</p>
                 <p className="text-xs text-slate-400">engineeringforchange.org</p>
               </div>
-              <span className="text-slate-300 group-hover:text-blue-400 transition-colors">↗</span>
+              <span className="text-slate-300 group-hover:text-teal-400 transition-colors">↗</span>
             </a>
           </div>
         </section>
@@ -273,12 +273,12 @@ export default function E4CCaseStudy() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200"
+              className="bg-teal-600 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200"
             >
               Partner with us →
             </Link>
             <Link
-              href="/blog#case-studies"
+              href="/blog"
               className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-xl font-bold hover:shadow-md transition-all duration-200"
             >
               More case studies
