@@ -6,6 +6,13 @@ const client = createClient({
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
 });
 
+// Word count of a Contentful rich text document
+function richTextWords(node: any): number {
+  if (!node) return 0;
+  if (typeof node.value === 'string') return node.value.trim().split(/\s+/).filter(Boolean).length;
+  return Array.isArray(node.content) ? node.content.reduce((n: number, child: any) => n + richTextWords(child), 0) : 0;
+}
+
 export const getBlogPosts = unstable_cache(
   async () => {
     const entries = await client.getEntries({ content_type: 'originBlog' });
@@ -18,9 +25,12 @@ export const getBlogPosts = unstable_cache(
       excerpt: item.fields.excerpt || '',
       author: item.fields.author,
       date: item.fields.date || item.sys.createdAt,
+      readingMinutes: item.fields.content
+        ? Math.max(1, Math.round(richTextWords(item.fields.content) / 200))
+        : null,
     }));
   },
-  ['blog-posts'],
+  ['blog-posts-v2'],
   { revalidate: 3600 }
 );
 

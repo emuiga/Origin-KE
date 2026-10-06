@@ -1,7 +1,9 @@
 import Link from "next/link";
+import ArrowLink from "../../../components/ArrowLink";
 import Image from "next/image";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
+import BackLink from "../../../components/BackLink";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,48 +19,10 @@ export default function E4CCaseStudy() {
 
       {/* Hero */}
       <section className="px-4 sm:px-8 pt-24 pb-16 bg-slate-950 text-white relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/Explore-feature-image2-470x470.jpg"
-            alt="E4C AI Pilot"
-            fill
-            className="object-cover opacity-10"
-            sizes="100vw"
-            priority
-          />
-        </div>
-        {/* Abstract shapes */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-          {/* Large circle ring — top right */}
-          <circle cx="92%" cy="-10%" r="280" fill="none" stroke="rgba(99,102,241,0.12)" strokeWidth="1" />
-          <circle cx="92%" cy="-10%" r="180" fill="none" stroke="rgba(99,102,241,0.08)" strokeWidth="1" />
-          {/* Small circle — bottom left */}
-          <circle cx="6%" cy="105%" r="140" fill="none" stroke="rgba(20,184,166,0.10)" strokeWidth="1" />
-          {/* Diagonal lines — top left */}
-          <line x1="0" y1="30%" x2="12%" y2="0" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
-          <line x1="0" y1="50%" x2="20%" y2="0" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
-          {/* Dot cluster — mid right */}
-          {[0,1,2,3,4].map((col) =>
-            [0,1,2,3].map((row) => (
-              <circle
-                key={`${col}-${row}`}
-                cx={`${78 + col * 2.2}%`}
-                cy={`${55 + row * 10}%`}
-                r="1.5"
-                fill="rgba(255,255,255,0.07)"
-              />
-            ))
-          )}
-          {/* Small square — lower center */}
-          <rect x="48%" y="80%" width="32" height="32" fill="none" stroke="rgba(99,102,241,0.10)" strokeWidth="1" transform="rotate(20, 48%, 80%)" />
-        </svg>
+        <Image src="/heroes/engineering.jpg" alt="" fill className="object-cover" sizes="100vw" priority />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/80 to-slate-950/60" />
         <div className="relative z-10 max-w-4xl mx-auto">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-slate-400 hover:text-white transition-colors mb-10"
-          >
-            ← Research &amp; Case Studies
-          </Link>
+          <BackLink href="/case-studies" label="Case Studies" />
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <span className="text-xs font-bold tracking-widest text-yellow-400 uppercase bg-yellow-400/10 border border-yellow-400/20 px-3 py-1 rounded-full">
               🏆 Winner @ The E4C AI Pilot Competition
@@ -97,8 +61,7 @@ export default function E4CCaseStudy() {
 
         {/* The Challenge */}
         <section>
-          <p className="text-xs font-semibold tracking-widest text-teal-600 uppercase mb-4">01 / The Challenge</p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-6">
             A decade and a half of knowledge, largely untapped
           </h2>
           <div className="text-slate-600 text-base leading-relaxed space-y-4">
@@ -128,8 +91,7 @@ export default function E4CCaseStudy() {
 
         {/* Why Origin */}
         <section>
-          <p className="text-xs font-semibold tracking-widest text-teal-600 uppercase mb-4">02 / Why Origin Was Selected</p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-6">
             Trust, transparency, and a human in the loop
           </h2>
           <div className="text-slate-600 text-base leading-relaxed space-y-4">
@@ -155,8 +117,7 @@ export default function E4CCaseStudy() {
 
         {/* What We Built */}
         <section>
-          <p className="text-xs font-semibold tracking-widest text-teal-600 uppercase mb-4">03 / What We Built</p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-6">
             E4CInsights: an AI pipeline for decision-grade policy briefs
           </h2>
           <div className="text-slate-600 text-base leading-relaxed space-y-4">
@@ -200,8 +161,7 @@ export default function E4CCaseStudy() {
 
         {/* Results */}
         <section>
-          <p className="text-xs font-semibold tracking-widest text-teal-600 uppercase mb-4">04 / The Results</p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-6">
             Best Overall, out of all teams across all tracks
           </h2>
           <div className="text-slate-600 text-base leading-relaxed space-y-4">
@@ -232,8 +192,7 @@ export default function E4CCaseStudy() {
 
         {/* External links */}
         <section>
-          <p className="text-xs font-semibold tracking-widest text-teal-600 uppercase mb-4">References</p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">From E4C directly</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-6">From E4C directly</h2>
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="https://www.engineeringforchange.org"
@@ -271,14 +230,9 @@ export default function E4CCaseStudy() {
             something that matters in sustainability, development, or beyond, we want to hear from you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <ArrowLink href="/contact">Partner with us</ArrowLink>
             <Link
-              href="/contact"
-              className="bg-teal-600 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200"
-            >
-              Partner with us →
-            </Link>
-            <Link
-              href="/blog"
+              href="/case-studies"
               className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-xl font-bold hover:shadow-md transition-all duration-200"
             >
               More case studies

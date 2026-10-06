@@ -1,22 +1,22 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import InsightsCard from "@/components/InsightsCard";
+import BlogCard from "@/components/BlogCard";
 import ArticleHero from "@/components/ArticleHero";
-import { getBlogPostBySlug, getBlogPosts } from "@/lib/contentful";
+import { getBlogPostBySlug } from "@/lib/contentful";
+import { getAllBlogPosts, blockWords, minutesToRead, SITE_URL } from "@/lib/blog";
+import { getLocalBlogPost, type BlogBlock } from "@/data/blogPosts";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  try {
-    const posts = await getBlogPosts();
-    return posts.map((post) => ({ slug: post.slug as string }));
-  } catch {
-    return [];
-  }
+  const posts = await getAllBlogPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 const richTextOptions = {
@@ -76,6 +76,84 @@ const richTextOptions = {
   },
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const local = getLocalBlogPost(slug);
+  let title = local?.title;
+  let description = local?.excerpt;
+  let date = local?.date;
+  if (!local) {
+    try {
+      const cms = await getBlogPostBySlug(slug);
+      title = cms?.title as string | undefined;
+      description = cms?.excerpt as string | undefined;
+      date = cms?.date as string | undefined;
+    } catch {
+      // fall through to the site defaults
+    }
+  }
+  if (!title) return {};
+  const url = `${SITE_URL}/blog/${slug}`;
+  return {
+    title: `${title} | Origin`,
+    description,
+    keywords: local?.keywords,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      title,
+      description,
+      url,
+      siteName: "Origin",
+      publishedTime: date,
+      images: [{ url: `${SITE_URL}${local?.image ?? "/heroes/blog.jpg"}` }],
+    },
+  };
+}
+
+// Turns [text](/path) into links; internal paths use the router, others open in a new tab
+function renderInline(text: string) {
+  return text.split(/(\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
+    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (!match) return part;
+    const [, label, href] = match;
+    const className = "text-teal-700 font-medium underline underline-offset-2 hover:text-teal-800";
+    return href.startsWith("/") ? (
+      <Link key={i} href={href} className={className}>{label}</Link>
+    ) : (
+      <a key={i} href={href} target="_blank" rel="noopener noreferrer" className={className}>{label}</a>
+    );
+  });
+}
+
+// Renders a post kept in src/data/blogPosts.ts, styled to match the Contentful posts
+function renderBlocks(blocks: BlogBlock[]) {
+  return blocks.map((block, i) => {
+    switch (block.type) {
+      case "h2":
+        return <h2 key={i} className="text-2xl font-bold text-slate-900 mt-8 mb-4">{block.text}</h2>;
+      case "ul":
+        return (
+          <ul key={i} className="list-disc pl-6 mb-4 space-y-2 text-slate-700">
+            {block.items.map((item) => <li key={item}>{renderInline(item)}</li>)}
+          </ul>
+        );
+      case "quote":
+        return (
+          <blockquote key={i} className="border-l-4 border-teal-500 pl-4 py-2 my-6 text-slate-600 italic">
+            {block.text}
+          </blockquote>
+        );
+      default:
+        return <p key={i} className="text-slate-700 leading-relaxed mb-4">{renderInline(block.text)}</p>;
+    }
+  });
+}
+
 function formatDate(date?: string) {
   if (!date) return null;
   return new Date(date).toLocaleDateString('en-US', {
@@ -93,40 +171,64 @@ export default async function BlogPostPage({
 }) {
   const { slug } = await params;
 
-  let post: Awaited<ReturnType<typeof getBlogPostBySlug>>;
+  const localPost = getLocalBlogPost(slug);
 
-  try {
-    post = await getBlogPostBySlug(slug);
-  } catch {
-    notFound();
+  let cmsPost: Awaited<ReturnType<typeof getBlogPostBySlug>> = null;
+  if (!localPost) {
+    try {
+      cmsPost = await getBlogPostBySlug(slug);
+    } catch {
+      notFound();
+    }
+    if (!cmsPost) notFound();
   }
 
-  if (!post) notFound();
+  const allPosts = await getAllBlogPosts();
+  const listed = allPosts.find((p) => p.slug === slug);
+  const related = allPosts.filter((p) => p.slug !== slug).slice(0, 3);
 
-  let related: Awaited<ReturnType<typeof getBlogPosts>> = [];
-  try {
-    const allPosts = await getBlogPosts();
-    related = allPosts.filter((p) => p.slug !== slug).slice(0, 4);
-  } catch {
-    // ignore — related articles are optional
-  }
+  const post = {
+    title: (localPost?.title ?? cmsPost?.title) as string,
+    excerpt: (localPost?.excerpt ?? cmsPost?.excerpt) as string,
+    author: (localPost?.author ?? cmsPost?.author) as string | undefined,
+    date: (localPost?.date ?? cmsPost?.date) as string | undefined,
+    // Local posts use their image on cards only; the page hero carries the shared blog photo
+    image: localPost ? null : cmsPost?.image ?? null,
+  };
+  const readingMinutes = localPost ? minutesToRead(blockWords(localPost.content)) : listed?.readingMinutes;
 
   const stats = [
     ...(formatDate(post.date) ? [{ label: "Published", value: formatDate(post.date)! }] : []),
-    ...(post.author ? [{ label: "Author", value: post.author as string }] : []),
+    ...(post.author ? [{ label: "Author", value: post.author }] : []),
+    ...(readingMinutes ? [{ label: "Reading time", value: `${readingMinutes} min read` }] : []),
   ];
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: { "@type": "Organization", name: post.author ?? "Origin" },
+    publisher: { "@type": "Organization", name: "Origin", url: SITE_URL },
+    mainEntityOfPage: `${SITE_URL}/blog/${slug}`,
+    image: `${SITE_URL}${localPost?.image ?? "/heroes/blog.jpg"}`,
+    keywords: localPost?.keywords?.join(", "),
+  };
 
   return (
     <div className="min-h-screen bg-surface">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header />
 
       <ArticleHero
         backHref="/blog"
-        backLabel="Insights & Updates"
+        backLabel="Blog"
         eyebrow="Blog"
-        title={post.title as string}
-        subtitle={post.excerpt as string}
+        title={post.title}
+        subtitle={post.excerpt}
         stats={stats}
+        image="/heroes/blog.jpg"
       />
 
       <article className="px-4 sm:px-8 py-16">
@@ -136,7 +238,7 @@ export default async function BlogPostPage({
             <div className="relative w-full aspect-[16/9] overflow-hidden mb-10 bg-slate-100">
               <Image
                 src={post.image}
-                alt={post.title as string}
+                alt={post.title}
                 fill
                 className="object-cover"
                 priority
@@ -147,9 +249,11 @@ export default async function BlogPostPage({
 
           {/* Content */}
           <div className="prose-origin max-w-2xl mx-auto">
-            {post.content
-              ? documentToReactComponents(post.content as any, richTextOptions)
-              : null}
+            {localPost
+              ? renderBlocks(localPost.content)
+              : cmsPost?.content
+                ? documentToReactComponents(cmsPost.content as any, richTextOptions)
+                : null}
           </div>
         </div>
       </article>
@@ -158,19 +262,15 @@ export default async function BlogPostPage({
       {related.length > 0 && (
         <section className="px-4 sm:px-8 pb-16 sm:pb-24 bg-white">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-8">
-              Related Articles
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-8 pt-16">
+              More from the blog
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-slate-200">
               {related.map((p) => (
-                <InsightsCard
+                <BlogCard
                   key={p.slug}
-                  href={`/blog/${p.slug}`}
-                  image={p.image}
-                  title={p.title as string}
-                  date={p.date}
-                  ctaLabel="Read Article →"
-                  accent="blue"
+                  post={p}
+                  className="border-b border-slate-200 sm:max-lg:[&:nth-child(odd)]:border-r lg:[&:not(:nth-child(3n))]:border-r"
                 />
               ))}
             </div>

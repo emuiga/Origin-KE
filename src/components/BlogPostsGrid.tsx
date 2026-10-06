@@ -1,20 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import InsightsCard from './InsightsCard';
-
-interface BlogPost {
-  slug: string;
-  title: string;
-  image: string | null;
-  excerpt: string;
-  author: string;
-  date?: string;
-}
+import BlogCard, { type BlogCardPost } from './BlogCard';
 
 const POSTS_PER_PAGE = 6;
 
-export default function BlogPostsGrid({ posts }: { posts: BlogPost[] }) {
+export default function BlogPostsGrid({ posts }: { posts: BlogCardPost[] }) {
   const [page, setPage] = useState(1);
 
   if (posts.length === 0) {
@@ -37,18 +28,13 @@ export default function BlogPostsGrid({ posts }: { posts: BlogPost[] }) {
 
   return (
     <>
-      {/* Posts — compact card grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+      {/* Posts: ruled grid, with a line under every card and between columns */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-slate-200">
         {paginatedPosts.map((post) => (
-          <InsightsCard
+          <BlogCard
             key={post.slug}
-            href={`/blog/${post.slug}`}
-            image={post.image}
-            title={post.title as string}
-            excerpt={post.excerpt}
-            date={post.date}
-            ctaLabel="Read Article →"
-            accent="blue"
+            post={post}
+            className="border-b border-slate-200 sm:max-lg:[&:nth-child(odd)]:border-r lg:[&:not(:nth-child(3n))]:border-r"
           />
         ))}
       </div>

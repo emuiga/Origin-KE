@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from "framer-motion";
+import ArrowLink from "../components/ArrowLink";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "../components/Header";
@@ -72,12 +73,7 @@ export default function Home() {
 
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-4 items-center">
-              <Link
-                href="/contact"
-                className="bg-teal-600 text-white px-8 py-4 rounded-xl font-bold shadow-md hover:shadow-xl transition-all duration-200 text-lg"
-              >
-                Book a call →
-              </Link>
+              <ArrowLink href="/contact" className="text-lg">Book a call</ArrowLink>
               <Link
                 href="/portfolio"
                 className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-xl font-bold shadow-sm hover:shadow-md transition-all duration-200 text-lg"
@@ -206,12 +202,7 @@ export default function Home() {
                 Out of 33 teams across all tracks, Origin won Best Overall at the 2026 Engineering for Change AI Pilot Competition. We built E4CInsights - an AI pipeline that turns 15 years of vetted sustainable development knowledge into fully cited, decision-grade policy briefs, with a human in the loop.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/case-studies/e4c"
-                  className="bg-teal-400 text-slate-900 px-7 py-3.5 rounded-xl font-bold hover:shadow-xl hover:bg-teal-300 transition-all duration-200 text-center"
-                >
-                  Read the case study →
-                </Link>
+                <ArrowLink href="/case-studies/e4c" variant="bright">Read the case study</ArrowLink>
                 <Link
                   href="/contact"
                   className="border border-white/20 text-white px-7 py-3.5 rounded-xl font-bold hover:bg-white/10 transition-all duration-200 text-center"

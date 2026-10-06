@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import ArrowLink from "../../../components/ArrowLink";
 import Link from "next/link";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
@@ -127,14 +128,15 @@ export default async function CaseStudyPage({
       <Header />
 
       <ArticleHero
-        backHref="/blog"
-        backLabel="Research & Case Studies"
+        backHref="/case-studies"
+        backLabel="Case Studies"
         badge={study.award ? `🏆 ${study.award}` : null}
         badgeMeta={study.award && formattedDate ? formattedDate : null}
         eyebrow={study.client || "Case Study"}
         title={study.title}
         subtitle={excerpt}
         stats={stats}
+        image={isResearch ? undefined : "/heroes/casestudyhero.jpg"}
       />
 
       <article className="max-w-2xl mx-auto px-5 py-16">
@@ -152,14 +154,9 @@ export default async function CaseStudyPage({
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4">
+          <ArrowLink href="/contact">Partner with us</ArrowLink>
           <Link
-            href="/contact"
-            className="bg-teal-600 text-white px-7 py-3 rounded-xl font-bold text-center hover:shadow-lg transition-all duration-200 text-sm"
-          >
-            Partner with us →
-          </Link>
-          <Link
-            href="/blog"
+            href="/case-studies"
             className="border border-slate-200 text-slate-700 px-7 py-3 rounded-xl font-bold text-center hover:shadow-sm transition-all duration-200 text-sm"
           >
             More case studies

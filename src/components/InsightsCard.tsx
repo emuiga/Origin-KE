@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ArrowCue from './ArrowCue';
 import Image from 'next/image';
 
 export function formatCardDate(date?: string | null) {
@@ -34,10 +35,9 @@ export default function InsightsCard({
   accent = 'blue',
 }: InsightsCardProps) {
   const ringHover = accent === 'amber' ? 'hover:ring-amber-300' : 'hover:ring-teal-300';
-  const ctaColor = 'text-teal-600';
 
   return (
-    <Link href={href} className="block h-full">
+    <Link href={href} className="group block h-full">
       <article className={`h-full flex flex-col bg-white ring-1 ring-slate-200 ${ringHover}`}>
         <div className="relative w-full aspect-[16/9] overflow-hidden bg-slate-100">
           {image && (
@@ -74,9 +74,7 @@ export default function InsightsCard({
               {excerpt}
             </p>
           )}
-          <p className={`${ctaColor} font-semibold text-sm underline underline-offset-4`}>
-            {ctaLabel}
-          </p>
+          <ArrowCue label={ctaLabel} className="text-sm" />
         </div>
       </article>
     </Link>

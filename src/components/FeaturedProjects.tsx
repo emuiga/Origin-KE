@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import ArrowCue from "./ArrowCue";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -195,10 +196,10 @@ export default function FeaturedProjects() {
                               href={project.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-block pt-1 text-sm font-semibold text-teal-600 hover:text-teal-700 transition-colors"
+                              className="group inline-block pt-1 text-sm"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              Visit site →
+                              <ArrowCue label="Visit site" external />
                             </Link>
                           )}
                         </div>

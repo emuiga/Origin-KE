@@ -13,14 +13,14 @@ export default function Footer() {
     { href: '/process', label: 'Our Process' },
     { href: '/portfolio', label: 'Portfolio' },
     { href: '/blog', label: 'Blog' },
-    { href: '/blog', label: 'Case Studies' },
+    { href: '/case-studies', label: 'Case Studies' },
     { href: '/contact', label: 'Contact Us' },
   ];
 
   const serviceLinks = [
     { href: '/contact', label: 'Web Development' },
     { href: '/contact', label: 'App Development' },
-    { href: '/contact', label: 'Business Systems (Odoo, ERP, POS)' },
+    { href: '/erp', label: 'Business Systems (Odoo, ERP, POS)' },
     { href: '/contact', label: 'Internal Tools' },
     { href: '/contact', label: 'AI & Automation' },
     { href: '/contact', label: 'UI/UX Design' },

@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://origin.co.ke"),
   title: "Origin - Digital Agency",
   description: "We blend culture and technology to create digital experiences that matter.",
 };

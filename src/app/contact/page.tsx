@@ -5,7 +5,7 @@ import { ContactPatterns } from '@/components/DecorativePatterns';
 import Image from 'next/image';
 import { Send, AlertCircle, Plus, Minus } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 interface FormErrors {
   name?: string;
@@ -30,6 +30,15 @@ export default function ContactPage() {
   const [submitMessage, setSubmitMessage] = useState('');
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<number | null>(null);
+
+  // Prefill the message when arriving from a page that names what the visitor is interested in
+  useEffect(() => {
+    const interest = new URLSearchParams(window.location.search).get('interest');
+    if (!interest) return;
+    setFormData(prev =>
+      prev.message ? prev : { ...prev, message: `I'm interested in the ${interest.slice(0, 80)}. ` }
+    );
+  }, []);
 
   const toggleAccordion = (index: number) => {
     setOpenAccordion(prev => (prev === index ? null : index));

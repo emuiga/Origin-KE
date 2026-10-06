@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import ArtworkHero from "../../components/ArtworkHero";
 import CardStack from "../../components/CardStack";
 import { PortfolioPatterns } from "../../components/DecorativePatterns";
 
@@ -153,6 +154,8 @@ export default function Portfolio() {
     <div className="min-h-screen bg-surface overflow-hidden relative">
       <PortfolioPatterns />
       <Header />
+
+      <ArtworkHero src="/heroes/portfoliohero.svg" title="Portfolio" />
 
       {/* Services Section */}
       <section id="services" className="px-4 sm:px-8 pt-16 sm:pt-24 py-16 sm:py-24 bg-white">
